@@ -33,9 +33,10 @@
 }
 
 .tabs.block .tabs-panel {
-  padding: 8px 0 0;
+  padding: 2px 0 0;
   text-align: center;
   color: #333;
+  font-size: 15px;
 }
 
 .tabs.block .tabs-panel a {
