@@ -87,10 +87,19 @@ body.appear {
   display: block;
 }
 
+/* prod: header scrolls with the page on desktop; below 992px the main bar is fixed (60 / 90px) */
 header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 20;
+  min-height: 60px;
+}
+
+@media (width >= 768px) {
+  header { min-height: 90px; }
+}
+
+@media (width >= 992px) {
+  header { min-height: 201px; }
 }
 
 header .header,
