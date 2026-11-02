@@ -39,7 +39,7 @@
   font-size: 34px;
   line-height: 1.1;
   margin: 8px 0 12px;
-  color: #000;
+  color: var(--text-color);
   text-wrap: balance;
 }
 

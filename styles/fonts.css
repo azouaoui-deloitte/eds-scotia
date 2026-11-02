@@ -1,4 +1,52 @@
 /* stylelint-disable max-line-length */
+
+/* Scotiabank brand webfonts (same files prod serves from /etc/designs/bns/fonts). */
+@font-face {
+  font-family: Scotiabank-Regular;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Rg.woff2') format('woff2'), url('../fonts/Scotia_W_Rg.woff') format('woff');
+}
+
+/* bold registered under the same family so font-weight:700 uses the real Bold face */
+@font-face {
+  font-family: Scotiabank-Regular;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Bd.woff2') format('woff2'), url('../fonts/Scotia_W_Bd.woff') format('woff');
+}
+
+@font-face {
+  font-family: Scotiabank-Bold;
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Bd.woff2') format('woff2'), url('../fonts/Scotia_W_Bd.woff') format('woff');
+}
+
+@font-face {
+  font-family: Scotiabank-Headline;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Headline.woff2') format('woff2'), url('../fonts/Scotia_W_Headline.woff') format('woff');
+}
+
+/* fallback metrics (approximate Scotia metrics with Arial) to limit CLS before swap */
+@font-face {
+  font-family: Scotiabank-Regular-fallback;
+  size-adjust: 100%;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: Scotiabank-Headline-fallback;
+  size-adjust: 97%;
+  src: local('Arial');
+}
+
 @font-face {
   font-family: roboto-condensed;
   font-style: normal;
