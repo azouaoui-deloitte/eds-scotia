@@ -68,14 +68,23 @@ function buildTopbar(segmentsSection, languageSection) {
     langList.querySelectorAll('li').forEach((li) => li.setAttribute('role', 'none'));
     items.forEach((a, i) => {
       a.setAttribute('role', 'menuitem');
+      a.innerHTML = `<span>${a.textContent.trim()}</span>`;
       if (i === 0) {
         a.classList.add('selected');
         a.setAttribute('aria-current', 'true');
+        a.insertAdjacentHTML('beforeend', `<span class="nav-sr-only">selected</span><img class="nav-lang-check" src="${icon('check')}" alt="" width="13" height="13">`);
       }
     });
     const setOpen = (open) => {
       lang.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      // like prod (Popper), keep the menu 5px inside the viewport
+      langList.style.left = '';
+      if (open) {
+        const r = langList.getBoundingClientRect();
+        const overflow = r.right - (document.documentElement.clientWidth - 5);
+        if (overflow > 0) langList.style.left = `${-overflow}px`;
+      }
     };
     toggle.addEventListener('click', () => setOpen(!lang.classList.contains('open')));
     lang.addEventListener('keydown', (e) => {
@@ -108,6 +117,7 @@ function buildSearch(trendingSection) {
     const title = trendingSection.querySelector('p');
     title?.classList.add('nav-trending-title');
     const list = trendingSection.querySelector('ul');
+    list?.querySelectorAll('a').forEach((a) => { a.innerHTML = `<span>${a.textContent.trim()}</span>`; });
     panel.append(...[title, list].filter(Boolean));
     box.append(panel);
     const input = form.querySelector('input');
@@ -132,6 +142,9 @@ function decorateTools(toolsSection) {
     label.textContent = label.textContent.trim();
     a.append(label);
     a.setAttribute('aria-label', label.textContent);
+    const iconSpan = a.querySelector('.icon');
+    const name = [...(iconSpan?.classList || [])].find((c) => c.startsWith('icon-'))?.substring(5);
+    if (name) iconSpan.style.setProperty('--nav-icon', `url("${icon(name)}")`);
   });
   return list;
 }
@@ -243,8 +256,10 @@ function decorateMenu(menuSection) {
 }
 
 /** prod-like mobile/tablet drawer ("mav"): root list > category panel > section panel */
+const DISMISS_SVG = '<svg width="13" height="13" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M5.5 5.5l5 5m0-5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
+
 function buildDrawer(categories, {
-  segments, more, langLinks, tools,
+  segments, more, langLinks, tools, trending,
 }) {
   const drawer = el('div', {
     class: 'nav-drawer', id: 'nav-drawer', role: 'dialog', 'aria-label': 'Menu', 'aria-hidden': 'true',
@@ -258,12 +273,38 @@ function buildDrawer(categories, {
     const q = search.querySelector('input').value.trim();
     window.location.href = `https://www.scotiabank.com/ca/en/search-results.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
   });
+  // mobile search focus: prod shows the trending searches sheet over the drawer
+  const sheet = el('div', { class: 'nav-drawer-trending' });
+  if (trending) {
+    const panel = el('div', { class: 'nav-drawer-trending-panel' });
+    const head = el('div', { class: 'nav-drawer-trending-head' });
+    const title = trending.querySelector('.nav-trending-title');
+    head.append(el('span', { class: 'nav-drawer-trending-title' }, title?.textContent.trim() || ''));
+    const dismiss = el('button', { type: 'button', class: 'nav-drawer-dismiss' });
+    dismiss.innerHTML = `<span>Dismiss</span>${DISMISS_SVG}`;
+    head.append(dismiss);
+    panel.append(head);
+    const list = trending.querySelector('ul');
+    if (list) panel.append(cleanClone(list));
+    sheet.append(panel);
+    const input = search.querySelector('input');
+    const setSearch = (open) => drawer.classList.toggle('search-open', open);
+    input.addEventListener('focus', () => setSearch(true));
+    dismiss.addEventListener('click', () => { setSearch(false); input.blur(); });
+    drawer.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && drawer.classList.contains('search-open')) {
+        e.stopPropagation();
+        setSearch(false);
+        input.blur();
+      }
+    });
+  }
   const wrapper = el('div', { class: 'nav-drawer-wrapper' });
   const panels = [];
-  const show = (panel) => {
+  const show = (panel, focus = true) => {
     panels.forEach((p) => p.classList.toggle('active', p === panel));
     wrapper.scrollTop = 0;
-    panel.querySelector('a, button, select')?.focus({ preventScroll: true });
+    if (focus) panel.querySelector('a, button, select')?.focus({ preventScroll: true });
   };
   const button = (label, cls, onClick) => {
     const b = el('button', { type: 'button', class: cls }, label);
@@ -338,8 +379,11 @@ function buildDrawer(categories, {
     const c = cleanClone(a);
     quick.append(li(c));
   });
-  drawer.append(search, wrapper, quick);
-  drawer.resetPanels = () => show(root);
+  drawer.append(search, sheet, wrapper, quick);
+  drawer.resetPanels = () => {
+    drawer.classList.remove('search-open');
+    show(root, false);
+  };
   return drawer;
 }
 
@@ -393,6 +437,7 @@ export default async function decorate(block) {
     more: topbar.querySelector('.nav-more'),
     langLinks: [...topbar.querySelectorAll('.nav-lang-menu a')],
     tools: [...(tools?.querySelectorAll('a') || [])],
+    trending: searchBox.querySelector('.nav-trending'),
   });
   const overlay = el('div', { class: 'nav-overlay' });
 
@@ -409,7 +454,7 @@ export default async function decorate(block) {
   toggleButton.addEventListener('click', () => setDrawer(!nav.classList.contains('drawer-open')));
   overlay.addEventListener('click', () => setDrawer(false));
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('drawer-open')) setDrawer(false);
+    if (e.key === 'Escape' && nav.classList.contains('drawer-open') && !drawer.classList.contains('search-open')) setDrawer(false);
   });
   isDesktop.addEventListener('change', () => { if (isDesktop.matches) setDrawer(false); });
   isMobile.addEventListener('change', () => drawer.resetPanels());

@@ -168,14 +168,16 @@ header .nav-topbar-right a.nav-more:any-link {
   font-size: 13px;
 }
 
-header .nav-topbar-right a.nav-more:hover {
-  text-decoration: underline;
-}
-
 header .nav-lang {
   position: relative;
   display: flex;
   align-items: center;
+}
+
+/* bootstrap reboot on prod: button:focus { outline: 5px auto -webkit-focus-ring-color } */
+header .nav-lang-toggle:focus,
+header .nav-search-submit:focus {
+  outline: 5px auto -webkit-focus-ring-color;
 }
 
 header .nav-lang-toggle {
@@ -208,10 +210,11 @@ header .nav-lang-menu {
   margin: 0.125rem 0 0;
   padding: 0.5rem 0;
   background: #fff;
-  border: 1px solid rgb(0 0 0 / 15%);
-  border-radius: 0.25rem;
-  box-shadow: 0 6px 12px rgb(0 0 0 / 17.5%);
+  border: 1px solid #eee;
+  border-radius: 0.3rem;
+  box-shadow: 0 8px 16px rgb(0 0 0 / 5%);
   font-size: 1rem;
+  color: #747474;
   text-align: left;
 }
 
@@ -222,9 +225,16 @@ header .nav-lang.open .nav-lang-menu {
 header .nav-lang-menu a:any-link {
   display: block;
   padding: 0.25rem 1.5rem;
-  color: #212529;
+  color: var(--hf-text);
   font-size: 13px;
   white-space: nowrap;
+}
+
+header .nav-lang-check {
+  width: 0.875em;
+  height: auto;
+  margin-left: 7.5px;
+  vertical-align: -0.125em;
 }
 
 header .nav-lang-menu a:hover,
@@ -233,16 +243,7 @@ header .nav-lang-menu a:focus {
   color: #16181b;
 }
 
-header .nav-lang-menu a.selected::after {
-  content: "";
-  display: inline-block;
-  width: 0.7em;
-  height: 0.4em;
-  margin-left: 0.5rem;
-  border-left: 2px solid currentcolor;
-  border-bottom: 2px solid currentcolor;
-  transform: translateY(-0.2em) rotate(-45deg);
-}
+
 
 /* ---------- main bar (logo, search, quick links, sign in, hamburger) ---------- */
 header .nav-mainbar {
@@ -258,10 +259,13 @@ header .nav-mainbar {
   transition: height 0.3s ease;
 }
 
+header nav a.nav-logo:any-link {
+  color: #8230df;
+}
+
 header .nav-logo {
   position: relative;
   display: flex;
-  color: #8230df;
   height: 36px;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -352,7 +356,8 @@ header .nav-search-submit img {
   vertical-align: middle;
 }
 
-/* trending searches panel, shown while the search input has focus */
+/* trending searches panel, shown while the search input has focus. Prod asks for "Scotia Regular" /
+   "Scotia Bold" families that it never loads, so the panel really renders in Arial. */
 header .nav-trending {
   display: none;
   position: absolute;
@@ -360,8 +365,7 @@ header .nav-trending {
   left: 0;
   z-index: 5;
   width: 100%;
-  padding: 1rem;
-  padding-top: calc(50px + 1.75rem);
+  padding: 4.688rem 1rem 0;
   background-color: #fff;
   border: 0.1rem solid #e2e8ee;
   border-radius: 0.8rem;
@@ -377,13 +381,23 @@ header .nav-search-box.open .nav-search {
 }
 
 header .nav-trending-title {
-  font-family: var(--hf-regular);
-  font-weight: 800;
+  display: block;
+  font-family: "Scotia Bold", arial, helvetica, sans-serif;
   font-size: 16px;
+  font-weight: 800;
+  line-height: 22px;
   color: #333;
 }
 
+header .nav-trending ul {
+  font-family: "Scotia Regular", arial, helvetica, sans-serif;
+  font-size: 1.6rem;
+}
+
 header .nav-trending ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 0.75rem 0;
 }
 
@@ -392,21 +406,25 @@ header .nav-trending ul li:not(:last-of-type) {
 }
 
 header .nav-trending a:any-link {
-  display: inline-block;
-  max-width: 100%;
+  display: block;
   overflow: hidden;
   padding: 0.25rem 0;
+  font-size: 16px;
+  line-height: 16px;
   color: #000;
-  font-size: 0.8175rem;
   white-space: nowrap;
   text-overflow: ellipsis;
-  border-bottom: 1px dotted;
-  padding-bottom: 3px;
-  line-height: 1.2;
 }
 
-header .nav-trending a:hover {
-  border-bottom-color: transparent;
+header .nav-trending a span {
+  padding-bottom: 3px;
+  border-bottom: 1px dotted;
+  font-size: 0.8175rem;
+  white-space: nowrap;
+}
+
+header .nav-trending a:hover span {
+  border-bottom: 0;
 }
 
 /* quick links (Location / Contact Us / Offers) */
@@ -433,17 +451,26 @@ header .nav-cta a:any-link {
   color: var(--hf-text);
 }
 
+/* glyph drawn as a mask so it follows prod's hover colour (#333 -> #000) */
 header .nav-cta .icon {
   display: block;
   width: 24px;
   height: 24px;
   margin: 0 auto;
+  background-color: #333;
+  mask: var(--nav-icon) center / contain no-repeat;
+  transition: all 0.3s ease;
+}
+
+header .nav-cta a:hover .icon {
+  background-color: #000;
 }
 
 header .nav-cta .icon img {
   display: block;
   width: 100%;
   height: 100%;
+  opacity: 0;
 }
 
 header .nav-cta .nav-cta-label {
@@ -480,7 +507,7 @@ header .nav-signin a.signin-button:any-link {
 header .nav-signin a.signin-button:hover,
 header .nav-signin a.signin-button:focus {
   background-color: #ad0000;
-  border-color: #ad0000;
+  border-color: #bb061b;
   color: #fff;
   text-decoration: none;
 }
@@ -772,6 +799,8 @@ header .nav-drawer-search input:focus {
 }
 
 header .nav-drawer-search button {
+  display: flex;
+  align-items: center;
   position: absolute;
   top: 30px;
   right: 30px;
@@ -784,6 +813,111 @@ header .nav-drawer-search button {
 header .nav-drawer-search button img {
   width: 2rem;
   height: 1.5rem;
+}
+
+header .nav-drawer-trending {
+  display: none;
+}
+
+@media (width < 768px) {
+  header .nav-drawer.search-open {
+    padding-top: 60px;
+    background: linear-gradient(rgb(214 214 214 / 75%), rgb(214 214 214 / 75%)), #fff;
+  }
+
+  header .nav-drawer.search-open .nav-drawer-search {
+    z-index: 1031;
+    padding: 20px;
+    background: none;
+    box-shadow: none;
+  }
+
+  header .nav-drawer.search-open .nav-drawer-search input {
+    border: 2px solid #007eab;
+  }
+
+  header .nav-drawer.search-open .nav-drawer-search button {
+    top: 18px;
+  }
+
+  header .nav-drawer.search-open .nav-drawer-trending {
+    display: block;
+    position: absolute;
+    top: 76px;
+    left: 0;
+    z-index: 1025;
+    width: 100%;
+    height: 100vh;
+    background: rgb(214 214 214 / 75%);
+  }
+}
+
+header .nav-drawer-trending-panel {
+  position: relative;
+  z-index: 1028;
+  margin: 0 0.5rem;
+  padding: 72px 1rem 0;
+  background: #fff;
+  border: 0.1rem solid #e2e8ee;
+  border-radius: 0.8rem;
+  box-shadow: #00225b1c 0 2px 10px;
+}
+
+header .nav-drawer-trending-head {
+  display: flex;
+  justify-content: space-between;
+}
+
+header .nav-drawer-trending-title {
+  font-weight: 800;
+}
+
+header .nav-drawer-dismiss {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  line-height: 16px;
+  color: #007eab;
+  cursor: pointer;
+}
+
+header .nav-drawer-dismiss svg {
+  margin-top: 0.15rem;
+  margin-left: 0.25rem;
+}
+
+header .nav-drawer-trending-panel ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 1rem 0.25rem;
+}
+
+header .nav-drawer-trending-panel ul li:not(:last-of-type) {
+  border-bottom: 1px solid #d6d6d6;
+}
+
+header .nav-drawer-trending-panel ul a:any-link {
+  display: block;
+  overflow: hidden;
+  padding: 0;
+  border-bottom: 1px dotted;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+  color: #000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+header .nav-drawer-trending-panel ul a span {
+  font-size: 0.8175rem;
+  white-space: nowrap;
 }
 
 header .nav-drawer-wrapper {
@@ -881,6 +1015,7 @@ header .nav-drawer-extra > div {
 
 header .nav-drawer-extra label {
   display: block;
+  margin-bottom: 0.5rem;
   font-family: var(--hf-bold);
   font-size: 0.9rem;
   color: var(--hf-text);
@@ -916,6 +1051,8 @@ header .nav-drawer-quick > li {
 
 header .nav-drawer-quick a:any-link {
   display: block;
+  padding: 20px 15px;
+  line-height: 1;
   color: var(--hf-text);
   text-align: center;
 }
@@ -936,6 +1073,7 @@ header .nav-drawer-quick .icon img {
 header .nav-drawer-quick .nav-cta-label {
   display: block;
   font-size: 0.8rem;
+  line-height: 1;
   color: var(--hf-text);
 }
 
