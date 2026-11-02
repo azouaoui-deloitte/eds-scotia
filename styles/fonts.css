@@ -34,6 +34,23 @@
   src: url('../fonts/Scotia_W_Headline.woff2') format('woff2'), url('../fonts/Scotia_W_Headline.woff') format('woff');
 }
 
+/* light weight (prod renders the section h2 with a thin face via weight 100/300) */
+@font-face {
+  font-family: Scotiabank-Headline;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Lt.woff2') format('woff2'), url('../fonts/Scotia_W_Lt.woff') format('woff');
+}
+
+@font-face {
+  font-family: Scotiabank-Light;
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Lt.woff2') format('woff2'), url('../fonts/Scotia_W_Lt.woff') format('woff');
+}
+
 /* fallback metrics (approximate Scotia metrics with Arial) to limit CLS before swap */
 @font-face {
   font-family: Scotiabank-Regular-fallback;
