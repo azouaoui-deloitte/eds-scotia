@@ -126,6 +126,11 @@
     max-width: 560px;
   }
 
+  /* extra gap below the body copy so the CTA row lands at prod's y */
+  .hero.block .hero-content-inner > p:nth-of-type(2) {
+    margin-bottom: 20px;
+  }
+
   /* two CTA columns side by side on prod's ~257px pitch (253 + inline-block whitespace) */
   .hero.block .hero-cta {
     width: 253px;
