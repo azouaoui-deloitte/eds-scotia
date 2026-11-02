@@ -126,6 +126,15 @@
     max-width: 560px;
   }
 
+  /* two CTA columns side by side, matching prod's wider gap */
+  .hero.block .hero-cta {
+    margin-right: 130px;
+  }
+
+  .hero.block .hero-cta:last-of-type {
+    margin-right: 0;
+  }
+
   .hero.block h1 {
     font-size: 46px;
     letter-spacing: -1px;

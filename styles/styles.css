@@ -366,7 +366,7 @@ main .section:has(.tabs) {
 
 /* authorable legal/disclaimer band (CDIC) — extra vertical breathing room like prod */
 main .section.legal {
-  padding: 32px 0;
+  padding: 16px 0;
 }
 
 main .section.legal > div {
