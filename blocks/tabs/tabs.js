@@ -2,12 +2,17 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * Accessible tabs. Each row is a tab: [label] [rich content].
- * The first tab is selected by default. When a non-"Featured" tab is active, a sibling
- * `cards.featured` block (if present in the same section) is hidden so only the active
- * tab's content shows. Backend-driven tab content on scotiabank.com cannot be fetched
- * cross-origin from Edge Delivery, so each tab here carries its own authored content.
+ * Each tab is paired, by order, with a sibling `cards.featured` block in the same section
+ * (tab 0 -> 1st cards block, tab 1 -> 2nd, ...). Selecting a tab shows its panel text and its
+ * matching card grid, hiding the others. Backend-driven tab content on scotiabank.com cannot
+ * be fetched cross-origin from Edge Delivery, so each tab carries its own authored cards.
  */
 export default function decorate(block) {
+  const section = block.closest('.section');
+  // sibling card grids, in document (tab) order
+  const cardBlocks = section ? [...section.querySelectorAll('.cards.featured')] : [];
+  const showCards = (idx) => cardBlocks.forEach((cb, j) => { cb.style.display = j === idx ? '' : 'none'; });
+
   const tablist = document.createElement('div');
   tablist.className = 'tabs-list';
   tablist.setAttribute('role', 'tablist');
@@ -48,14 +53,12 @@ export default function decorate(block) {
       button.setAttribute('aria-selected', 'true');
       button.tabIndex = 0;
       panels.forEach((p) => { p.hidden = p !== panel; });
-      // The per-tab card data on scotiabank.com is backend-driven and cannot be fetched
-      // cross-origin from Edge Delivery. Keep the authored featured card grid visible for
-      // every tab so a tab is never empty (graceful degradation); the panel text above it
-      // provides the tab-specific context.
-      const cards = block.closest('.section')?.querySelector('.cards.featured');
-      if (cards) cards.style.display = '';
+      showCards(i);
     });
   });
+
+  // show the first tab's cards by default
+  showCards(0);
 
   tablist.addEventListener('keydown', (e) => {
     const tabs = [...tablist.querySelectorAll('.tabs-tab')];
