@@ -59,7 +59,7 @@
 /* prod stacks the CTA button under its "Already a client?" / "Not a client yet?" label */
 .hero.block .hero-cta a.button {
   display: block;
-  margin-top: 8px;
+  margin-top: 40px;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -129,7 +129,7 @@
   /* two CTA columns side by side on prod's ~257px pitch (253 + inline-block whitespace) */
   .hero.block .hero-cta {
     width: 253px;
-    margin: 8px 0 0;
+    margin: 18px 0 0;
   }
 
   .hero.block h1 {
