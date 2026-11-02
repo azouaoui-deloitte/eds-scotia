@@ -61,6 +61,25 @@ Until then the author shows *"Component Models could not be loaded: HTTP 404"*. 
 
 If `EDS_OWNER` changes, rebuild + reinstall: `import-work/tools/ue-setup-aem.sh`.
 
+## Page templates (Templates console)
+
+Same layout as the Adobe `aem-boilerplate-xwalk` site template (release 0.2.0): `/conf/scotia/settings/wcm`
+holds `templates`, `policies` and `template-types` (`cq:Page`), which is what makes the **Scotia** folder
+appear in *Tools › General › Templates* (`/libs/wcm/core/content/sites/templates.html/conf`).
+
+| Path | Content |
+|---|---|
+| `/conf/scotia/settings/wcm/templates/page-template` | **Scotia EDS Page**, `status=enabled`, `allowedPaths=^/content/scotia(/.*)?`; `initial` = `core/franklin/components/page/v1/page` + `root` + one `section` (same as `/libs/core/franklin/templates/page`) |
+| `/conf/scotia/settings/wcm/template-types/eds-page` | template type used by *Create* in the Templates console |
+| `/content/scotia/jcr:content` `cq:allowedTemplates` | `/libs/core/franklin/templates/.*` + `/conf/scotia/settings/wcm/templates/.*` |
+
+`personal`, `nav` and `footer` use `cq:template=/conf/scotia/settings/wcm/templates/page-template`; the
+rendered HTML and `data-aue-*` instrumentation are identical to the `/libs/core/franklin/templates/page` version.
+
+Source: `tools/aem/scotia-wcm-templates/` (package `scotia:scotia-wcm-templates`, filter
+`/conf/scotia/settings/wcm` only, so it never touches `/content/scotia`). Reinstall it alone with
+`tools/aem/scotia-wcm-templates/build.sh --install`. The full content package also bundles it.
+
 ## Edit round-trip & restore
 
 Edit a text or a card/tab item in the UE and see it render. To restore the original content,
