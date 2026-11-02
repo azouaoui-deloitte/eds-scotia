@@ -1,5 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
+import initFooter from './footer-behavior.js';
 
 const el = (tag, cls, ...children) => {
   const e = document.createElement(tag);
@@ -55,21 +56,13 @@ function buildCards(section) {
 }
 
 /**
- * Scotiabank footer. The footer fragment has three sections, in order:
+ * Fallback footer built from the EDS footer fragment (page). The fragment has three sections:
  *   0 contact cards (question / support / advice)   1 social links   2 legal links + copyright
  */
-export default async function decorate(block) {
-  const footerMeta = getMetadata('footer');
-  // Default to a footer fragment in the current content directory so the site works both
-  // root-served on Edge (/ca/en/footer) and subtree-served on AEM (/content/scotia/ca/en/footer).
-  const footerPath = footerMeta
-    ? new URL(footerMeta, window.location).pathname
-    : `${window.location.pathname.replace(/\/[^/]*$/, '')}/footer`;
+async function buildFooter(footerPath) {
   const fragment = await loadFragment(footerPath);
-
-  block.textContent = '';
+  if (!fragment) return null;
   const [contact, social, bottom] = [...fragment.children];
-
   const cardsRow = el('div', 'footer-container');
   if (contact) cardsRow.append(...buildCards(contact));
   const socialList = social?.querySelector('ul');
@@ -96,18 +89,55 @@ export default async function decorate(block) {
     links.querySelectorAll('a[href$="#cookie-settings"]').forEach((a) => {
       const button = el('button', 'footer-cookie-settings', a.textContent.trim());
       button.type = 'button';
-      button.addEventListener('click', () => window.OneTrust?.ToggleInfoDisplay?.());
       a.replaceWith(button);
     });
   }
   const copyright = [...(bottom?.querySelectorAll('p') || [])].pop();
 
-  const footer = el(
+  return el(
     'div',
     'footer-inner',
     el('div', 'footer-contact', cardsRow),
     el('div', 'footer-links', el('div', 'footer-container', ...[links].filter(Boolean))),
     el('div', 'footer-copyright', el('div', 'footer-container', ...[copyright].filter(Boolean))),
   );
-  block.append(footer);
+}
+
+/**
+ * Server-rendered footer of an AEM Experience Fragment (scotia/components/footer): the
+ * `.footer-inner` of the XF variation content.
+ */
+async function loadExperienceFragment(path) {
+  try {
+    const resp = await fetch(`${path.replace(/\.html$/, '')}.content.html?wcmmode=disabled`);
+    if (!resp.ok) return null;
+    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+    const inner = doc.querySelector('.footer-inner');
+    return inner ? document.adoptNode(inner) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Scotiabank footer: the footer Experience Fragment (AEM footer component) set in the `footer`
+ * metadata; falls back to an EDS footer fragment page. Markup already server-rendered in the
+ * block (template structure) is only bound.
+ */
+export default async function decorate(block) {
+  let inner = block.querySelector('.footer-inner');
+  if (!inner) {
+    const footerMeta = getMetadata('footer');
+    // Default to a footer fragment in the current content directory so the site works both
+    // root-served on Edge (/ca/en/footer) and subtree-served on AEM (/content/scotia/ca/en/footer).
+    const footerPath = footerMeta
+      ? new URL(footerMeta, window.location).pathname
+      : `${window.location.pathname.replace(/\/[^/]*$/, '')}/footer`;
+    inner = (footerPath.includes('/experience-fragments/') && await loadExperienceFragment(footerPath))
+      || await buildFooter(footerPath);
+    block.textContent = '';
+    if (!inner) return;
+    block.append(inner);
+  }
+  initFooter(inner);
 }

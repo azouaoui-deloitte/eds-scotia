@@ -1,9 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
-
-// prod (bootstrap) breakpoints: < 768 mobile, 768-991 tablet, >= 992 desktop (>= 1200 wide)
-const isDesktop = window.matchMedia('(min-width: 992px)');
-const isMobile = window.matchMedia('(max-width: 767px)');
+import initNav from './nav-behavior.js';
 
 const icon = (name) => `${window.hlx.codeBasePath}/icons/${name}.svg`;
 const el = (tag, attrs = {}, ...children) => {
@@ -30,22 +27,11 @@ const cleanClone = (node) => {
   return c;
 };
 
-const lastSegment = (href) => {
-  try { return new URL(href, window.location).pathname.replace(/\/$/, '').split('/').pop().replace(/\.html$/, ''); } catch { return ''; }
-};
-
 function buildTopbar(segmentsSection, languageSection) {
   const container = el('div', { class: 'nav-container' });
   const segments = segmentsSection?.querySelector('ul');
-  const current = lastSegment(window.location.pathname);
   if (segments) {
     segments.classList.add('nav-segments');
-    segments.querySelectorAll('a').forEach((a) => {
-      if (lastSegment(a.href) === current) {
-        a.classList.add('active');
-        a.setAttribute('aria-current', 'page');
-      }
-    });
     container.append(segments);
   }
   const right = el('div', { class: 'nav-topbar-right' });
@@ -75,22 +61,6 @@ function buildTopbar(segmentsSection, languageSection) {
         a.insertAdjacentHTML('beforeend', `<span class="nav-sr-only">selected</span><img class="nav-lang-check" src="${icon('check')}" alt="" width="13" height="13">`);
       }
     });
-    const setOpen = (open) => {
-      lang.classList.toggle('open', open);
-      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      // like prod (Popper), keep the menu 5px inside the viewport
-      langList.style.left = '';
-      if (open) {
-        const r = langList.getBoundingClientRect();
-        const overflow = r.right - (document.documentElement.clientWidth - 5);
-        if (overflow > 0) langList.style.left = `${-overflow}px`;
-      }
-    };
-    toggle.addEventListener('click', () => setOpen(!lang.classList.contains('open')));
-    lang.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && lang.classList.contains('open')) { setOpen(false); toggle.focus(); }
-    });
-    document.addEventListener('click', (e) => { if (!lang.contains(e.target)) setOpen(false); });
     lang.append(toggle, langList);
     right.append(lang);
   }
@@ -104,13 +74,6 @@ function buildSearch(trendingSection) {
   form.innerHTML = '<label for="nav-search-input" class="nav-sr-only">Begin Your Search</label>'
     + '<input type="search" id="nav-search-input" name="q" placeholder="Begin Your Search" aria-controls="nav-trending">'
     + `<button type="submit" class="nav-search-submit"><img src="${icon('search')}" alt="Search" width="20" height="20"></button>`;
-  const submit = (q) => {
-    window.location.href = `https://www.scotiabank.com/ca/en/search-results.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
-  };
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    submit(form.querySelector('input').value.trim());
-  });
   box.append(form);
   if (trendingSection) {
     const panel = el('div', { class: 'nav-trending', id: 'nav-trending' });
@@ -120,14 +83,6 @@ function buildSearch(trendingSection) {
     list?.querySelectorAll('a').forEach((a) => { a.innerHTML = `<span>${a.textContent.trim()}</span>`; });
     panel.append(...[title, list].filter(Boolean));
     box.append(panel);
-    const input = form.querySelector('input');
-    const setOpen = (open) => box.classList.toggle('open', open);
-    input.addEventListener('focus', () => setOpen(true));
-    box.addEventListener('focusout', (e) => { if (!box.contains(e.relatedTarget)) setOpen(false); });
-    box.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') { setOpen(false); input.blur(); }
-    });
-    document.addEventListener('mousedown', (e) => { if (!box.contains(e.target)) setOpen(false); });
   }
   return box;
 }
@@ -224,34 +179,6 @@ function decorateMenu(menuSection) {
     categories.push(cat);
   });
 
-  const close = (cat) => {
-    cat.li.classList.remove('open');
-    cat.link.setAttribute('aria-expanded', 'false');
-  };
-  const open = (cat) => {
-    categories.filter((c) => c !== cat).forEach(close);
-    cat.li.classList.add('open');
-    cat.link.setAttribute('aria-expanded', 'true');
-  };
-  categories.forEach((cat) => {
-    cat.li.addEventListener('mouseenter', () => { if (isDesktop.matches) open(cat); });
-    cat.li.addEventListener('mouseleave', () => { if (isDesktop.matches) close(cat); });
-    // keyboard: Enter follows the link (as prod), Space / ArrowDown opens the panel, Escape closes
-    cat.link.addEventListener('keydown', (e) => {
-      if (e.key === ' ' || e.key === 'ArrowDown') {
-        e.preventDefault();
-        open(cat);
-        cat.li.querySelector('.nav-dropdown a')?.focus();
-      }
-    });
-    cat.li.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && cat.li.classList.contains('open')) {
-        close(cat);
-        cat.link.focus();
-      }
-    });
-    cat.li.addEventListener('focusout', (e) => { if (!cat.li.contains(e.relatedTarget)) close(cat); });
-  });
   return categories;
 }
 
@@ -268,11 +195,6 @@ function buildDrawer(categories, {
   search.innerHTML = '<label for="nav-drawer-search-input" class="nav-sr-only">Search</label>'
     + '<input type="text" id="nav-drawer-search-input" name="q" placeholder="Begin Your Search">'
     + `<button type="submit"><img src="${icon('search')}" alt="Search"></button>`;
-  search.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const q = search.querySelector('input').value.trim();
-    window.location.href = `https://www.scotiabank.com/ca/en/search-results.html${q ? `?q=${encodeURIComponent(q)}` : ''}`;
-  });
   // mobile search focus: prod shows the trending searches sheet over the drawer
   const sheet = el('div', { class: 'nav-drawer-trending' });
   if (trending) {
@@ -287,61 +209,43 @@ function buildDrawer(categories, {
     const list = trending.querySelector('ul');
     if (list) panel.append(cleanClone(list));
     sheet.append(panel);
-    const input = search.querySelector('input');
-    const setSearch = (open) => drawer.classList.toggle('search-open', open);
-    input.addEventListener('focus', () => setSearch(true));
-    dismiss.addEventListener('click', () => { setSearch(false); input.blur(); });
-    drawer.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && drawer.classList.contains('search-open')) {
-        e.stopPropagation();
-        setSearch(false);
-        input.blur();
-      }
-    });
   }
   const wrapper = el('div', { class: 'nav-drawer-wrapper' });
   const panels = [];
-  const show = (panel, focus = true) => {
-    panels.forEach((p) => p.classList.toggle('active', p === panel));
-    wrapper.scrollTop = 0;
-    if (focus) panel.querySelector('a, button, select')?.focus({ preventScroll: true });
-  };
-  const button = (label, cls, onClick) => {
-    const b = el('button', { type: 'button', class: cls }, label);
-    b.addEventListener('click', onClick);
-    return b;
-  };
+  // panel buttons point to their target panel (aria-controls), bound by initNav
+  const button = (label, cls, target) => el('button', { type: 'button', class: cls, 'aria-controls': target }, label);
   const li = (...c) => el('li', {}, ...c);
 
-  const root = el('div', { class: 'nav-drawer-panel active' });
+  const root = el('div', { class: 'nav-drawer-panel active', id: 'nav-drawer-root' });
   const rootList = el('ul');
   root.append(rootList);
   panels.push(root);
-  categories.forEach((cat) => {
-    const catPanel = el('div', { class: 'nav-drawer-panel' });
+  categories.forEach((cat, i) => {
+    const catId = `nav-drawer-${i + 1}`;
+    const catPanel = el('div', { class: 'nav-drawer-panel', id: catId });
     const catList = el('ul');
     catPanel.append(catList);
     panels.push(catPanel);
-    catList.append(li(button('Back to main menu', 'nav-drawer-back', () => show(root))));
+    catList.append(li(button('Back to main menu', 'nav-drawer-back', root.id)));
     if (cat.viewall) {
       const va = el('a', { href: cat.viewall.href }, 'View all');
       catList.append(li(va));
     }
-    cat.sections.forEach((sec) => {
-      const secPanel = el('div', { class: 'nav-drawer-panel' });
+    cat.sections.forEach((sec, j) => {
+      const secPanel = el('div', { class: 'nav-drawer-panel', id: `${catId}-${j + 1}` });
       const secList = el('ul');
       secPanel.append(secList);
       panels.push(secPanel);
-      secList.append(li(button('Back', 'nav-drawer-back', () => show(catPanel))));
+      secList.append(li(button('Back', 'nav-drawer-back', catId)));
       sec.links.forEach((a) => {
         const c = cleanClone(a);
         c.querySelector('.nav-external')?.remove();
         c.textContent = c.textContent.trim();
         secList.append(li(c));
       });
-      catList.append(li(button(sec.title, 'nav-drawer-toggle', () => show(secPanel))));
+      catList.append(li(button(sec.title, 'nav-drawer-toggle', secPanel.id)));
     });
-    rootList.append(li(button(cat.label, 'nav-drawer-toggle', () => show(catPanel))));
+    rootList.append(li(button(cat.label, 'nav-drawer-toggle', catId)));
   });
 
   const select = (id, label, options) => {
@@ -353,7 +257,6 @@ function buildDrawer(categories, {
       if (selected) o.selected = true;
       sel.append(o);
     });
-    sel.addEventListener('change', () => { window.location.href = sel.value; });
     box.append(lab, el('div', {}, sel));
     return box;
   };
@@ -362,8 +265,7 @@ function buildDrawer(categories, {
     root.append(select('nav-drawer-lang', 'Language', langLinks.map((a, i) => option(a, i === 0))));
   }
   if (segments.length) {
-    const sites = segments.map((a) => option(a, a.classList.contains('active')));
-    root.append(select('nav-drawer-sites', 'Scotiabank Sites', sites));
+    root.append(select('nav-drawer-sites', 'Scotiabank Sites', segments.map((a) => option(a, false))));
   }
   if (more) {
     const box = el('div', { class: 'nav-drawer-extra' });
@@ -380,43 +282,27 @@ function buildDrawer(categories, {
     quick.append(li(c));
   });
   drawer.append(search, sheet, wrapper, quick);
-  drawer.resetPanels = () => {
-    drawer.classList.remove('search-open');
-    show(root, false);
-  };
   return drawer;
 }
 
 /**
- * Scotiabank header. The nav fragment has seven sections, in order:
+ * Fallback nav built from the EDS nav fragment (page). The fragment has seven sections, in order:
  *   0 brand (desktop + mobile logo)   1 segment links + More Sites   2 language links
  *   3 tools (Location / Contact / Offers)   4 sign in   5 main menu (mega-menu)
  *   6 trending searches
  */
-export default async function decorate(block) {
-  const navMeta = getMetadata('nav');
-  // Default to a nav fragment in the current content directory so the site works both
-  // root-served on Edge (/ca/en/nav) and subtree-served on AEM (/content/scotia/ca/en/nav).
-  const navPath = navMeta
-    ? new URL(navMeta, window.location).pathname
-    : `${window.location.pathname.replace(/\/[^/]*$/, '')}/nav`;
+async function buildNav(navPath) {
   const fragment = await loadFragment(navPath);
-
-  block.textContent = '';
+  if (!fragment) return null;
   const nav = el('nav', { id: 'nav', 'aria-label': 'Main' });
   const [
     brand, segmentsSection, languageSection, toolsSection,
     signinSection, menuSection, trendingSection,
   ] = [...fragment.children];
 
-  // logo: home of the nav's language root; an Experience Fragment nav
-  // (/content/experience-fragments/<site>/ca/en/site/header/master) maps to /content/<site>/ca/en
   const ext = window.location.pathname.endsWith('.html') ? '.html' : '';
-  const navRoot = navPath
-    .replace(/^\/content\/experience-fragments\/([^/]+)\/(.+)\/site\/[^/]+\/[^/.]+(\.html)?$/, '/content/$1/$2')
-    .replace(/\/nav$/, '');
   const logo = el('a', {
-    class: 'nav-logo', href: `${navRoot}/personal${ext}`, 'aria-label': 'Scotiabank',
+    class: 'nav-logo', href: `${navPath.replace(/\/nav$/, '')}/personal${ext}`, 'aria-label': 'Scotiabank',
   });
   [...(brand?.querySelectorAll('picture') || [])].forEach((pic, i) => {
     pic.classList.add(i === 0 ? 'logo-desktop' : 'logo-mobile');
@@ -445,25 +331,46 @@ export default async function decorate(block) {
   });
   const overlay = el('div', { class: 'nav-overlay' });
 
-  const toggleButton = hamburger.querySelector('button');
-  const setDrawer = (open) => {
-    nav.classList.toggle('drawer-open', open);
-    toggleButton.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggleButton.setAttribute('aria-label', open ? 'Close menu' : 'Menu');
-    drawer.setAttribute('aria-hidden', open ? 'false' : 'true');
-    document.body.classList.toggle('nav-drawer-open', open);
-    if (open) drawer.resetPanels();
-    else toggleButton.focus({ preventScroll: true });
-  };
-  toggleButton.addEventListener('click', () => setDrawer(!nav.classList.contains('drawer-open')));
-  overlay.addEventListener('click', () => setDrawer(false));
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && nav.classList.contains('drawer-open') && !drawer.classList.contains('search-open')) setDrawer(false);
-  });
-  isDesktop.addEventListener('change', () => { if (isDesktop.matches) setDrawer(false); });
-  isMobile.addEventListener('change', () => drawer.resetPanels());
-
   nav.append(topbar, mainbar, menubar, overlay, drawer);
-  const navWrapper = el('div', { class: 'nav-wrapper' }, nav);
-  block.append(navWrapper);
+  return el('div', { class: 'nav-wrapper' }, nav);
+}
+
+/**
+ * Server-rendered header of an AEM Experience Fragment (scotia/components/header): the
+ * `.nav-wrapper` of the XF variation content.
+ */
+async function loadExperienceFragment(path) {
+  try {
+    const resp = await fetch(`${path.replace(/\.html$/, '')}.content.html?wcmmode=disabled`);
+    if (!resp.ok) return null;
+    const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
+    const wrapper = doc.querySelector('.nav-wrapper');
+    return wrapper ? document.adoptNode(wrapper) : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Scotiabank header: the header Experience Fragment (AEM header component) set in the `nav`
+ * metadata; falls back to an EDS nav fragment page. Markup already server-rendered in the block
+ * (template structure) is only bound.
+ */
+export default async function decorate(block) {
+  let nav = block.querySelector('nav#nav');
+  if (!nav) {
+    const navMeta = getMetadata('nav');
+    // Default to a nav fragment in the current content directory so the site works both
+    // root-served on Edge (/ca/en/nav) and subtree-served on AEM (/content/scotia/ca/en/nav).
+    const navPath = navMeta
+      ? new URL(navMeta, window.location).pathname
+      : `${window.location.pathname.replace(/\/[^/]*$/, '')}/nav`;
+    const navWrapper = (navPath.includes('/experience-fragments/') && await loadExperienceFragment(navPath))
+      || await buildNav(navPath);
+    block.textContent = '';
+    if (!navWrapper) return;
+    block.append(navWrapper);
+    nav = navWrapper.querySelector('nav#nav');
+  }
+  initNav(nav);
 }

@@ -57,58 +57,23 @@ export function getContentRoot() {
   return match ? match[0] : '';
 }
 
-/**
- * Header / footer Experience Fragment variation rendered on its own, e.g.
- * /content/experience-fragments/scotia/ca/en/site/header/master.html
- * @returns {string} 'header', 'footer' or '' (regular page)
- */
-function getFragmentPreview() {
-  const match = window.location.pathname.match(/^\/content\/experience-fragments\/.+\/(header|footer)\/[^/]+$/);
-  return match ? match[1] : '';
-}
-
 let experienceFragmentBlocks = [];
 
 /**
  * Header / footer Experience Fragment components (the locked XFs of the template structure)
- * inline the raw fragment sections: render them through the header / footer block instead.
+ * include the header / footer server-rendered by the AEM components: load their block (CSS +
+ * interactions) in place.
  * @param {Element} main The main element
  * @returns {Element[]} the header / footer blocks to load
  */
 function decorateExperienceFragments(main) {
   return [...main.querySelectorAll('.cmp-experiencefragment')].map((xf) => {
-    const kind = ['header', 'footer'].find((k) => xf.classList.contains(`cmp-experiencefragment--${k}`));
-    const root = xf.querySelector('[data-aue-resource$="/jcr:content/root"]');
-    const path = (root?.dataset.aueResource || '').replace(/^urn:aemconnection:/, '').replace(/\/jcr:content\/root$/, '');
-    if (!kind || !path) return null;
-    const meta = document.createElement('meta');
-    meta.name = kind === 'header' ? 'nav' : 'footer';
-    meta.content = path;
-    document.head.append(meta);
-    const block = document.createElement('div');
-    block.className = kind;
-    const wrapper = document.createElement(kind);
-    wrapper.append(block);
-    xf.replaceChildren(wrapper);
+    const block = xf.querySelector(':scope .header.block, :scope .footer.block');
+    if (!block) return null;
+    block.removeAttribute('data-block-status');
     document.documentElement.dataset.experienceFragments = 'true';
     return block;
   }).filter(Boolean);
-}
-
-const UE_CANVAS = 'https://experience.adobe.com/#/@deloitte-digitalengage/aem/editor/canvas/';
-
-/**
- * xwalk content has no classic authoring UI: when loaded in the classic page editor
- * (/editor.html/content/...), open the page in the Universal Editor instead.
- */
-function redirectClassicEditor() {
-  try {
-    const top = window.top.location;
-    if (window.top === window || !top.pathname.startsWith('/editor.html/content/')) return;
-    const connection = document.querySelector('meta[name="urn:adobe:aue:system:aemconnection"]')?.content || '';
-    const host = connection.replace(/^xwalk:https?:\/\//, '');
-    if (host) top.href = `${UE_CANVAS}${host}${top.pathname.substring('/editor.html'.length)}`;
-  } catch { /* cross-origin parent, e.g. the Universal Editor canvas */ }
 }
 
 /**
@@ -194,25 +159,8 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
-  redirectClassicEditor();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
-  const preview = getFragmentPreview();
-  if (preview && main) {
-    // render the fragment through its own header / footer block (styled as on every page);
-    // the instrumented sections stay in the DOM for the Universal Editor content tree
-    const meta = doc.createElement('meta');
-    meta.name = preview === 'header' ? 'nav' : 'footer';
-    meta.content = window.location.pathname;
-    doc.head.append(meta);
-    doc.body.classList.add('fragment-preview');
-    main.style.display = 'none';
-    const unused = doc.querySelector(preview === 'header' ? 'footer' : 'header');
-    if (unused) unused.style.display = 'none';
-    ['patch', 'update', 'add', 'move', 'remove', 'copy'].forEach((type) => {
-      doc.addEventListener(`aue:content-${type}`, () => window.location.reload(), { capture: true });
-    });
-  }
   if (main && !doc.documentElement.dataset.experienceFragments) {
     experienceFragmentBlocks = decorateExperienceFragments(main);
     if (experienceFragmentBlocks.length) {
@@ -258,9 +206,8 @@ function decorateBackToTop() {
 }
 
 async function loadLazy(doc) {
-  const preview = getFragmentPreview();
   const inlineFragments = doc.documentElement.dataset.experienceFragments === 'true';
-  if (preview !== 'footer' && !inlineFragments) loadHeader(doc.querySelector('header'));
+  if (!inlineFragments) loadHeader(doc.querySelector('header'));
   experienceFragmentBlocks.forEach((block) => {
     decorateBlock(block);
     loadBlock(block);
@@ -274,7 +221,7 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  if (preview !== 'header' && !inlineFragments) loadFooter(doc.querySelector('footer'));
+  if (!inlineFragments) loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();

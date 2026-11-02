@@ -71,45 +71,45 @@ appear in *Tools › General › Templates* (`/libs/wcm/core/content/sites/templ
 |---|---|
 | `/conf/scotia/settings/wcm/templates/page-template` | **Scotia EDS Page**, `status=enabled`, `allowedPaths=^/content/scotia(/.*)?`; `initial` = `core/franklin/components/page/v1/page` + `root` + one `section` (same as `/libs/core/franklin/templates/page`) |
 | `/conf/scotia/settings/wcm/template-types/eds-page` | template type used by *Create* in the Templates console |
+| `/conf/scotia/settings/wcm/templates/xf-scotia` | **Scotia XF**: Experience Fragment variations (`scotia/components/xfpage`, root container allowing *Scotia - Structure* / *Content* components) |
 | `/content/scotia/jcr:content` `cq:allowedTemplates` | `/libs/core/franklin/templates/.*` + `/conf/scotia/settings/wcm/templates/.*` |
 
 `personal`, `nav` and `footer` use `cq:template=/conf/scotia/settings/wcm/templates/page-template`; the
 rendered HTML and `data-aue-*` instrumentation are identical to the `/libs/core/franklin/templates/page` version.
 
-Source: `tools/aem/scotia-wcm-templates/` (package `scotia:scotia-wcm-templates`). Filters:
-`/conf/scotia/settings/wcm` (replace), `/content/experience-fragments/scotia` and `/content/scotia/metadata`
-(*merge*: only adds missing nodes, never overwrites authored content). Reinstall it alone with
-`tools/aem/scotia-wcm-templates/build.sh --install`. The full content package also bundles it.
+Source: AEM project **aem-scotia** (`/Users/azouaoui/Documents/aem-scotia`, GitHub
+`azouaoui-deloitte/aem-scotia`), `ui.content`: `/conf/scotia/settings/wcm` (mode *update*),
+`/content/experience-fragments/scotia` and `/content/scotia/metadata` (mode *merge*: never overwrites
+author edits). Deploy: `mvn clean install -PautoInstallSinglePackage -Daem.port=4802` in aem-scotia.
 
-## Header / footer Experience Fragments
+## Header / footer: AEM components in Experience Fragments (hybrid)
 
-The header and footer are AEM Experience Fragments (*Experience Fragments* console › Scotia › Canada ›
-English › Site) and are the **source of truth** for the header / footer content:
+The header and footer are **not** EDS content: they are AEM Experience Fragments built with AEM
+components (HTL, server-side), while the page main content stays EDS xwalk (Universal Editor).
 
-| XF (master variation) | Universal Editor |
+| XF (master variation) — source of truth | Edit (classic Page Editor) |
 |---|---|
-| `/content/experience-fragments/scotia/ca/en/site/header/master` | `https://experience.adobe.com/#/@deloitte-digitalengage/aem/editor/canvas/localhost:8444/content/experience-fragments/scotia/ca/en/site/header/master.html` |
-| `/content/experience-fragments/scotia/ca/en/site/footer/master` | `https://experience.adobe.com/#/@deloitte-digitalengage/aem/editor/canvas/localhost:8444/content/experience-fragments/scotia/ca/en/site/footer/master.html` |
+| `/content/experience-fragments/scotia/ca/en/site/header/master` | http://localhost:4802/editor.html/content/experience-fragments/scotia/ca/en/site/header/master.html |
+| `/content/experience-fragments/scotia/ca/en/site/footer/master` | http://localhost:4802/editor.html/content/experience-fragments/scotia/ca/en/site/footer/master.html |
 
-- The variations use template `/conf/scotia/settings/wcm/templates/xf-eds` (*Scotia EDS Experience Fragment*)
-  and the franklin page component, so they render the EDS head and `data-aue-*` instrumentation.
-- Pages load them through **bulk metadata**: the spreadsheet `/content/scotia/metadata` (franklin *Metadata*
-  template) has `url=/content/scotia/ca/en/**`, `nav=<header XF>`, `footer=<footer XF>`, emitted as
-  `<meta name="nav|footer">` and read by `blocks/header` / `blocks/footer`. No page property is needed.
-- The *Scotia EDS Page* template structure contains both XFs as locked
-  `core/wcm/components/experiencefragment/v2` components; `scripts/scripts.js` renders them with the
-  header / footer blocks in the Template Editor. Pages render only their own `root`, so the structure
-  never adds markup to pages.
-- Opened on its own (or in the UE), an XF variation renders through its header / footer block (styled,
-  mega-menu included); its instrumented sections stay in the DOM (hidden) for the UE content tree, and
-  the canvas reloads after each edit.
-- `editor.html/content/...` (classic Page Editor, which cannot edit xwalk content) redirects to the
-  Universal Editor canvas; *Edit* in Sites / XF consoles already opens the UE
-  (`UniversalEditorURLServiceImpl` mappings `/content/scotia` and `/content/experience-fragments/scotia`).
-- The old pages `/content/scotia/ca/en/nav` and `/footer` are kept as fallback (used when the metadata
-  sheet has no match). `import-work/tools/ue-build-package.mjs` writes the same content to the nav / footer
-  pages **and** the XF masters (`full` and `navfooter` scopes).
-- Local code for XF / template pages: the 8444 proxy serves the repo for
+- Components (aem-scotia `ui.apps`, group *Scotia - Structure*): `scotia/components/header` (dialog: brand,
+  top bar, tools & sign in, search) with child `megamenu` > `megamenu-category` (dialog: title, link,
+  View All, sections > links), `scotia/components/footer` (cards, social, legal links incl. Cookie
+  Settings, copyright); Sling Models `com.scotia.core.models.*`; XF template *Scotia XF*
+  (`/conf/scotia/settings/wcm/templates/xf-scotia`, `scotia/components/xfpage`).
+- The HTL reproduces the DOM the EDS blocks used to build, so `blocks/header/header.css` and
+  `blocks/footer/footer.css` are reused unchanged; interactions live in `blocks/header/nav-behavior.js`
+  and `blocks/footer/footer-behavior.js` (self-contained). aem-scotia `tools/sync-from-eds.mjs` copies that
+  CSS / JS (+ fonts, icons, styles.css) into its `clientlib-site` (`scotia.site`) for the XF pages: run it
+  after changing the header / footer CSS or behavior here.
+- EDS pages: the bulk metadata sheet `/content/scotia/metadata` sets `nav` / `footer` to the XF paths;
+  `blocks/header` / `blocks/footer` fetch `<xf>.content.html?wcmmode=disabled`, inject `.nav-wrapper` /
+  `.footer-inner` and bind the behavior. Without an XF (e.g. aem.live) they fall back to the legacy EDS
+  fragment pages `/content/scotia/ca/en/nav` and `/footer` (kept, not the source of truth).
+- *Scotia EDS Page* template structure: locked `scotia/components/experiencefragment` header / footer,
+  rendered by HTL in the Template Editor (`scripts/scripts.js` binds them).
+- *Edit* on the XFs opens the classic Page Editor (Universal Editor mapping only for `/content/scotia`).
+- Local code: the 8444 proxy serves this repo for
   `CODE_RESOURCE_PREFIX='/content/scotia.resource/,/content/experience-fragments/scotia/*/*/*/*/*.resource/,/conf/scotia/*/*/*/*/*.resource/'`
   (`~/ue-service/daemon-start-scotia.sh`).
 
