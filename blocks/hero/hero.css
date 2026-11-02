@@ -81,10 +81,15 @@
   .hero.block {
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
+    min-height: 290px;
   }
 
   .hero.block .hero-image {
     order: 1;
+  }
+
+  .hero.block .hero-image img {
+    object-position: center right;
   }
 
   .hero.block .hero-content {

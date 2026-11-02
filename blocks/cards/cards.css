@@ -59,7 +59,7 @@
 .cards.interest > ul > li {
   position: relative;
   background: linear-gradient(135deg, #7a1620, #d3242f);
-  min-height: 260px;
+  min-height: 370px;
   display: flex;
   align-items: flex-end;
 }

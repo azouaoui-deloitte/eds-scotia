@@ -48,8 +48,12 @@ export default function decorate(block) {
       button.setAttribute('aria-selected', 'true');
       button.tabIndex = 0;
       panels.forEach((p) => { p.hidden = p !== panel; });
+      // The per-tab card data on scotiabank.com is backend-driven and cannot be fetched
+      // cross-origin from Edge Delivery. Keep the authored featured card grid visible for
+      // every tab so a tab is never empty (graceful degradation); the panel text above it
+      // provides the tab-specific context.
       const cards = block.closest('.section')?.querySelector('.cards.featured');
-      if (cards) cards.style.display = /featured/i.test(label) ? '' : 'none';
+      if (cards) cards.style.display = '';
     });
   });
 

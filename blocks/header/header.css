@@ -28,12 +28,14 @@ header nav a:hover {
   text-decoration: underline;
 }
 
-/* top utility bar */
+/* top utility bar: segment links on the left, utility (More Sites / language) on the right.
+   Full-bleed background with content centered to the 1200px page container. */
 header .nav-topbar {
   display: none;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   gap: 24px;
-  padding: 6px 24px;
+  padding: 6px max(32px, calc((100% - 1200px) / 2 + 32px));
   background: #fafafa;
   border-bottom: 1px solid #eee;
   font-size: 12px;
@@ -49,7 +51,7 @@ header .nav-mainbar {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 10px 16px;
+  padding: 10px max(16px, calc((100% - 1200px) / 2 + 32px));
 }
 
 header .nav-brand img {
@@ -119,7 +121,7 @@ header .nav-signin p:last-child {
 header .nav-navbar {
   display: none;
   border-top: 1px solid #eee;
-  padding: 0 16px;
+  padding: 0 max(16px, calc((100% - 1200px) / 2 + 32px));
 }
 
 header .nav-navbar .nav-menu ul {
