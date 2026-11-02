@@ -96,7 +96,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 28px 28px 28px 48px;
+    padding: 16px 24px 16px 40px;
   }
 
   .hero.block h1 {
@@ -106,7 +106,7 @@
 
 @media (width >= 1000px) {
   .hero.block .hero-content {
-    padding: 36px 32px 36px 80px;
+    padding: 24px 32px 24px 80px;
   }
 
   .hero.block h1 {

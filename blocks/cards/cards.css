@@ -49,8 +49,14 @@
 }
 
 @media (width >= 600px) {
-  .cards.interest > ul,
   .cards.featured > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* interest tiles stack until desktop, matching prod (tablet shows one column) */
+@media (width >= 900px) {
+  .cards.interest > ul {
     grid-template-columns: repeat(3, 1fr);
   }
 }
