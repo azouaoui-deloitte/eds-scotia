@@ -141,6 +141,28 @@
   box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
   display: flex;
   flex-direction: column;
+  min-height: 426px;
+}
+
+/* the body fills the card so cards reach prod's height (text stays top-aligned) */
+.cards.featured .cards-card-body {
+  flex: 1 1 auto;
+}
+
+@media (width >= 600px) {
+  .cards.featured > ul {
+    row-gap: 30px;
+  }
+
+  .cards.featured > ul > li {
+    min-height: 585px;
+  }
+}
+
+@media (width >= 1000px) {
+  .cards.featured > ul > li {
+    min-height: 525px;
+  }
 }
 
 .cards.featured .cards-card-body h3 {
