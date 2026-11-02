@@ -58,6 +58,7 @@
 @media (width >= 900px) {
   .cards.interest > ul {
     grid-template-columns: repeat(3, 1fr);
+    gap: 69px;
   }
 }
 
@@ -88,7 +89,7 @@
   z-index: 1;
   width: 100%;
   color: #fff;
-  padding: 24px;
+  padding: 24px 24px 24px 0;
   background: linear-gradient(transparent, rgb(0 0 0 / 15%) 40%, rgb(0 0 0 / 78%));
 }
 
