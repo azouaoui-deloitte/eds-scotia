@@ -57,12 +57,12 @@
 }
 
 /* prod stacks the CTA button under its "Already a client?" / "Not a client yet?" label */
-/* stylelint-disable-next-line no-descending-specificity */
 .hero.block .hero-cta a.button {
   display: block;
   margin-top: 8px;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .hero.block a.button {
   display: inline-block;
   padding: 12px 28px;
