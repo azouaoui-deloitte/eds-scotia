@@ -23,12 +23,13 @@ export default function decorate(block) {
         if (media) s.setAttribute('media', media);
         picture.append(s);
       };
-      // mobile uses the portrait-friendly crop; tablet & desktop use the clean wide scene
-      // (the 3000x900 desktop master has a dark text-overlay band that doesn't suit our
-      // two-column layout, so we keep the clean crop there).
+      // Art direction matching prod renditions: mobile band, tablet band, desktop master
+      // (the desktop 3000x900 has a dark band on the left that the light text panel covers,
+      // exactly like prod's full-bleed hero).
       addSource('hero-mobile.jpg', '(max-width: 767px)');
+      addSource('hero-tablet.jpg', '(max-width: 991px)');
       const out = document.createElement('img');
-      out.setAttribute('src', `${base}hero-tablet.jpg`);
+      out.setAttribute('src', `${base}hero-desktop.jpg`);
       out.setAttribute('alt', img.getAttribute('alt') || '');
       out.setAttribute('loading', 'eager');
       moveInstrumentation(img, out);
