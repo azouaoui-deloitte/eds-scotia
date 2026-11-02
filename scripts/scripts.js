@@ -9,6 +9,8 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  decorateBlock,
+  loadBlock,
 } from './aem.js';
 
 /**
@@ -63,6 +65,34 @@ export function getContentRoot() {
 function getFragmentPreview() {
   const match = window.location.pathname.match(/^\/content\/experience-fragments\/.+\/(header|footer)\/[^/]+$/);
   return match ? match[1] : '';
+}
+
+let experienceFragmentBlocks = [];
+
+/**
+ * Header / footer Experience Fragment components (the locked XFs of the template structure)
+ * inline the raw fragment sections: render them through the header / footer block instead.
+ * @param {Element} main The main element
+ * @returns {Element[]} the header / footer blocks to load
+ */
+function decorateExperienceFragments(main) {
+  return [...main.querySelectorAll('.cmp-experiencefragment')].map((xf) => {
+    const kind = ['header', 'footer'].find((k) => xf.classList.contains(`cmp-experiencefragment--${k}`));
+    const root = xf.querySelector('[data-aue-resource$="/jcr:content/root"]');
+    const path = (root?.dataset.aueResource || '').replace(/^urn:aemconnection:/, '').replace(/\/jcr:content\/root$/, '');
+    if (!kind || !path) return null;
+    const meta = document.createElement('meta');
+    meta.name = kind === 'header' ? 'nav' : 'footer';
+    meta.content = path;
+    document.head.append(meta);
+    const block = document.createElement('div');
+    block.className = kind;
+    const wrapper = document.createElement(kind);
+    wrapper.append(block);
+    xf.replaceChildren(wrapper);
+    document.documentElement.dataset.experienceFragments = 'true';
+    return block;
+  }).filter(Boolean);
 }
 
 const UE_CANVAS = 'https://experience.adobe.com/#/@deloitte-digitalengage/aem/editor/canvas/';
@@ -183,6 +213,12 @@ async function loadEager(doc) {
       doc.addEventListener(`aue:content-${type}`, () => window.location.reload(), { capture: true });
     });
   }
+  if (main && !doc.documentElement.dataset.experienceFragments) {
+    experienceFragmentBlocks = decorateExperienceFragments(main);
+    if (experienceFragmentBlocks.length) {
+      doc.querySelectorAll('body > header, body > footer').forEach((el) => { el.style.display = 'none'; });
+    }
+  }
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
@@ -223,7 +259,12 @@ function decorateBackToTop() {
 
 async function loadLazy(doc) {
   const preview = getFragmentPreview();
-  if (preview !== 'footer') loadHeader(doc.querySelector('header'));
+  const inlineFragments = doc.documentElement.dataset.experienceFragments === 'true';
+  if (preview !== 'footer' && !inlineFragments) loadHeader(doc.querySelector('header'));
+  experienceFragmentBlocks.forEach((block) => {
+    decorateBlock(block);
+    loadBlock(block);
+  });
 
   const main = doc.querySelector('main');
   await loadSections(main);
@@ -233,7 +274,7 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  if (preview !== 'header') loadFooter(doc.querySelector('footer'));
+  if (preview !== 'header' && !inlineFragments) loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();

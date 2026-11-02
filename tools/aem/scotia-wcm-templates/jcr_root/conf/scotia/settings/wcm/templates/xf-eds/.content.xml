@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:sling="http://sling.apache.org/jcr/sling/1.0"
+    jcr:primaryType="cq:Template">
+    <jcr:content
+        jcr:primaryType="cq:PageContent"
+        jcr:title="Scotia EDS Experience Fragment"
+        jcr:description="Experience Fragment variation rendered by Edge Delivery Services (xwalk), e.g. header and footer, editable in the Universal Editor."
+        cq:templateType="/conf/scotia/settings/wcm/template-types/eds-page"
+        allowedPaths="[^/content/experience-fragments/scotia(/.*)?]"
+        status="enabled"/>
+    <structure jcr:primaryType="cq:Page">
+        <jcr:content
+            jcr:primaryType="cq:PageContent"
+            cq:template="/conf/scotia/settings/wcm/templates/xf-eds"
+            sling:resourceType="core/franklin/components/page/v1/page">
+            <root
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/root/v1/root"
+                editable="{Boolean}true"/>
+        </jcr:content>
+    </structure>
+    <initial jcr:primaryType="cq:Page">
+        <jcr:content
+            jcr:primaryType="cq:PageContent"
+            cq:template="/conf/scotia/settings/wcm/templates/xf-eds"
+            cq:xfVariantType="web"
+            cq:xfShowInEditor="{Boolean}true"
+            cq:tags="[experience-fragments:variation/web]"
+            hideInNav="{Boolean}true"
+            sling:resourceType="core/franklin/components/page/v1/page">
+            <root
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="core/franklin/components/root/v1/root">
+                <section
+                    jcr:primaryType="nt:unstructured"
+                    sling:resourceType="core/franklin/components/section/v1/section"/>
+            </root>
+        </jcr:content>
+    </initial>
+    <policies jcr:primaryType="cq:Page">
+        <jcr:content
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/core/components/policies/mappings">
+            <root
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="wcm/core/components/policies/mapping"/>
+        </jcr:content>
+    </policies>
+</jcr:root>

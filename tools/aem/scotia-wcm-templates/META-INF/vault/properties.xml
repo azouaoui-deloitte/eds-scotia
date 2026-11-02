@@ -3,8 +3,8 @@
 <properties>
 <entry key="name">scotia-wcm-templates</entry>
 <entry key="group">scotia</entry>
-<entry key="version">1.0.0</entry>
-<entry key="description">Editable templates, template types and policies of the Scotia xwalk (AEM authoring + Edge Delivery Services) site, under /conf/scotia/settings/wcm. Same structure as the Adobe aem-boilerplate-xwalk site template, plus a "Scotia EDS Page" template.</entry>
+<entry key="version">1.1.0</entry>
+<entry key="description">Editable templates, template types and policies of the Scotia xwalk (AEM authoring + Edge Delivery Services) site, under /conf/scotia/settings/wcm. Same structure as the Adobe aem-boilerplate-xwalk site template, plus the "Scotia EDS Page" template (header / footer Experience Fragments locked in its structure) and the "Scotia EDS Experience Fragment" template; seeds (merge) the header / footer XFs under /content/experience-fragments/scotia and the bulk metadata sheet /content/scotia/metadata (nav / footer -> XFs).</entry>
 <entry key="createdBy">tools/aem/scotia-wcm-templates/build.sh</entry>
 <entry key="allowIndexDefinitions">false</entry>
 <entry key="requiresRoot">false</entry>

@@ -409,10 +409,14 @@ export default async function decorate(block) {
     signinSection, menuSection, trendingSection,
   ] = [...fragment.children];
 
-  // logo
+  // logo: home of the nav's language root; an Experience Fragment nav
+  // (/content/experience-fragments/<site>/ca/en/site/header/master) maps to /content/<site>/ca/en
   const ext = window.location.pathname.endsWith('.html') ? '.html' : '';
+  const navRoot = navPath
+    .replace(/^\/content\/experience-fragments\/([^/]+)\/(.+)\/site\/[^/]+\/[^/.]+(\.html)?$/, '/content/$1/$2')
+    .replace(/\/nav$/, '');
   const logo = el('a', {
-    class: 'nav-logo', href: `${navPath.replace(/\/nav$/, '')}/personal${ext}`, 'aria-label': 'Scotiabank',
+    class: 'nav-logo', href: `${navRoot}/personal${ext}`, 'aria-label': 'Scotiabank',
   });
   [...(brand?.querySelectorAll('picture') || [])].forEach((pic, i) => {
     pic.classList.add(i === 0 ? 'logo-desktop' : 'logo-mobile');
