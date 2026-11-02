@@ -113,9 +113,4 @@
     font-size: 46px;
     letter-spacing: -1px;
   }
-
-  /* desktop crop (hero-desktop.jpg) has a dark text-area on the left; show the bright scene */
-  .hero.block .hero-image img {
-    object-position: right;
-  }
 }
