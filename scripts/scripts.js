@@ -56,6 +56,32 @@ export function getContentRoot() {
 }
 
 /**
+ * Header / footer Experience Fragment variation rendered on its own, e.g.
+ * /content/experience-fragments/scotia/ca/en/site/header/master.html
+ * @returns {string} 'header', 'footer' or '' (regular page)
+ */
+function getFragmentPreview() {
+  const match = window.location.pathname.match(/^\/content\/experience-fragments\/.+\/(header|footer)\/[^/]+$/);
+  return match ? match[1] : '';
+}
+
+const UE_CANVAS = 'https://experience.adobe.com/#/@deloitte-digitalengage/aem/editor/canvas/';
+
+/**
+ * xwalk content has no classic authoring UI: when loaded in the classic page editor
+ * (/editor.html/content/...), open the page in the Universal Editor instead.
+ */
+function redirectClassicEditor() {
+  try {
+    const top = window.top.location;
+    if (window.top === window || !top.pathname.startsWith('/editor.html/content/')) return;
+    const connection = document.querySelector('meta[name="urn:adobe:aue:system:aemconnection"]')?.content || '';
+    const host = connection.replace(/^xwalk:https?:\/\//, '');
+    if (host) top.href = `${UE_CANVAS}${host}${top.pathname.substring('/editor.html'.length)}`;
+  } catch { /* cross-origin parent, e.g. the Universal Editor canvas */ }
+}
+
+/**
  * load fonts.css and set a session storage flag
  */
 async function loadFonts() {
@@ -138,8 +164,25 @@ export function decorateMain(main) {
  */
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
+  redirectClassicEditor();
   decorateTemplateAndTheme();
   const main = doc.querySelector('main');
+  const preview = getFragmentPreview();
+  if (preview && main) {
+    // render the fragment through its own header / footer block (styled as on every page);
+    // the instrumented sections stay in the DOM for the Universal Editor content tree
+    const meta = doc.createElement('meta');
+    meta.name = preview === 'header' ? 'nav' : 'footer';
+    meta.content = window.location.pathname;
+    doc.head.append(meta);
+    doc.body.classList.add('fragment-preview');
+    main.style.display = 'none';
+    const unused = doc.querySelector(preview === 'header' ? 'footer' : 'header');
+    if (unused) unused.style.display = 'none';
+    ['patch', 'update', 'add', 'move', 'remove', 'copy'].forEach((type) => {
+      doc.addEventListener(`aue:content-${type}`, () => window.location.reload(), { capture: true });
+    });
+  }
   if (main) {
     decorateMain(main);
     document.body.classList.add('appear');
@@ -160,17 +203,37 @@ async function loadEager(doc) {
  * Loads everything that doesn't need to be delayed.
  * @param {Element} doc The container element
  */
+/**
+ * Adds the floating "back to top" button (purple circle, bottom-right), shown after the
+ * user scrolls down, matching scotiabank.com. Page-level affordance (not header/footer).
+ */
+function decorateBackToTop() {
+  if (document.querySelector('.back-to-top')) return;
+  const btn = document.createElement('button');
+  btn.className = 'back-to-top';
+  btn.type = 'button';
+  btn.setAttribute('aria-label', 'Back to top');
+  btn.innerHTML = '<span class="back-to-top-icon" aria-hidden="true"></span>';
+  btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  const toggle = () => btn.classList.toggle('show', window.scrollY > 400);
+  window.addEventListener('scroll', toggle, { passive: true });
+  toggle();
+  document.body.append(btn);
+}
+
 async function loadLazy(doc) {
-  loadHeader(doc.querySelector('header'));
+  const preview = getFragmentPreview();
+  if (preview !== 'footer') loadHeader(doc.querySelector('header'));
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  decorateBackToTop();
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadFooter(doc.querySelector('footer'));
+  if (preview !== 'header') loadFooter(doc.querySelector('footer'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
