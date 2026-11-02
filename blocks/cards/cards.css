@@ -65,7 +65,7 @@
 /* "You may be interested in": lifestyle photo background + card-art overlay + title */
 .cards.interest > ul > li {
   position: relative;
-  min-height: 460px;
+  min-height: 481px;
   overflow: hidden;
   border-radius: 8px;
   display: flex;
