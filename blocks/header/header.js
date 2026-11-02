@@ -45,19 +45,65 @@ export default async function decorate(block) {
   const mainbar = document.createElement('div');
   mainbar.className = 'nav-mainbar';
 
-  // search box (static: the scotiabank search API is cross-origin and cannot be called from EDS)
+  // Expandable search. The scotiabank search API is cross-origin and cannot be queried from
+  // Edge Delivery, so submitting redirects to the scotiabank.com search results page.
   const search = document.createElement('form');
   search.className = 'nav-search';
   search.setAttribute('role', 'search');
-  search.action = 'https://www.scotiabank.com/ca/en/personal.html';
-  search.innerHTML = '<input type="search" aria-label="Search" placeholder="Begin Your Search">'
-    + '<button type="submit" aria-label="Search"><span class="icon icon-search"></span></button>';
+  search.innerHTML = '<input type="search" name="q" aria-label="Search scotiabank.com" placeholder="Begin Your Search">'
+    + '<button type="submit" class="nav-search-submit" aria-label="Search"><span class="icon icon-search"></span></button>'
+    + '<button type="button" class="nav-search-close" aria-label="Close search">&times;</button>';
+  search.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const q = encodeURIComponent(search.querySelector('input').value.trim());
+    window.location.href = `https://www.scotiabank.com/ca/en/search-results.html${q ? `?q=${q}` : ''}`;
+  });
+  // toggle button shown when the search is collapsed (mobile / compact)
+  const searchToggle = document.createElement('button');
+  searchToggle.type = 'button';
+  searchToggle.className = 'nav-search-toggle';
+  searchToggle.setAttribute('aria-label', 'Open search');
+  searchToggle.innerHTML = '<span class="icon icon-search"></span>';
+  const setSearch = (openState) => {
+    search.classList.toggle('open', openState);
+    searchToggle.setAttribute('aria-expanded', openState ? 'true' : 'false');
+    if (openState) search.querySelector('input').focus();
+  };
+  searchToggle.addEventListener('click', () => setSearch(!search.classList.contains('open')));
+  search.querySelector('.nav-search-close').addEventListener('click', () => setSearch(false));
 
-  [brand, search, tools, signin].forEach((s) => s && mainbar.append(s));
+  [brand, searchToggle, search, tools, signin].forEach((s) => s && mainbar.append(s));
 
   const navbar = document.createElement('div');
   navbar.className = 'nav-navbar';
   if (menu) navbar.append(menu);
+
+  // Mega-menu: each top-level category link that has a nested <ul> gets a dropdown panel,
+  // opened on hover (desktop) and click/Enter (all viewports). Content stays UE-editable
+  // because it is authored in the nav fragment.
+  const topItems = menu ? [...menu.querySelectorAll('ul > li')].filter((li) => li.querySelector(':scope > ul')) : [];
+  const closeAllMenus = () => topItems.forEach((li) => li.classList.remove('open'));
+  topItems.forEach((li) => {
+    li.classList.add('has-submenu');
+    const link = li.querySelector(':scope > a');
+    const submenu = li.querySelector(':scope > ul');
+    submenu.classList.add('nav-submenu');
+    link?.setAttribute('aria-haspopup', 'true');
+    link?.setAttribute('aria-expanded', 'false');
+    const open = (state) => {
+      closeAllMenus();
+      if (state) li.classList.add('open');
+      link?.setAttribute('aria-expanded', state ? 'true' : 'false');
+    };
+    link?.addEventListener('click', (e) => {
+      // On desktop let hover drive it but still allow click to pin; prevent navigation
+      // only when opening the panel (first click), navigate on the category page via arrow.
+      if (!li.classList.contains('open')) { e.preventDefault(); open(true); } else open(false);
+    });
+    li.addEventListener('mouseenter', () => { if (isDesktop.matches) open(true); });
+    li.addEventListener('mouseleave', () => { if (isDesktop.matches) open(false); });
+  });
+  document.addEventListener('click', (e) => { if (!e.target.closest('.nav-navbar')) closeAllMenus(); });
 
   // hamburger for mobile
   const hamburger = document.createElement('div');
