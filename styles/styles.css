@@ -363,3 +363,16 @@ main .section > div > h2 {
 main .section:has(.tabs) {
   background: #f5f6fc;
 }
+
+/* authorable legal/disclaimer band (CDIC) — extra vertical breathing room like prod */
+main .section.legal {
+  padding: 32px 0;
+}
+
+main .section.legal > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}

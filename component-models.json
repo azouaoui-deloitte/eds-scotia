@@ -136,6 +136,10 @@
           {
             "name": "Highlight",
             "value": "highlight"
+          },
+          {
+            "name": "Legal (CDIC)",
+            "value": "legal"
           }
         ]
       }
