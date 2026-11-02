@@ -126,14 +126,10 @@
     max-width: 560px;
   }
 
-  /* two CTA columns side by side, matching prod's column pitch (~257px) */
+  /* two CTA columns side by side on prod's ~257px pitch (253 + inline-block whitespace) */
   .hero.block .hero-cta {
-    width: 127px;
-    margin-right: 130px;
-  }
-
-  .hero.block .hero-cta:last-of-type {
-    margin-right: 0;
+    width: 253px;
+    margin: 8px 0 0;
   }
 
   .hero.block h1 {
