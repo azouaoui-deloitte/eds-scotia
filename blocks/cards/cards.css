@@ -117,6 +117,20 @@
   flex-direction: column;
 }
 
+.cards.featured .cards-card-body h3 {
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: normal;
+  color: #2b2b2b;
+}
+
+.cards.featured .cards-card-link {
+  font-family: scotiabank-bold, var(--body-font-family);
+  color: #007eab;
+}
+
 .cards.featured .cards-card-badge {
   display: inline-block;
   background: #006272;

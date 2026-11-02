@@ -110,6 +110,7 @@
   }
 
   .hero.block h1 {
-    font-size: 44px;
+    font-size: 46px;
+    letter-spacing: -1px;
   }
 }
