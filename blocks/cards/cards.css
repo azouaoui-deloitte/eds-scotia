@@ -106,6 +106,13 @@
   }
 }
 
+/* mobile/tablet: text block sits closer to the tile bottom, matching prod */
+@media (width <= 899px) {
+  .cards.interest .cards-card-body {
+    padding-bottom: 0;
+  }
+}
+
 /* the credit-card art floats above the title, overlapping the photo */
 .cards.interest .cards-card-body picture {
   position: absolute;
