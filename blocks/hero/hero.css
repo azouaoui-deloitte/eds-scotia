@@ -36,11 +36,25 @@
 }
 
 .hero.block h1 {
-  font-size: 34px;
-  line-height: 1.1;
-  margin: 4px 0 8px;
+  font-size: 40px;
+  line-height: 44px;
+  margin: 0 0 8px;
   color: var(--text-color);
   text-wrap: balance;
+}
+
+/* mobile hero image shows at its natural aspect (prod band ~293px at 375w) */
+@media (width <= 767px) {
+  .hero.block .hero-image img {
+    height: auto;
+  }
+}
+
+@media (width >= 768px) {
+  .hero.block h1 {
+    font-size: 46px;
+    line-height: 50.6px;
+  }
 }
 
 .hero.block .hero-content p {
