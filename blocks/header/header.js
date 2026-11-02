@@ -10,7 +10,11 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
  */
 export default async function decorate(block) {
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
+  // Default to a nav fragment in the current content directory so the site works both
+  // root-served on Edge (/ca/en/nav) and subtree-served on AEM (/content/scotia/ca/en/nav).
+  const navPath = navMeta
+    ? new URL(navMeta, window.location).pathname
+    : `${window.location.pathname.replace(/\/[^/]*$/, '')}/nav`;
   const fragment = await loadFragment(navPath);
 
   block.textContent = '';
