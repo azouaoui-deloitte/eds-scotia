@@ -65,11 +65,17 @@
 /* "You may be interested in": lifestyle photo background + card-art overlay + title */
 .cards.interest > ul > li {
   position: relative;
-  min-height: 560px;
+  min-height: 460px;
   overflow: hidden;
   border-radius: 8px;
   display: flex;
   align-items: flex-end;
+}
+
+@media (width >= 900px) {
+  .cards.interest > ul > li {
+    min-height: 560px;
+  }
 }
 
 .cards.interest .cards-card-image {
@@ -89,8 +95,15 @@
   z-index: 1;
   width: 100%;
   color: #fff;
-  padding: 24px 24px 24px 0;
+  padding: 24px 24px 24px 20px;
   background: linear-gradient(transparent, rgb(0 0 0 / 15%) 40%, rgb(0 0 0 / 78%));
+}
+
+/* desktop tiles sit edge-to-edge with wide gaps; text aligns to the card edge */
+@media (width >= 900px) {
+  .cards.interest .cards-card-body {
+    padding-left: 0;
+  }
 }
 
 /* the credit-card art floats above the title, overlapping the photo */
