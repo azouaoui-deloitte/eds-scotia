@@ -55,6 +55,10 @@ async function applyChanges(event) {
       const blockResource = block.getAttribute('data-aue-resource');
       const newBlock = parsedUpdate.querySelector(`[data-aue-resource="${blockResource}"]`);
       if (newBlock) {
+        // preserve the active tab across re-decoration of a tabs block
+        const activeTabIdx = block.classList.contains('tabs')
+          ? [...block.querySelectorAll('.tabs-tab')].findIndex((b) => b.getAttribute('aria-selected') === 'true')
+          : -1;
         newBlock.style.display = 'none';
         block.insertAdjacentElement('afterend', newBlock);
         decorateButtons(newBlock);
@@ -64,6 +68,7 @@ async function applyChanges(event) {
         await loadBlock(newBlock);
         block.remove();
         newBlock.style.display = null;
+        if (activeTabIdx > 0) newBlock.querySelectorAll('.tabs-tab')[activeTabIdx]?.click();
         return true;
       }
     } else {
@@ -114,6 +119,24 @@ function attachEventListeners(main) {
 }
 
 attachEventListeners(document.querySelector('main'));
+
+// In the Universal Editor the canvas intercepts clicks for selection, so a tab never
+// activates on click. Drive tab switching from UE's selection event instead: when a tab
+// item (its panel) or any resource inside it is selected, activate the matching tab.
+function activateTabForResource(resource) {
+  if (!resource) return;
+  const el = document.querySelector(`[data-aue-resource="${resource}"]`);
+  const panel = el?.closest('.tabs-panel');
+  if (!panel?.id) return;
+  const btn = document.getElementById(`${panel.id}-btn`);
+  if (btn && btn.getAttribute('aria-selected') !== 'true') btn.click();
+}
+document.querySelector('main')?.addEventListener('aue:ui-select', (event) => {
+  const resource = event.detail?.resource
+    || event.detail?.request?.target?.resource
+    || event.target?.closest?.('[data-aue-resource]')?.getAttribute('data-aue-resource');
+  activateTabForResource(resource);
+});
 
 // decorate rich text
 // this has to happen after decorateMain(), and everythime decorateBlocks() is called
