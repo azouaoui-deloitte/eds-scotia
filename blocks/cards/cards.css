@@ -55,11 +55,12 @@
   }
 }
 
-/* "You may be interested in" overlay tiles */
+/* "You may be interested in": lifestyle photo background + card-art overlay + title */
 .cards.interest > ul > li {
   position: relative;
-  background: linear-gradient(135deg, #7a1620, #d3242f);
-  min-height: 370px;
+  min-height: 460px;
+  overflow: hidden;
+  border-radius: 8px;
   display: flex;
   align-items: flex-end;
 }
@@ -67,29 +68,41 @@
 .cards.interest .cards-card-image {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .cards.interest .cards-card-image img {
-  width: 70%;
-  height: auto;
+  width: 100%;
+  height: 100%;
   aspect-ratio: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 8px 20px rgb(0 0 0 / 40%));
+  object-fit: cover;
 }
 
 .cards.interest .cards-card-body {
   position: relative;
   z-index: 1;
-  color: #fff;
-  background: linear-gradient(transparent, rgb(0 0 0 / 55%));
   width: 100%;
+  color: #fff;
+  padding: 24px;
+  background: linear-gradient(transparent, rgb(0 0 0 / 15%) 40%, rgb(0 0 0 / 78%));
+}
+
+/* the credit-card art floats above the title, overlapping the photo */
+.cards.interest .cards-card-body picture {
+  position: absolute;
+  bottom: 120px;
+  left: 24px;
+  width: 58%;
+}
+
+.cards.interest .cards-card-body picture img {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 10px 24px rgb(0 0 0 / 45%));
 }
 
 .cards.interest .cards-card-body h3 {
   color: #fff;
+  font-size: 20px;
 }
 
 .cards.interest .cards-card-link {

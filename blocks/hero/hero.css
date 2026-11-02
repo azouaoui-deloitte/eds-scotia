@@ -77,11 +77,11 @@
   border: 2px solid #1b1b1b;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .hero.block {
     grid-template-columns: 1fr 1fr;
     align-items: stretch;
-    min-height: 290px;
+    min-height: 260px;
   }
 
   .hero.block .hero-image {
@@ -89,14 +89,24 @@
   }
 
   .hero.block .hero-image img {
-    object-position: center right;
+    object-position: center;
   }
 
   .hero.block .hero-content {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 48px 32px 48px 80px;
+    padding: 28px 28px 28px 48px;
+  }
+
+  .hero.block h1 {
+    font-size: 40px;
+  }
+}
+
+@media (width >= 1000px) {
+  .hero.block .hero-content {
+    padding: 36px 32px 36px 80px;
   }
 
   .hero.block h1 {
