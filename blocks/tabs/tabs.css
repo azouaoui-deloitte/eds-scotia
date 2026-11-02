@@ -22,6 +22,11 @@
   cursor: pointer;
 }
 
+.tabs.block .tabs-tab:hover,
+.tabs.block .tabs-tab:focus-visible {
+  color: #d3242f;
+}
+
 .tabs.block .tabs-tab[aria-selected="true"] {
   color: #d3242f;
   border-bottom-color: #d3242f;

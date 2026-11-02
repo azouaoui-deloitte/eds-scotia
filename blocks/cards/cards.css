@@ -115,6 +115,11 @@
   color: #fff;
 }
 
+.cards.interest .cards-card-link:hover,
+.cards.interest .cards-card-link:focus-visible {
+  text-decoration: underline;
+}
+
 /* Featured offer tiles */
 .cards.featured > ul > li {
   border: 1px solid #e5e5e5;
@@ -134,7 +139,14 @@
 
 .cards.featured .cards-card-link {
   font-family: scotiabank-bold, var(--body-font-family);
+  font-size: 16px;
   color: #007eab;
+}
+
+.cards.featured .cards-card-link:hover,
+.cards.featured .cards-card-link:focus-visible {
+  color: #005e80;
+  text-decoration: underline;
 }
 
 .cards.featured .cards-card-badge {

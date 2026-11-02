@@ -1,4 +1,3 @@
-import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
@@ -13,11 +12,27 @@ export default function decorate(block) {
 
   if (imageRow) {
     imageRow.classList.add('hero-image');
-    imageRow.querySelectorAll('picture > img').forEach((img) => {
-      const optimized = createOptimizedPicture(img.src, img.alt, true, [{ width: '1600' }]);
-      moveInstrumentation(img, optimized.querySelector('img'));
-      img.closest('picture').replaceWith(optimized);
-    });
+    const img = imageRow.querySelector('picture > img');
+    if (img) {
+      // Art-directed hero matching prod breakpoints: a dedicated crop per viewport.
+      const base = (img.getAttribute('src') || '').replace(/[^/]+$/, '');
+      const picture = document.createElement('picture');
+      const addSource = (file, media) => {
+        const s = document.createElement('source');
+        s.setAttribute('srcset', `${base}${file}`);
+        if (media) s.setAttribute('media', media);
+        picture.append(s);
+      };
+      addSource('hero-mobile.jpg', '(max-width: 767px)');
+      addSource('hero-tablet.jpg', '(max-width: 1199px)');
+      const out = document.createElement('img');
+      out.setAttribute('src', `${base}hero-desktop.jpg`);
+      out.setAttribute('alt', img.getAttribute('alt') || '');
+      out.setAttribute('loading', 'eager');
+      moveInstrumentation(img, out);
+      picture.append(out);
+      img.closest('picture').replaceWith(picture);
+    }
   }
 
   if (contentRow) {
