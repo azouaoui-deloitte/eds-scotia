@@ -137,6 +137,7 @@
   color: #2b2b2b;
 }
 
+/* stylelint-disable-next-line no-descending-specificity */
 .cards.featured .cards-card-link {
   font-family: scotiabank-bold, var(--body-font-family);
   font-size: 16px;
