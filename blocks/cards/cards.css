@@ -172,6 +172,18 @@
   .cards.featured > ul > li {
     min-height: 525px;
   }
+
+  /* match prod's Featured grid: ~1092px container (cards start ~x174) + body padding.
+     Scoped to the .featured variant so it doesn't affect other pages' card grids. */
+  .cards.featured > ul {
+    max-width: 1092px;
+    margin-inline: auto;
+  }
+
+  .cards.featured .cards-card-body {
+    padding-left: 36px;
+    padding-right: 36px;
+  }
 }
 
 .cards.featured .cards-card-body h3 {
