@@ -104,6 +104,33 @@ main:has(> .section.l1) {
     color: #000;
   }
 
+  .section.cc-top .cards.promo > ul > li:nth-child(2n) :is(h3, p, strong) {
+    color: #fff;
+  }
+
+  .section.cc-top .cards.promo .cards-card-body h3 {
+    font-family: var(--body-font-family);
+    font-weight: 400;
+  }
+
+  .section.cc-top .cards.promo .cards-card-body h3 strong {
+    font-family: Scotiabank-Bold, var(--body-font-family);
+  }
+
+  .section.cc-top .cards.promo .cards-card-body > p:last-child:not(.button-wrapper) {
+    margin-top: 16px;
+  }
+
+  .section.cc-top .cards.promo .cards-card-body > p:last-child:not(.button-wrapper) a:any-link {
+    color: #1f1f1f;
+    font-size: 14px;
+    border: 0;
+  }
+
+  .section.cc-top .cards.promo .cards-card-body > p:last-child:not(.button-wrapper) a:any-link::after {
+    content: " \2192";
+  }
+
   .section.faq-side.split > div {
     padding: 0;
   }
