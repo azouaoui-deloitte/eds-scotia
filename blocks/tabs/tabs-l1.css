@@ -98,7 +98,7 @@
 
 .tabs.block.pills .tabs-pills-toggle {
   display: block;
-  margin: -12px 0 24px;
+  margin: 0 0 25px;
   padding: 0;
   border: 0;
   background: none;
@@ -111,6 +111,11 @@
 
 .tabs.block.pills .tabs-pills-toggle[hidden] {
   display: none;
+}
+
+/* all pills on one row (no toggle): prod leaves 38px above the cards */
+.tabs.block.pills .tabs-list:has(+ .tabs-pills-toggle[hidden]) {
+  margin-bottom: 38px;
 }
 
 /* panels below 992px: prod swaps the tab bar for a native dropdown (rec-tabs-select) */

@@ -54,7 +54,7 @@ main:has(> .section.l1) {
     order: 1;
     box-sizing: border-box;
     width: 100%;
-    padding: 0 30px;
+    padding: 0 32px;
   }
 
   .section.sand > .cards-wrapper {
@@ -72,9 +72,17 @@ main:has(> .section.l1) {
   }
 
   .section.sand .default-content-wrapper > h2 + p {
-    margin: 0 0 22px;
-    font-size: 16px;
-    line-height: 24px;
+    margin: 0 0 20px;
+    color: #525252;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  @media (width < 768px) {
+    .section.sand .default-content-wrapper > h2 + p {
+      font-size: 16px;
+      line-height: 24px;
+    }
   }
 
   .section.sand-light .columns.links h2 {
