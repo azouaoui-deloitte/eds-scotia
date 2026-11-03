@@ -382,6 +382,9 @@ main > .section:has(.cards.interest) {
 
 main > .section:has(.cards.interest) > .default-content-wrapper > h2:first-child {
   margin-top: 0;
+  margin-inline: auto;
+  width: fit-content; /* prod: a 416px centred box */
+  font-weight: 500; /* prod renders the Headline face (not Light) */
 }
 
 main > .section:has(> .tabs.block) {

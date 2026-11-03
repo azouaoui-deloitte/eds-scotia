@@ -70,7 +70,7 @@ main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
   padding-bottom: 7px;
 }
 
-/* panels stay in the DOM (UE-editable) but prod shows no per-tab text line; the cards switch */
+/* panels stay in the DOM (UE-editable); only the default bar shows the active one (below) */
 .tabs.block .tabs-panel {
   display: none;
 }
@@ -78,4 +78,34 @@ main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
 .tabs.block .tabs-panel a {
   color: #d3242f;
   font-weight: 700;
+}
+
+/* personal: the active panel carries prod's per-tab heading + subtitle under the bar
+   (Headline 36/39.6 weight 500, -1px; subtitle 17.6px), the panel's cards follow */
+main > .section > .tabs.block .tabs-panel:not([hidden]) {
+  display: block;
+  text-align: center;
+  color: #333;
+}
+
+main > .section > .tabs.block .tabs-panel h2 {
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: #333;
+  margin: 32px 0 12px;
+}
+
+main > .section > .tabs.block .tabs-panel > p {
+  font-size: 17.6px;
+  line-height: 17.6px;
+  margin: 0 0 16px;
+}
+
+@media (width < 768px) {
+  main > .section > .tabs.block .tabs-panel h2 {
+    font-size: 35px;
+  }
 }

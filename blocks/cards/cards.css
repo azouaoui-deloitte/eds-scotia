@@ -185,7 +185,7 @@
 
 .cards.interest .cards-card-body h3 {
   color: #fff;
-  font-family: scotiabank-bold, var(--body-font-family);
+  font-family: scotiabank-bold-synth, scotiabank-bold, var(--body-font-family); /* prod: synthetic bold over the Bold face */
   font-size: 24px;
   font-weight: 700;
   line-height: 27px;
@@ -216,27 +216,33 @@
   font-weight: 400;
 }
 
-/* prod: the whole tile is the link (pointer anywhere, no visual hover change) and keyboard
-   focus rings the tile, not the link text */
-.cards.interest .cards-card-link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
+/* prod: the tile IS the link (369x510 hit area, no visual hover change); keyboard focus rings
+   the whole tile. The anchor fills the tile and keeps the text band at its bottom. */
+.cards.interest a.cards-card-tile {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  color: inherit;
+  text-decoration: none;
 }
 
-.cards.interest .cards-card-link:focus-visible {
-  outline: none;
-}
-
-.cards.interest > ul > li:has(.cards-card-link:focus-visible) {
+.cards.interest a.cards-card-tile:focus-visible {
   outline: rgb(0 95 204) auto 1px;
   outline-offset: 1px;
+}
+
+/* prod superscripts (®, TM) in the tile titles */
+.cards.interest .cards-card-body h3 sup {
+  font-size: 12px;
+  line-height: 0;
 }
 
 /* in the tabbed section the tab bar sits above the heading, so prod keeps a gap between the
    subtitle and the card grid that the tab bar no longer provides locally */
 main .section:has(.tabs) .cards.featured {
-  margin-top: 40px;
+  margin-top: 45px; /* prod: 45px under the 17.6px panel subtitle */
 }
 
 /* Featured offer tiles. Prod mobile cards are NOT uniform (426-513): 426 is the floor and
@@ -267,7 +273,7 @@ main .section:has(.tabs) .cards.featured {
 .cards.featured .cards-card-body p:not(.cards-card-badge) {
   font-size: 16px;
   line-height: 1.5;
-  color: #4a4a4a;
+  color: #333;
 }
 
 
@@ -329,16 +335,20 @@ main .section:has(.tabs) .cards.featured {
 }
 
 .cards.featured .cards-card-body h3 {
-  /* prod renders the Featured title in the HEADLINE font (measures ~287px for the Invest title
-     vs ~269px in the body font), which wraps to 2 lines at every viewport; using the body font
-     kept it on 1 line and pushed the description/card height off. */
-  font-family: var(--heading-font-family);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.5; /* prod 24px at desktop AND mobile */
+  /* prod: the title is a Scotiabank-Bold 18/27 span (weight 500, no synthetic bold), 12px above
+     the copy */
+  font-family: scotiabank-bold, var(--body-font-family);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 27px;
   letter-spacing: normal;
   color: #2b2b2b;
-  margin: 0 0 12px; /* prod: no top margin, 12px below */
+  margin: 0 0 12px;
+}
+
+/* superscripts (†, ®) must not grow the title's line box */
+.cards.featured .cards-card-body h3 sup {
+  line-height: 0;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -405,4 +415,66 @@ main .section:has(.tabs) .cards.featured {
 
 .cards.featured .cards-card-badge strong {
   font-weight: 700;
+}
+
+/* personal tab grids: the "View all ..." buttons centred 60px under the grid (prod bns_button
+   rectangle red buttons: 58px, 18/30 padding, synthetic-bold 16/20, inverted on hover/focus) */
+/* stylelint-disable no-descending-specificity */
+.cards.block > ul > li.cards-ctas {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px 30px;
+  min-height: 0;
+  margin: 30px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.cards.block > ul > li.cards-ctas .cards-card-body {
+  display: contents;
+}
+
+.cards.block > ul > li.cards-ctas .cards-card-body > p {
+  margin: 0;
+  padding: 0;
+}
+
+.cards.block > ul > li.cards-ctas a.cards-cta-button:any-link {
+  display: inline-block;
+  box-sizing: border-box;
+  height: 58px;
+  padding: 18px 30px;
+  border: 1px solid #ec111a;
+  border-radius: 5px;
+  background: #ec111a;
+  color: #fff;
+  font-family: scotiabank-bold-synth, scotiabank-bold, var(--body-font-family);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+.cards.block > ul > li.cards-ctas a.cards-cta-button:any-link::after {
+  content: none;
+}
+
+.cards.block > ul > li.cards-ctas a.cards-cta-button:any-link:hover,
+.cards.block > ul > li.cards-ctas a.cards-cta-button:any-link:focus {
+  background: transparent;
+  color: #ec111a;
+}
+/* stylelint-enable no-descending-specificity */
+
+/* wide desktop: prod keeps a one-line tile title at the two-line position */
+@media (width >= 1200px) {
+  .cards.interest .cards-card-body h3 {
+    min-height: 54px;
+  }
 }

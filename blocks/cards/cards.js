@@ -25,11 +25,36 @@ export default function decorate(block) {
         body.firstElementChild.classList.add('cards-card-badge');
       }
     }
+    // personal tab grids: an item with no image whose paragraphs are only links is the row of
+    // "View all ..." buttons under the grid (prod bns_button rectangle buttons)
+    const tabGrid = (block.classList.contains('featured') && !block.classList.contains('article'))
+      || (block.classList.contains('product') && !block.classList.contains('compare'));
+    const paras = [...li.querySelectorAll('.cards-card-body > *')].filter((e) => e.textContent.trim());
+    if (tabGrid && !li.querySelector('picture') && paras.length
+      && paras.every((p) => p.tagName === 'P' && p.querySelector('a') && p.textContent.trim() === p.querySelector('a').textContent.trim())) {
+      li.classList.add('cards-ctas');
+      li.querySelectorAll('.cards-card-body:not(:has(*))').forEach((d) => d.remove());
+      li.querySelectorAll('a').forEach((a) => a.classList.add('cards-cta-button'));
+      ul.append(li);
+      return;
+    }
     // make the whole tile clickable via its last link
     const link = li.querySelector('.cards-card-body a[href]');
     if (link) {
       link.classList.add('cards-card-link');
       li.dataset.href = link.href;
+    }
+    // interest: prod's tile IS the link (one focusable anchor around art, title and CTA text)
+    if (link && block.classList.contains('interest')) {
+      const tile = document.createElement('a');
+      tile.className = 'cards-card-tile';
+      tile.href = link.href;
+      const cta = document.createElement('span');
+      cta.className = link.className;
+      cta.append(...link.childNodes);
+      link.replaceWith(cta);
+      tile.append(...li.childNodes);
+      li.append(tile);
     }
     ul.append(li);
   });

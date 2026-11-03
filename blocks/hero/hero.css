@@ -230,3 +230,59 @@
     width: 210px;
   }
 }
+
+/* personal (default) hero, prod bns_button pills: auto width, 58px (18/30 padding, 16/20 type),
+   999px radius, 20px under the "Already a client?" label; the primary is synthetic-bold 800, the
+   outline uses the Bold face at weight 400 */
+.hero.block:not(.split) .hero-cta a.button.primary,
+.hero.block:not(.split) .hero-cta a.button.secondary {
+  display: block;
+  width: fit-content;
+  margin-top: 34px; /* prod: 20px under its label block, whose line box sits 14px lower */
+  padding: 18px 30px;
+  border-radius: 999px;
+  font-family: scotiabank-bold-synth, scotiabank-bold, var(--body-font-family);
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 20px;
+}
+
+.hero.block:not(.split) .hero-cta a.button.secondary {
+  font-family: scotiabank-bold, var(--body-font-family);
+  font-weight: 400;
+}
+
+/* prod partner lockup: 200x57, flush on the title */
+.hero.block:not(.split) .hero-brands {
+  margin: 0;
+  line-height: 0;
+}
+
+.hero.block:not(.split) .hero-brands img {
+  height: 57px;
+  margin: 0;
+}
+
+/* prod's mobile/tablet hero image is full-bleed (no 16px section gutter); the content panel
+   carries those 16px instead so the text column is unchanged */
+main > .section > .hero-wrapper:has(> .hero.block:not(.split)) {
+  padding: 0;
+}
+
+@media (width <= 767px) {
+  .hero.block:not(.split) .hero-content {
+    padding: 20px 30px 28px;
+  }
+
+  /* prod mobile CTA columns are 163px wide (2nd label at ~x193) */
+  .hero.block:not(.split) .hero-content p.hero-cta {
+    width: 159px;
+    margin-right: 0;
+  }
+}
+
+@media (width >= 768px) and (width < 900px) {
+  .hero.block:not(.split) .hero-content {
+    padding: 24px 36px 32px;
+  }
+}

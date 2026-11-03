@@ -26,6 +26,16 @@
   src: url('../fonts/Scotia_W_Bd.woff2') format('woff2'), url('../fonts/Scotia_W_Bd.woff') format('woff');
 }
 
+/* prod declares its Bold face at normal weight, so bold text (700/800) gets a synthetic bold on
+   top of it; this alias reproduces that rendering where prod shows it */
+@font-face {
+  font-family: Scotiabank-Bold-synth;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../fonts/Scotia_W_Bd.woff2') format('woff2'), url('../fonts/Scotia_W_Bd.woff') format('woff');
+}
+
 @font-face {
   font-family: Scotiabank-Headline;
   font-style: normal;
