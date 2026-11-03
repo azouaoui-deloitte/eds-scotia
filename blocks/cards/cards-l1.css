@@ -207,8 +207,11 @@ main .cards.article.cols-2 {
   margin-top: 12px;
 }
 
+/* prod lead-text calculator titles (Loans "Useful calculators"): 19.2px, 16px above the copy */
 main .cards.plain.block .cards-card-body > h4:first-child {
-  margin-bottom: 22px;
+  margin-bottom: 16px;
+  font-size: 19.2px;
+  line-height: 28.8px;
 }
 
 main .cards.article .cards-card-body h4,
@@ -275,7 +278,7 @@ main .cards.icons .cards-card-body a:any-link {
 
 /* plain: frameless icon cards */
 main .cards.plain .cards-card-image {
-  margin-bottom: 24px;
+  margin-bottom: 13px;
 }
 
 main .cards.plain .cards-card-body h4 {
@@ -283,7 +286,7 @@ main .cards.plain .cards-card-body h4 {
 }
 
 main .cards.plain .cards-card-body > p:last-child:has(> a:only-child) {
-  margin-top: 12px;
+  margin-top: 16px;
 }
 
 main .cards.plain .cards-card-body a:any-link {
@@ -972,20 +975,4 @@ main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body
 /* pill button right under a list (Investing "Ways to invest"): the list's 16px margin only */
 main .cards:is(.info, .article) .cards-card-body > ul + p.button-wrapper:last-child {
   padding-top: 0;
-}
-
-/* plain calculator cards (Loans "Useful calculators"): prod lead-text titles 19.2px, 13px under the
-   icon, 16px around the copy */
-main .cards.plain .cards-card-image {
-  margin-bottom: 13px;
-}
-
-main .cards.plain.block .cards-card-body > h4:first-child {
-  margin-bottom: 16px;
-  font-size: 19.2px;
-  line-height: 28.8px;
-}
-
-main .cards.plain .cards-card-body > p:last-child:has(> a:only-child) {
-  margin-top: 16px;
 }
