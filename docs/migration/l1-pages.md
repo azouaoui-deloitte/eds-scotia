@@ -38,8 +38,17 @@ Package `scotia:scotia-l1-pages` (built by `ue-build-l1.mjs`) only has filter ro
 
 - Header/footer: the XF header/footer (classic Scotiabank) is used on every page; prod credit-cards
   uses the newer global header/footer.
-- Modals replaced by links: "Book an appointment" / "Open a TFSA/RRSP/GIC now" (triage modals) link to
-  the modal's target; video cards link to YouTube.
+- Modals / tooltips: one generic mechanism (`scripts/l1-modal.js`) — any link to a fragment page
+  `…/modals/<id>` opens a modal dialog, `…/tooltips/<id>` renders an info button + toggletip. Authored
+  fragments: credit-cards "About the offer" (30, from prod) and rate-row toggletips (11, the ones prod
+  renders), investing TFSA / RRSP / GIC triage modals (product-cards inside the modal). Other prod
+  modals (Book an appointment, advisor) still link to their target; video cards link to YouTube.
+- Tabs options (UE `tabs` model): default = personal Featured (tab bar moved above the heading,
+  panels hidden); `pills` = credit-cards filter pills in place, "Show more +" when they wrap;
+  `panels` = Advice+ (active panel copy under the bar).
+- Card grids that prod renders in a `tab-pane` are swipe carousels below 1200px (`cards … scroll`,
+  `product-cards`), pager "n of m" stepping one card like prod; credit-cards Special offers is an
+  arrow-only carousel below 768px.
 - Advice+: the RRSP quiz widget and "Show more" of Trending topics are not migrated (first 5 topics).
 - Creditor insurance: the Protection Planner gear icon is not migrated.
 - Personalised / backend content (Adobe Target, search) is a static snapshot.
