@@ -576,3 +576,25 @@ main .section.overlap .columns.box > div > div:first-child:has(> p:first-child >
     margin: 0;
   }
 }
+
+/* maroon CTA box (Loans "Choose a borrowing solution"): prod callout - 36px padding, 120px row
+   centred, 28px title, buttons 24px apart */
+main .columns.banner.maroon {
+  padding: 36px;
+}
+
+main .columns.banner.maroon h3 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 30.8px;
+}
+
+@media (width >= 900px) {
+  main .columns.banner.maroon > div {
+    min-height: 120px;
+  }
+
+  main .columns.banner.maroon > div > div:last-child {
+    gap: 24px;
+  }
+}

@@ -923,6 +923,15 @@ main:has(> .section.l1) {
     }
   }
 
+  /* Loans "Useful calculators": 44px under the heading, 90px down to the maroon CTA box */
+  .section:has(.cards.plain) .default-content-wrapper > h2 {
+    margin-bottom: 44px;
+  }
+
+  .section:has(.cards.plain):has(+ .section .columns.maroon) {
+    padding-bottom: 60px;
+  }
+
   /* Mortgages FAQ (compact accordion): 60px bands like prod's spacers */
   .section:has(.accordion.compact) {
     padding: 60px 0;

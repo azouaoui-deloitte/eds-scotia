@@ -973,3 +973,19 @@ main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body
 main .cards:is(.info, .article) .cards-card-body > ul + p.button-wrapper:last-child {
   padding-top: 0;
 }
+
+/* plain calculator cards (Loans "Useful calculators"): prod lead-text titles 19.2px, 13px under the
+   icon, 16px around the copy */
+main .cards.plain .cards-card-image {
+  margin-bottom: 13px;
+}
+
+main .cards.plain.block .cards-card-body > h4:first-child {
+  margin-bottom: 16px;
+  font-size: 19.2px;
+  line-height: 28.8px;
+}
+
+main .cards.plain .cards-card-body > p:last-child:has(> a:only-child) {
+  margin-top: 16px;
+}
