@@ -106,6 +106,10 @@
             {
               "name": "Height 35vw",
               "value": "ratio35"
+            },
+            {
+              "name": "Tablet band 50vw",
+              "value": "tablet-half"
             }
           ]
         }

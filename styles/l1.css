@@ -205,6 +205,51 @@ main:has(> .section.l1) {
     padding-top: 70px;
   }
 
+  /* Advice+ quiz section: 696px column, small caps eyebrow, 30px question */
+  .section.quiz {
+    padding-top: 82px;
+  }
+
+  .section.quiz > div {
+    max-width: 1002px;
+  }
+
+  .section.quiz .default-content-wrapper > p:first-child {
+    margin: 0 0 8px;
+    font-size: 11px;
+    line-height: 16px;
+    letter-spacing: 2px;
+  }
+
+  .section.quiz .default-content-wrapper > h3 {
+    margin: 0 0 12px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+
+  .section.quiz .default-content-wrapper > h3 + p {
+    margin: 0 0 50px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  @media (width < 1200px) {
+    .section:has(.tabs.panels) > div {
+      box-sizing: border-box;
+      padding: 0 16px;
+    }
+
+    .section.quiz > div {
+      max-width: 630px;
+    }
+  }
+
+  @media (width < 768px) {
+    .section.quiz > div {
+      padding: 0 48px;
+    }
+  }
+
   /* bands */
   > .section:has(.hero) + .section:not(.subnav) {
     padding-top: 45px;

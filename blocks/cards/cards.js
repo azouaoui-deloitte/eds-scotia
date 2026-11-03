@@ -41,6 +41,10 @@ export default function decorate(block) {
   block.replaceChildren(ul);
   // L1 pages: swipe carousel with pager below 1200px
   if (block.classList.contains('scroll')) import('../../scripts/l1-carousel.js').then((m) => m.default(block, ul));
-  // cards.product: optional "Show more" after 3 cards
-  if (block.classList.contains('product') && block.classList.contains('more')) import('./cards-product.js').then((m) => m.default(block, ul));
+  // optional "Show more" (cards.product: after 3 cards, cards.icons: after 5)
+  if (block.classList.contains('more')) {
+    import('./cards-product.js').then((m) => m.default(block, ul, block.classList.contains('icons') ? 5 : 3));
+  }
+  // L1 Advice+ quiz: option rows + feedback row
+  if (block.classList.contains('quiz')) import('./cards-quiz.js').then((m) => m.default(block, ul));
 }

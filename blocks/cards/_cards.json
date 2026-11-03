@@ -120,6 +120,10 @@
             {
               "name": "3 columns from tablet",
               "value": "cols-3"
+            },
+            {
+              "name": "Quiz (Advice+)",
+              "value": "quiz"
             }
           ]
         }

@@ -113,6 +113,10 @@
             {
               "name": "Overlap previous band",
               "value": "overlap"
+            },
+            {
+              "name": "Quiz column",
+              "value": "quiz"
             }
           ]
         }

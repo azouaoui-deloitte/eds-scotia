@@ -3,9 +3,10 @@
  * reveals the rest (credit-cards page tab grids).
  * @param {Element} block the cards block
  * @param {Element} ul the card list
+ * @param {number} [limit=3] cards shown before "Show more" (Advice+ trending topics: 5)
  */
-export default function decorateMore(block, ul) {
-  const LIMIT = 3;
+export default function decorateMore(block, ul, limit = 3) {
+  const LIMIT = limit;
   const items = [...ul.children];
   if (items.length <= LIMIT) return;
   let expanded = false;

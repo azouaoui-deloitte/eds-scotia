@@ -574,3 +574,152 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+/* quiz (Advice+): radio option tiles 2-up, Answer button, feedback (scripts in cards-quiz.js) */
+main .cards.quiz > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 37px 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main .cards.quiz > ul > li {
+  min-height: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  overflow: visible;
+}
+
+main .cards.quiz .cards-card-body {
+  padding: 0;
+}
+
+main .cards.quiz .l1-quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-sizing: border-box;
+  min-height: 52px;
+  padding: 26px 24px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  background: #fff;
+  color: #333;
+  font-family: Arial, var(--body-font-family);
+  font-size: 15px;
+  line-height: 22px;
+  cursor: pointer;
+}
+
+main .cards.quiz .l1-quiz-option input {
+  position: absolute;
+  opacity: 0;
+}
+
+main .cards.quiz .l1-quiz-radio {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #333;
+  border-radius: 50%;
+}
+
+main .cards.quiz .l1-quiz-option:has(input:checked) {
+  border-color: #333;
+}
+
+main .cards.quiz .l1-quiz-option:has(input:checked) .l1-quiz-radio {
+  border: 6px solid #333;
+}
+
+main .cards.quiz .l1-quiz-option:has(input:focus-visible) {
+  outline: 2px solid #007eab;
+  outline-offset: 2px;
+}
+
+main .cards.quiz .l1-quiz-option.is-correct {
+  border-color: #138468;
+}
+
+main .cards.quiz .l1-quiz-option.is-wrong {
+  border-color: #ec111a;
+}
+
+main .cards.quiz .l1-quiz-answer {
+  margin-top: 39px;
+  padding: 10px 24px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+  font-family: Arial, var(--body-font-family);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+main .cards.quiz .l1-quiz-answer:disabled {
+  background: #f2f2f2;
+  color: #8a8a8a;
+  cursor: default;
+}
+
+main .cards.quiz .l1-quiz-result {
+  margin-top: 24px;
+}
+
+main .cards.quiz .l1-quiz-result h3 {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 30px;
+}
+
+main .cards.quiz .l1-quiz-result a:any-link {
+  color: #333;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  border-bottom: 1px dotted #333;
+  text-decoration: none;
+}
+
+/* icons + more (Advice+ trending topics): 5 shown, "Show more" chevron toggle */
+main .cards.icons.more .cards-product-more {
+  display: block;
+  margin: 24px auto 0;
+  padding: 0 0 14px;
+  border: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='8' viewBox='0 0 14 8'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23ec111a' stroke-width='1.5'/%3E%3C/svg%3E") no-repeat bottom center;
+  color: #333;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  font-size: 14px;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+main .cards.icons.more > ul > li[hidden] {
+  display: none;
+}
+
+@media (width >= 768px) {
+  main .cards.quiz > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 768px) and (width < 992px) {
+  main .cards.icons > ul:has(> li:nth-child(5)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width < 1200px) {
+  main .cards.quiz > ul {
+    gap: 24px 18px;
+  }
+
+  main .cards.quiz .l1-quiz-option {
+    padding: 30px;
+  }
+}

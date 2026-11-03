@@ -232,6 +232,10 @@
           {
             "name": "Overlap previous band",
             "value": "overlap"
+          },
+          {
+            "name": "Quiz column",
+            "value": "quiz"
           }
         ]
       }
@@ -357,6 +361,10 @@
           {
             "name": "3 columns from tablet",
             "value": "cols-3"
+          },
+          {
+            "name": "Quiz (Advice+)",
+            "value": "quiz"
           }
         ]
       }
@@ -608,6 +616,10 @@
           {
             "name": "Height 35vw",
             "value": "ratio35"
+          },
+          {
+            "name": "Tablet band 50vw",
+            "value": "tablet-half"
           }
         ]
       }
