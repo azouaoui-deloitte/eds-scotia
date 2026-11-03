@@ -110,6 +110,10 @@
               "value": "scroll"
             },
             {
+              "name": "Highlights carousel (counter below, side arrows)",
+              "value": "highlights"
+            },
+            {
               "name": "Show more after 3 (product)",
               "value": "more"
             },

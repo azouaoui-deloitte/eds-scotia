@@ -415,11 +415,6 @@ main .cards.promo > ul > li:nth-child(2n) a.button:any-link {
   }
 }
 
-@media (width < 768px) {
-  main .cards.info:not(.scroll) > ul {
-    margin: 0 -6px;
-  }
-}
 
 @media (width >= 992px) {
   main .cards.article.arrow .cards-card-body {
@@ -551,7 +546,7 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
 /* article.arrow below 992px: natural height, prod body rhythm (32 / 30 padding, 64px to the arrow) */
 @media (width < 768px) {
   main .cards.article .cards-card-body {
-    padding: 32px 30px 31px;
+    padding: 30px;
   }
 }
 
@@ -882,4 +877,83 @@ main .cards.icons.more .cards-card-image {
 /* grey tools carousel (Mortgages): 12px under the icon card title */
 main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body > h4:first-child {
   margin-bottom: 12px;
+}
+
+/* icons + scroll + highlights (Creditor "Reasons to consider"): prod highlight carousel below
+   1200px - 2 per view (1 on mobile), 30px gaps, no bleed, "n of m" under the slides, 21px arrows
+   25px outside the strip (the first one hidden) */
+@media (width < 1200px) {
+  main .cards.icons.highlights {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main .cards.icons.highlights.scroll > ul {
+    order: 1;
+    gap: 30px;
+    margin: 0;
+    padding: 0;
+    scroll-padding-left: 0;
+  }
+
+  main .cards.icons.highlights.scroll > ul > li {
+    flex-basis: calc((100% - 30px) / 2);
+  }
+
+  main .cards.icons.highlights.scroll.block .l1-pager {
+    order: 2;
+    gap: 0;
+    margin: 16px 0 0;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  main .cards.icons.highlights.scroll.block .l1-pager button {
+    position: absolute;
+    top: 83px;
+    left: -25px;
+    width: 21px;
+    height: 21px;
+  }
+
+  main .cards.icons.highlights.scroll.block .l1-pager .l1-pager-next {
+    right: -25px;
+    left: auto;
+  }
+
+  main .cards.icons.highlights.scroll.block .l1-pager button:disabled {
+    visibility: hidden;
+  }
+
+  main .cards.icons.highlights.scroll.block .l1-pager button::before {
+    border-color: #8230df;
+  }
+}
+
+@media (width >= 992px) and (width < 1200px) {
+  main .cards.icons.highlights.scroll.block .l1-pager button {
+    top: 71px;
+  }
+}
+
+@media (width < 768px) {
+  main .cards.icons.highlights.scroll > ul > li {
+    flex-basis: 100%;
+  }
+}
+
+/* highlight slides: synthetic-bold copy 10px under the icon, 16px below (prod highlight-slide) */
+@media (width < 1200px) {
+  main .cards.icons.highlights .cards-card-image {
+    margin-bottom: 10px;
+  }
+
+  main .cards.icons.highlights .cards-card-body {
+    padding-bottom: 16px;
+  }
+
+  main .cards.icons.highlights .cards-card-body p {
+    font-weight: 700;
+  }
 }

@@ -835,6 +835,74 @@ main:has(> .section.l1) {
     text-align: center;
   }
 
+  /* Creditor "Reasons to consider" (prod product-highlights box): 32px heading, 30px inner inset
+     below 992px, heading-to-slides 26 / 18px, planner box right under the band (60px on mobile) */
+  .section:has(.cards.icons.highlights) .default-content-wrapper > h2 {
+    font-size: 32px;
+    line-height: 35.2px;
+    letter-spacing: normal;
+  }
+
+  @media (width < 1200px) {
+    .section.grey:has(.cards.icons.highlights) {
+      padding-bottom: 52px;
+    }
+
+    .section.grey:has(.cards.icons.highlights) .default-content-wrapper > h2:only-child {
+      margin-bottom: 18px;
+    }
+  }
+
+  @media (width < 992px) {
+    .section:has(.cards.icons.highlights) > div {
+      box-sizing: border-box;
+      padding: 0 30px;
+    }
+
+    .section.grey:has(.cards.icons.highlights) .default-content-wrapper > h2:only-child {
+      margin-bottom: 26px;
+    }
+  }
+
+  @media (width < 768px) {
+    .section.grey:has(.cards.icons.highlights) {
+      padding-top: 54px;
+    }
+
+    .section:has(.cards.icons.highlights) > div {
+      padding: 0 60px;
+    }
+
+    .section.grey:has(.cards.icons.highlights) .default-content-wrapper > h2:only-child {
+      margin-bottom: 14px;
+    }
+
+    .section.grey:has(.cards.icons.highlights) + .section.overlap {
+      padding: 60px 0;
+    }
+  }
+
+  /* Creditor mobile: 44px under the article section headings, 192px between the two article bands,
+     60px above "Ways to contact us" */
+  @media (width < 768px) {
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article) .default-content-wrapper > h2 {
+      margin-bottom: 44px;
+    }
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article) + .section.center:has(.cards.article) {
+      padding-top: 90px;
+    }
+
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article):has(+ .section.center .cards.article) {
+      padding-bottom: 102px;
+    }
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article) + .section.center:has(.cards.article) + .section {
+      padding-top: 60px;
+    }
+  }
+
   /* Mortgages FAQ (compact accordion): 60px bands like prod's spacers */
   .section:has(.accordion.compact) {
     padding: 60px 0;
@@ -892,13 +960,24 @@ main:has(> .section.l1) {
       justify-content: flex-start;
       max-width: none;
       padding: 0;
+      border-width: 1px;
       overflow-x: auto;
       scrollbar-width: none;
     }
 
     .section.subnav.subnav-wide a:any-link {
-      padding: 10px 36px 9px 11px;
+      padding: 18px 10px;
+      line-height: 24px;
       white-space: nowrap;
+    }
+
+    .section.subnav.subnav-wide li {
+      padding-right: 40px;
+    }
+
+    /* prod: the hero copy ends 96px above the hero's bottom when the sub-nav overlaps it */
+    > .section:has(.hero):has(+ .section.subnav-wide) .hero-content {
+      padding-bottom: 96px;
     }
 
     > .section > div {
