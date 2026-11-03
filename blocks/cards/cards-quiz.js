@@ -1,3 +1,5 @@
+import { moveInstrumentation } from '../../scripts/scripts.js';
+
 /**
  * cards.quiz: single-answer quiz (Advice+ RRSP quiz). Rows of the cards block:
  *   option rows  - one text cell each ("A. ..."); the correct option is authored in bold
@@ -36,7 +38,13 @@ export default function decorateQuiz(block, ul) {
   if (feedbackLi) {
     const body = feedbackLi.querySelector('.cards-card-body:has(*)') || feedbackLi;
     headings = [...body.querySelectorAll('h3')];
-    result.append(...body.childNodes);
+    // keep the Universal Editor item (card) and its richtext prop editable once moved
+    const feedback = document.createElement('div');
+    feedback.className = 'l1-quiz-feedback';
+    if (body !== feedbackLi) moveInstrumentation(body, feedback);
+    moveInstrumentation(feedbackLi, result);
+    feedback.append(...body.childNodes);
+    result.append(feedback);
     feedbackLi.remove();
   }
   ul.addEventListener('change', () => { button.disabled = false; });
