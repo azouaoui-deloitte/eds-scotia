@@ -151,9 +151,11 @@
   min-height: 426px;
 }
 
-/* the body fills the card so cards reach prod's height (text stays top-aligned) */
+/* the body fills the card; content top-aligned with the CTA pushed to the bottom (prod) */
 .cards.featured .cards-card-body {
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (width >= 600px) {
@@ -186,6 +188,13 @@
   font-family: scotiabank-bold, var(--body-font-family);
   font-size: 16px;
   color: #007eab;
+}
+
+/* push the CTA paragraph to the bottom of the card, like prod */
+.cards.featured .cards-card-body > p:last-of-type {
+  margin-top: auto;
+  padding-top: 12px;
+  margin-bottom: 0;
 }
 
 .cards.featured .cards-card-link:hover,
