@@ -335,6 +335,7 @@
 }
 
 .cards.product.compare .cards-card-body p:has(> em:only-child) {
+  display: flow-root;
   margin: -4px 0 8px;
   padding: 8px 12px;
   background: #f8f8f5;
@@ -412,10 +413,6 @@
 .cards.product.compare .cards-card-body p > em a.l1-tooltip-link:any-link {
   float: right;
   margin: 0 0 0 8px;
-}
-
-.cards.product.compare .cards-card-body p:has(> em:only-child) {
-  display: flow-root;
 }
 
 .cards.product.compare .cards-card-body p:has(> strong:last-child a.l1-tooltip-link) {
