@@ -596,8 +596,16 @@ main:has(> .section.l1) {
     color: #fff;
   }
 
-  .section.wide > div {
-    max-width: 1320px;
+  /* credit-cards grid: 32px gutters below 1200px, 60px above (prod) */
+  > .section.wide > div {
+    max-width: none;
+    padding: 0 32px;
+  }
+
+  @media (width >= 1200px) {
+    > .section.wide > div {
+      padding: 0 60px;
+    }
   }
 
   @media (width < 768px) {
@@ -664,11 +672,6 @@ main:has(> .section.l1) {
   @media (width >= 992px) {
     > .section > div {
       max-width: 930px;
-    }
-
-    .section.wide > div {
-      max-width: none;
-      padding: 0 60px;
     }
 
     .section.split {
