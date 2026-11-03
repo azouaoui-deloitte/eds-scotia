@@ -723,3 +723,39 @@ main .cards.icons.more > ul > li[hidden] {
     padding: 30px;
   }
 }
+
+/* credit-card rate rows stack label / value below 768px (prod mobile) */
+@media (width < 768px) {
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) {
+    display: block;
+  }
+
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) strong {
+    display: block;
+    text-align: left;
+  }
+}
+
+/* credit-card rate rows stack label / value below 768px (prod mobile) */
+@media (width < 768px) {
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) {
+    display: block;
+  }
+
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) strong {
+    display: block;
+    text-align: left;
+  }
+}
+
+/* credit-card rate rows stack label / value below 768px (prod mobile) */
+@media (width < 768px) {
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) {
+    display: block;
+  }
+
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) strong {
+    display: block;
+    text-align: left;
+  }
+}

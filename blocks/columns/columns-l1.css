@@ -112,11 +112,6 @@ main .columns.banner:not(.box, .maroon, .media) h2 {
   line-height: 30px;
 }
 
-main .columns.box > div > div:first-child:has(> p:first-child > picture) {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
 
 main .columns.box > div > div:first-child > p:first-child > picture img {
   display: block;
@@ -245,4 +240,30 @@ main .columns.banner > div > div:first-child {
   main .columns.media > div > .columns-img-col {
     flex: 0 0 245px;
   }
+}
+
+/* box with a leading icon: icon left of the heading + text (Protection Planner, business advice) */
+main .columns.box > div > div:first-child:has(> p:first-child > picture) {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  column-gap: 24px;
+  align-items: start;
+}
+
+main .columns.box > div > div:first-child:has(> p:first-child > picture) > p:first-child {
+  grid-row: 1 / span 2;
+  margin: 2px 0 0;
+}
+
+main .section.overlap .columns.box h3 {
+  margin: 0;
+  font-size: 21px;
+  line-height: 31.5px;
+  font-weight: 400;
+}
+
+main .section.overlap .columns.box h3 + p {
+  margin: 2px 0 0;
+  font-size: 16px;
+  line-height: 21px;
 }
