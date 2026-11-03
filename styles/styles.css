@@ -367,6 +367,16 @@ main .section:has(.tabs) {
   background: #f5f6fc;
 }
 
+/* 900-1109 (e.g. 1024): the 1110px container isn't reached, so content would touch the edges;
+   prod keeps ~24px side gutters. Scoped below 1110 so centred desktop (>=1110) is unaffected.
+   The full-bleed hero manages its own padding, so exclude it. */
+@media (width >= 900px) and (width < 1110px) {
+  main .section:not(:has(.hero.block)) > div {
+    box-sizing: border-box;
+    padding: 0 24px;
+  }
+}
+
 /* tabbed Featured section: heading + subtitle centered above the tab bar / cards (prod) */
 main .section:has(.tabs) > div > p {
   text-align: center;

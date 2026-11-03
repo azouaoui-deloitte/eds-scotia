@@ -150,7 +150,7 @@
     flex-direction: column;
     justify-content: center;
     background: var(--scotia-grey-bg, #f2f2f2);
-    padding: 24px 40px 24px max(24px, calc((100% - 1110px) / 2));
+    padding: 24px 40px 24px max(47px, calc((100% - 1110px) / 2));
   }
 
   .hero.block .hero-content-inner {
@@ -185,5 +185,18 @@
      first CTA group (the second is the last p) so the row doesn't overflow and wrap */
   .hero.block .hero-content p.hero-cta:not(:last-of-type) {
     margin: 8px 95px 0 0;
+  }
+}
+
+/* 1024-ish: the full-bleed panel is ~50% (narrower than 1440); prod uses 216px CTA columns so
+   both fit on one line (253px would wrap and balloon the hero height). Tighten the right
+   padding so the two 216px columns fit the ~432px inner width (prod: 47 left / 33 right). */
+@media (width >= 992px) and (width < 1200px) {
+  .hero.block .hero-content {
+    padding-right: 29px;
+  }
+
+  .hero.block .hero-cta {
+    width: 210px;
   }
 }

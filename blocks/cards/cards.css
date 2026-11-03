@@ -199,7 +199,24 @@ main .section:has(.tabs) .cards.featured {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  padding: 30px 20px 38px 30px; /* prod mobile body left padding ~30 */
+  padding: 30px 30px 38px; /* prod mobile body padding ~30 (symmetric) so copy wraps like prod */
+}
+
+/* prod Featured description/disclaimer copy is 16px/24 (not the 15/22.5 default); matching it
+   makes the cards wrap to prod's line counts so natural mobile heights reach 426-513 */
+.cards.featured .cards-card-body p:not(.cards-card-badge) {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #4a4a4a;
+}
+
+/* mobile: prod wraps the Featured title to multiple lines at lh 24 (not the tight 1.1 used on
+   wider viewports), which lifts natural card heights toward prod's 426-513 range */
+@media (width < 600px) {
+  .cards.featured .cards-card-body h3 {
+    line-height: 1.5;
+    text-wrap: pretty;
+  }
 }
 
 @media (width >= 600px) {
