@@ -286,3 +286,45 @@ main > .section > .hero-wrapper:has(> .hero.block:not(.split)) {
     padding: 24px 36px 32px;
   }
 }
+
+/* desktop: prod's #f6f6f6 panel; 10px under the title, 16px under the copy, the pills 20px
+   under the label's 24px line box */
+@media (width >= 992px) {
+  .hero.block:not(.split),
+  .hero.block:not(.split) .hero-content {
+    background: #f6f6f6;
+  }
+
+  .hero.block:not(.split) h1 {
+    margin-bottom: 10px;
+  }
+
+  .hero.block:not(.split) .hero-content-inner > p:nth-of-type(2) {
+    margin-bottom: 16px;
+  }
+
+  .hero.block:not(.split) .hero-cta a.button.primary,
+  .hero.block:not(.split) .hero-cta a.button.secondary {
+    margin-top: 36px;
+  }
+}
+
+/* from 1200 prod's hero is 10:3 (30% of the width: 384 at 1280, 432 at 1440, 576 at 1920) with
+   the content block vertically centred; the half-width panel is 5:3. Content taller than that
+   (1200-1246) grows the hero instead of overflowing like prod. Text column: prod's 1110px
+   container edge to 627px short of its 1140px row (513px). */
+@media (width >= 1200px) {
+  .hero.block:not(.split) {
+    min-height: 0;
+  }
+
+  .hero.block:not(.split) .hero-content {
+    min-height: auto;
+    aspect-ratio: 5 / 3;
+    padding: 0 42px 0 calc((100% - 1110px) / 2);
+  }
+
+  .hero.block:not(.split) .hero-content p.hero-cta {
+    margin-bottom: 0;
+  }
+}

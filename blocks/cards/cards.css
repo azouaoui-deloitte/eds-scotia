@@ -62,7 +62,7 @@
    spacing); the row is wider than the 1110px section, so it bleeds out symmetrically */
 @media (width >= 900px) {
   .cards.interest {
-    margin-top: 55px;
+    margin-top: 53px;
   }
 
   .cards.interest > ul {
@@ -94,7 +94,7 @@
 /* 1024-ish (900-1199): prod's 3-col interest row is a centred 940px grid (284px tiles, 44px gaps) */
 @media (width >= 900px) and (width < 1200px) {
   .cards.interest {
-    margin-top: 49px;
+    margin-top: 53px;
   }
 
   .cards.interest > ul {
@@ -389,6 +389,7 @@ main .section:has(.tabs) .cards.featured {
 
 .cards.featured:not(.article) .cards-card-image {
   overflow: hidden;
+  border-radius: 8px 8px 0 0;
 }
 
 .cards.featured:not(.article) > ul > li:hover .cards-card-image img {
@@ -416,6 +417,157 @@ main .section:has(.tabs) .cards.featured {
 .cards.featured .cards-card-badge strong {
   font-weight: 700;
 }
+
+/* stylelint-disable no-descending-specificity */
+
+/* personal Featured cards (prod card--marketing): the card doesn't clip, so the ocean callout
+   pill (24px, 6px radius, Bold face 12/18 at weight 400) straddles the top edge 38px in; the
+   image keeps the 8px top corners */
+.cards.featured:not(.article) > ul > li {
+  overflow: visible;
+}
+
+.cards.featured:not(.article) .cards-card-badge {
+  top: -12px;
+  left: 38px;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: 24px;
+  padding: 0 12px;
+  border-radius: 6px;
+  background: rgb(0 90 133);
+  font-family: scotiabank-bold, var(--body-font-family);
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: normal;
+}
+
+.cards.featured:not(.article) .cards-card-badge strong {
+  font-weight: 400;
+}
+
+.cards.featured:not(.article) .cards-card-badge-red {
+  background: #ec111a;
+}
+
+.cards.featured:not(.article) .cards-card-badge-sunflower {
+  background: #fdb913;
+  color: #333;
+}
+
+.cards.featured:not(.article) .cards-card-badge-dark-grey {
+  background: #333;
+}
+
+/* prod tile images keep their own ratio (16:9 offers, 2:1 Accounts/Learning art) */
+.cards.featured:not(.article) .cards-card-image img {
+  height: auto;
+  aspect-ratio: auto;
+}
+
+/* prod superscripts: 75% raised 0.5em in the copy, 50% raised 0.8em in the title, neither
+   growing the line box */
+.cards.featured:not(.article) .cards-card-body sup {
+  position: relative;
+  top: -0.5em;
+  font-size: 12px;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.cards.featured:not(.article) .cards-card-body h3 sup {
+  top: -0.8em;
+  font-size: 9px;
+}
+
+/* copy that opens with a blank line (<br>) already carries the gap under the title */
+.cards.featured:not(.article) .cards-card-body h3:has(+ p > br:first-child) {
+  margin-bottom: 0;
+}
+
+/* prod CTA: Bold 16/24 inline-block with a 10x16 solid chevron 5px after the text and 5px down
+   (Font Awesome chevron-right metrics) */
+.cards.featured:not(.article) .cards-card-link {
+  display: inline-block;
+  padding: 0 3px 1px 0;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+.cards.featured:not(.article) .cards-card-link::after {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 16px;
+  margin: 5px 0 0 5px;
+  vertical-align: top;
+  background: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M80 64l192 192L80 448' fill='none' stroke='%23000' stroke-width='64' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* desktop: prod gutters are 30px (344px cards in the 1092 row, 350px in prod's 1110 xl row) and
+   each row is as tall as its longest card: 36px body padding, the CTA at least 36px under the
+   copy */
+@media (width >= 1000px) {
+  .cards.featured:not(.article) > ul {
+    column-gap: 30px;
+  }
+
+  .cards.featured:not(.article) > ul > li {
+    min-height: 0;
+  }
+
+  .cards.featured:not(.article) > ul > li:not(.cards-ctas) .cards-card-body {
+    padding: 36px;
+  }
+
+  .cards.featured:not(.article) > ul > li:not(.cards-ctas) .cards-card-body p:not(.cards-card-badge) {
+    margin-bottom: 0;
+  }
+
+  .cards.featured:not(.article) > ul > li:not(.cards-ctas) .cards-card-body > p:last-of-type {
+    padding-top: 36px;
+  }
+
+  /* prod authors one 30px spacer above a lone button, two above a pair */
+  .cards.featured:not(.article) > ul > li.cards-ctas:not(:has(p + p)),
+  .cards.product:not(.compare) > ul > li.cards-ctas:not(:has(p + p)) {
+    margin-top: 0;
+  }
+
+  /* a pair sits in two half-width columns, each button against the 30px centre gutter */
+  .cards.featured:not(.article) > ul > li.cards-ctas:has(p + p),
+  .cards.product:not(.compare) > ul > li.cards-ctas:has(p + p) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cards.featured:not(.article) > ul > li.cards-ctas:has(p + p) p:first-child,
+  .cards.product:not(.compare) > ul > li.cards-ctas:has(p + p) p:first-child {
+    justify-self: end;
+  }
+
+  .cards.featured:not(.article) > ul > li.cards-ctas:has(p + p) p + p,
+  .cards.product:not(.compare) > ul > li.cards-ctas:has(p + p) p + p {
+    justify-self: start;
+  }
+}
+
+/* personal Credit cards tab: same 1092px row (344px cards) as the other tab grids until xl */
+@media (width >= 1200px) and (width < 1536px) {
+  .cards.product:not(.compare) > ul {
+    max-width: 1092px;
+    margin-inline: auto;
+  }
+}
+
+@media (width >= 1536px) {
+  .cards.featured:not(.article) > ul {
+    max-width: 1110px;
+  }
+}
+/* stylelint-enable no-descending-specificity */
 
 /* personal tab grids: the "View all ..." buttons centred 60px under the grid (prod bns_button
    rectangle red buttons: 58px, 18/30 padding, synthetic-bold 16/20, inverted on hover/focus) */
@@ -476,5 +628,45 @@ main .section:has(.tabs) .cards.featured {
 @media (width >= 1200px) {
   .cards.interest .cards-card-body h3 {
     min-height: 54px;
+  }
+}
+
+/* desktop 3-col tiles (prod customCompassContent): a 160px rgba(31 31 31 / 60%) band under a
+   1px white/15% rule, 20px padding (border-box, so the title column is tile - 40), the title
+   (16px margin) and the link spaced evenly - a one-line title sits lower, like prod; the card
+   art is a 220x138 block whose bottom sits 240px above the tile bottom; no chevron after
+   "Explore this card" */
+@media (width >= 900px) {
+  .cards.interest .cards-card-body {
+    box-sizing: border-box;
+    padding: 20px;
+    border-top: 1px solid rgb(255 255 255 / 15%);
+    border-radius: 0 0 8px 8px;
+    background: rgb(31 31 31 / 60%);
+  }
+
+  .cards.interest .cards-card-body picture,
+  .cards.interest .cards-card-body picture img {
+    display: block;
+  }
+
+  .cards.interest .cards-card-body h3 {
+    min-height: 0;
+    margin-bottom: 16px;
+  }
+
+  .cards.interest .cards-card-body > p:last-child {
+    margin: 0;
+  }
+
+  .cards.interest .cards-card-link::after {
+    content: none;
+  }
+}
+
+/* xl desktop: prod widens the tile row to 1357px (436px tiles, 24px gaps) */
+@media (width >= 1536px) {
+  .cards.interest > ul {
+    margin-inline: calc((100% - 1357px) / 2);
   }
 }

@@ -4,7 +4,9 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 /**
  * Cards block. Variants:
  *   cards.interest  - product tiles with an image, a title and an "Explore" link (overlay style)
- *   cards.featured  - offer tiles with an image, optional badge, heading, body and a link
+ *   cards.featured  - offer tiles with an image, optional badge, heading, body and a link; the
+ *                     badge is a bold first paragraph, "Label (red|sunflower|dark-grey)" sets
+ *                     its tone
  * Default: image + body.
  */
 export default function decorate(block) {
@@ -23,6 +25,13 @@ export default function decorate(block) {
       const badge = body?.querySelector('p > strong');
       if (badge && body.firstElementChild.contains(badge)) {
         body.firstElementChild.classList.add('cards-card-badge');
+        // optional tone after the label, e.g. "Special Offer (red)" (default ocean)
+        const tone = badge.textContent.match(/^(.*\S)\s*\((red|sunflower|dark-grey)\)\s*$/i);
+        if (tone) {
+          const [, label, color] = tone;
+          badge.textContent = label;
+          body.firstElementChild.classList.add(`cards-card-badge-${color.toLowerCase()}`);
+        }
       }
     }
     // personal tab grids: an item with no image whose paragraphs are only links is the row of

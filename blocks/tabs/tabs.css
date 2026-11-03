@@ -40,10 +40,21 @@ main > .section > .tabs.block {
   border-bottom-color: #d3242f;
 }
 
+/* prod ships Scotiabank-Regular at 400 only, so its bold tab labels are synthesised from the
+   Regular face (lighter than the Bold file the shared family maps 700 to) */
+@font-face {
+  font-family: scotiabank-regular-synth;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../../fonts/Scotia_W_Rg.woff2') format('woff2'), url('../../fonts/Scotia_W_Rg.woff') format('woff');
+}
+
 /* personal (default) tab bar: prod rec--tab - 15px #2b2b2b labels that embolden on hover/focus
    (no colour change); the selected tab is bold over a 2px red rule (padding +1 keeps the
    height); keyboard focus shows the 5px ring, mouse focus/press none */
 main > .section > .tabs.block .tabs-tab {
+  font-family: scotiabank-regular-synth, var(--body-font-family);
   font-size: 15px;
   color: #2b2b2b;
 }
@@ -68,6 +79,30 @@ main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
   font-weight: 700;
   border-bottom: 2px solid #ed0722;
   padding-bottom: 7px;
+}
+
+/* prod rec--tablist: no divider, a 32px row whose labels (normal line height, -0.2px, 8px under
+   the text) sit 3px from its top and 32px apart */
+@media (width >= 992px) {
+  main > .section > .tabs.block .tabs-list {
+    box-sizing: border-box;
+    height: 32px;
+    align-items: flex-start;
+    gap: 8px 32px;
+    padding-top: 3px;
+    border-bottom: 0;
+  }
+
+  main > .section > .tabs.block .tabs-tab {
+    padding: 0 0 8px;
+    border-bottom: 0;
+    line-height: normal;
+    letter-spacing: -0.2px;
+  }
+
+  main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
+    padding-bottom: 8px;
+  }
 }
 
 /* panels stay in the DOM (UE-editable); only the default bar shows the active one (below) */

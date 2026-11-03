@@ -376,8 +376,15 @@ main > .section:has(> .hero-wrapper > .hero.block:not(.split)) {
   margin-bottom: 0;
 }
 
+/* prod's page renders with grayscale anti-aliasing (thinner glyphs than the subpixel default) */
+main:has(.cards.interest) {
+  -webkit-font-smoothing: antialiased;
+}
+
 main > .section:has(.cards.interest) {
-  margin-top: 27px;
+  margin: 0;
+  padding: 27px 0 72px;
+  background: #f5f6fc;
 }
 
 main > .section:has(.cards.interest) > .default-content-wrapper > h2:first-child {
@@ -390,7 +397,7 @@ main > .section:has(.cards.interest) > .default-content-wrapper > h2:first-child
 main > .section:has(> .tabs.block) {
   position: relative;
   z-index: 1; /* the panel overhang paints over the next section */
-  margin: 72px 0 -21px; /* -21 collapses with the next section's 40px top margin -> 19px */
+  margin: 0 0 -21px; /* -21 collapses with the next section's 40px top margin -> 19px */
   padding: 0 0 46px;
 }
 
@@ -414,8 +421,11 @@ main > .section:has(> .tabs.block)::before {
 }
 
 @media (width >= 1024px) {
+  main > .section:has(.cards.interest) {
+    padding-bottom: 63px;
+  }
+
   main > .section:has(> .tabs.block) {
-    margin-top: 63px;
     padding: 36px 0 30px;
   }
 
@@ -430,6 +440,24 @@ main > .section:has(> .tabs.block)::before {
 @media (width >= 1200px) {
   main > .section:has(> .tabs.block)::before {
     width: 1154px;
+  }
+}
+
+/* desktop: prod's CDIC line sits 12px under the white panel (the -1 collapses with the next
+   section's 40px top margin -> 39px) */
+@media (width >= 1024px) {
+  main > .section:has(> .tabs.block) {
+    margin-bottom: -1px;
+  }
+
+  main > .section:has(> .tabs.block) ~ .section.legal {
+    margin-bottom: 20px;
+  }
+}
+
+@media (width >= 1536px) {
+  main > .section:has(> .tabs.block)::before {
+    width: 1357px;
   }
 }
 /* stylelint-enable no-descending-specificity */
