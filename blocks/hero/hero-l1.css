@@ -107,10 +107,25 @@ main .hero.block.split:is(.maroon, .aura) .hero-cta a.button {
   color: #333;
 }
 
-main .hero.block.split .hero-image img {
+/* tablet band: prod shows the right half of the 3000x900 art at 200% width, centred vertically */
+main .hero.block.split .hero-image {
+  position: relative;
   height: 298px;
-  object-fit: cover;
-  object-position: right center;
+  overflow: hidden;
+}
+
+main .hero.block.split .hero-image picture {
+  height: 100%;
+}
+
+main .hero.block.split .hero-image img {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 200%;
+  max-width: none;
+  height: auto;
+  transform: translateY(-50%);
 }
 
 @media (width <= 767px) {
@@ -123,7 +138,7 @@ main .hero.block.split .hero-image img {
   }
 
   main .hero.block.split .hero-content {
-    padding: 40px 20px 52px;
+    padding: 72px 20px 52px;
   }
 }
 
@@ -135,7 +150,7 @@ main .hero.block.split .hero-image img {
   }
 
   main .hero.block.split .hero-content {
-    padding: 48px 39px 70px;
+    padding: 72px 39px 70px;
   }
 
   main .hero.block.split .hero-content-inner {
@@ -152,22 +167,42 @@ main .hero.block.split .hero-image img {
 
 @media (width >= 992px) {
   main .hero.block.split {
-    min-height: 432px;
+    --hero-h: 407px;
+
+    min-height: var(--hero-h);
+  }
+
+  main .hero.block.split.tall {
+    --hero-h: 450px;
+  }
+
+  main .hero.block.split.ratio {
+    --hero-h: 30vw;
+  }
+
+  main .hero.block.split .hero-image {
+    height: 100%;
   }
 
   main .hero.block.split .hero-image img {
+    top: 0;
+    width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: right center;
+    transform: none;
   }
 
   main .hero.block.split .hero-content {
     width: 50%;
-    min-height: 432px;
+    min-height: var(--hero-h);
     padding: 40px 30px 40px max(47px, calc((100% - 1110px) / 2));
   }
 
   main .hero.block.split .hero-content-inner {
     max-width: 513px;
     margin: 0;
+    padding-bottom: 27px;
   }
 
   main .hero.block.split.aura .hero-content {

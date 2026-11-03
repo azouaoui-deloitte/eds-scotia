@@ -59,9 +59,10 @@ main:has(> .section.l1) {
   }
 
   .default-content-wrapper > h2 + p {
-    margin-top: -18px;
+    margin-top: -19px;
+    margin-bottom: 30px;
     font-size: 17.6px;
-    line-height: 24px;
+    line-height: 17.6px;
   }
 
   .default-content-wrapper a:any-link:not(.button),
@@ -81,6 +82,16 @@ main:has(> .section.l1) {
 
   p.button-wrapper {
     margin: 0;
+  }
+
+  sup {
+    font-size: 12px;
+    line-height: 0;
+  }
+
+  .cards-wrapper + .default-content-wrapper > .button-wrapper:only-child {
+    margin-top: 30px;
+    text-align: center;
   }
 
   a.button:any-link {
@@ -136,8 +147,62 @@ main:has(> .section.l1) {
     background: #1a1a1a;
   }
 
+  /* carousel pager (mobile / tablet) */
+  .l1-pager {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin: 31px 0 22px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .l1-pager button {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .l1-pager button::before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
+    border-top: 2px solid #333;
+    border-left: 2px solid #333;
+    transform: rotate(-45deg);
+  }
+
+  .l1-pager .l1-pager-next::before {
+    transform: rotate(135deg);
+  }
+
+  .l1-pager button:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+
+  .l1-pager-count b {
+    font-family: Scotiabank-Bold, var(--body-font-family);
+    font-weight: 400;
+  }
+
   /* bands */
+  > .section:has(.hero) + .section {
+    padding-top: 45px;
+  }
+
+  > .section:has(+ .section.grey) {
+    padding-bottom: 90px;
+  }
+
   .section.grey {
+    padding: 60px 0;
     background: #fafbfd;
   }
 
@@ -180,7 +245,7 @@ main:has(> .section.l1) {
 
   /* CDIC band (reused "legal" style) */
   .section.legal {
-    padding: 30px 0;
+    padding: 45px 0 26px;
   }
 
   .section.legal > div {
@@ -299,12 +364,6 @@ main:has(> .section.l1) {
       padding: 0 30px;
     }
 
-    .section > div > h2,
-    .section .default-content-wrapper > h2 {
-      font-size: 32px;
-      line-height: 35.2px;
-    }
-
     .section.floating {
       inset: auto auto 30px 22px;
     }
@@ -378,6 +437,10 @@ main:has(> .section.l1) {
   }
 
   @media (width >= 1200px) {
+    .l1-pager {
+      display: none;
+    }
+
     > .section > div {
       max-width: 1110px;
     }

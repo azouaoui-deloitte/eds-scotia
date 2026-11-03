@@ -36,7 +36,7 @@
   margin: 0;
 }
 
-.product-cards .product-cards-eyebrow {
+.product-cards .product-cards-body > div > .product-cards-eyebrow {
   margin: 0 0 16px;
   font-size: 16px;
   line-height: 24px;
@@ -57,7 +57,7 @@
   border-bottom: 1px solid rgb(0 0 0 / 10%);
 }
 
-.product-cards .product-cards-head .product-cards-price {
+.product-cards .product-cards-body > div > .product-cards-price {
   margin-top: 30px;
   font-size: 19.2px;
   line-height: 28.8px;
@@ -73,7 +73,7 @@
   border-bottom: 1px solid rgb(0 0 0 / 10%);
 }
 
-.product-cards .product-cards-offer > p + p {
+.product-cards .product-cards-body .product-cards-offer > p + p {
   margin-top: 15px;
 }
 
@@ -87,7 +87,7 @@
   padding-top: 15px;
 }
 
-.product-cards .product-cards-features > p {
+.product-cards .product-cards-body .product-cards-features > p {
   margin: 0 0 16px;
 }
 
@@ -101,7 +101,12 @@
 }
 
 .product-cards .product-cards-notes {
-  padding-top: 15px;
+  padding-top: 30px;
+}
+
+.product-cards sup {
+  font-size: 12px;
+  line-height: 0;
 }
 
 .product-cards .product-cards-disclaimer {
@@ -114,7 +119,7 @@
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  padding-top: 15px;
+  padding-top: 8px;
   text-align: center;
 }
 
@@ -150,51 +155,6 @@
   width: 88px;
   height: auto;
   margin-bottom: 16px;
-}
-
-/* carousel pager (mobile / tablet) */
-.product-cards .product-cards-pager {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 22px;
-  margin: 0 0 30px;
-  font-size: 16px;
-  line-height: 24px;
-}
-
-.product-cards .product-cards-pager button {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: pointer;
-}
-
-.product-cards .product-cards-pager button::before {
-  content: "";
-  display: block;
-  width: 10px;
-  height: 10px;
-  margin: 0 auto;
-  border-top: 2px solid #333;
-  border-left: 2px solid #333;
-  transform: rotate(-45deg);
-}
-
-.product-cards .product-cards-pager .product-cards-next::before {
-  transform: rotate(135deg);
-}
-
-.product-cards .product-cards-pager button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.product-cards .product-cards-count b {
-  font-family: Scotiabank-Bold, var(--body-font-family);
-  font-weight: 400;
 }
 
 /* filter pills + show more (credit cards) */
@@ -241,24 +201,31 @@
 
 @media (width >= 768px) {
   .product-cards > ul {
-    gap: 6px;
-    padding: 0 6px 4px;
+    padding-left: 6px;
   }
 
   .product-cards > ul > li {
-    flex-basis: calc(50% - 6px);
+    flex-basis: 342px;
   }
 }
 
 @media (width >= 992px) {
-  .product-cards .product-cards-pager {
-    display: none;
+  .product-cards > ul {
+    margin-left: -2px;
+    padding-left: 0;
   }
 
+  .product-cards > ul > li {
+    flex-basis: 470px;
+  }
+}
+
+@media (width >= 1200px) {
   .product-cards > ul {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 30px;
+    margin-left: 0;
     padding: 0;
     overflow: visible;
   }

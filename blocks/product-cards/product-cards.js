@@ -1,5 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { moveInstrumentation } from '../../scripts/scripts.js';
+import buildPager from '../../scripts/l1-carousel.js';
 
 /**
  * Product comparison cards (bank accounts, investment products, credit cards).
@@ -51,43 +52,6 @@ function group(body) {
     frag.append(div);
   });
   body.replaceChildren(frag);
-}
-
-function buildPager(block, ul) {
-  const pager = document.createElement('div');
-  pager.className = 'product-cards-pager';
-  pager.innerHTML = '<button type="button" class="product-cards-prev" aria-label="Previous"></button><span class="product-cards-count" aria-live="polite"></span><button type="button" class="product-cards-next" aria-label="Next"></button>';
-  const [prev, count, next] = pager.children;
-  const visible = () => [...ul.children].filter((li) => !li.hidden);
-  const perView = () => {
-    const first = visible()[0];
-    return first ? Math.max(1, Math.round(ul.clientWidth / first.offsetWidth)) : 1;
-  };
-  const pages = () => Math.max(1, Math.ceil(visible().length / perView()));
-  const current = () => {
-    const first = visible()[0];
-    if (!first) return 0;
-    return Math.min(pages() - 1, Math.round(ul.scrollLeft / (first.offsetWidth * perView())));
-  };
-  const update = () => {
-    const n = pages();
-    const c = current();
-    count.innerHTML = `<b>${c + 1}</b> of ${n}`;
-    prev.disabled = c === 0;
-    next.disabled = c >= n - 1;
-  };
-  const go = (d) => {
-    const first = visible()[0];
-    if (!first) return;
-    ul.scrollTo({ left: (current() + d) * first.offsetWidth * perView(), behavior: 'smooth' });
-  };
-  prev.addEventListener('click', () => go(-1));
-  next.addEventListener('click', () => go(1));
-  ul.addEventListener('scroll', () => window.requestAnimationFrame(update), { passive: true });
-  window.addEventListener('resize', update);
-  block.prepend(pager);
-  block.productCardsUpdate = update;
-  window.requestAnimationFrame(update);
 }
 
 function buildFilter(block, ul) {
@@ -160,6 +124,6 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(pic);
   });
   block.replaceChildren(ul);
-  buildPager(block, ul);
+  block.productCardsUpdate = buildPager(block, ul);
   if (block.classList.contains('filter')) buildFilter(block, ul);
 }

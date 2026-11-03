@@ -39,4 +39,6 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(optimizedPic);
   });
   block.replaceChildren(ul);
+  // L1 pages: swipe carousel with pager below 1200px
+  if (block.classList.contains('scroll')) import('../../scripts/l1-carousel.js').then((m) => m.default(block, ul));
 }

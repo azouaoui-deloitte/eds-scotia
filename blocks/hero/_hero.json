@@ -74,6 +74,14 @@
             {
               "name": "No image on tablet",
               "value": "no-image-tablet"
+            },
+            {
+              "name": "Taller (450px)",
+              "value": "tall"
+            },
+            {
+              "name": "Height 30vw",
+              "value": "ratio"
             }
           ]
         }
