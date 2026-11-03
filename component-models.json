@@ -620,6 +620,14 @@
           {
             "name": "Tablet band 50vw",
             "value": "tablet-half"
+          },
+          {
+            "name": "Height 400px (desktop)",
+            "value": "h400"
+          },
+          {
+            "name": "Height 500px (desktop)",
+            "value": "h500"
           }
         ]
       }

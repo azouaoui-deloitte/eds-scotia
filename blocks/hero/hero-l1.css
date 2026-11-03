@@ -73,9 +73,16 @@ main .hero.block.split .hero-content a:any-link:not(.button) {
   text-decoration: none;
 }
 
+/* brand lockup (Advice+): 200px wide, 15px above the title at every width (prod) */
+main .hero.block.split .hero-content p.hero-brands {
+  margin: 0 0 15px;
+  line-height: 0;
+}
+
 main .hero.block.split .hero-brands img {
-  height: 30px;
-  margin: 0 0 8px;
+  width: 200px;
+  height: auto;
+  margin: 0;
 }
 
 main .hero.block.split .hero-cta {
@@ -218,6 +225,14 @@ main .hero.block.split .hero-image img {
     --hero-h: 35vw;
   }
 
+  main .hero.block.split.h400 {
+    --hero-h: 400px;
+  }
+
+  main .hero.block.split.h500 {
+    --hero-h: 500px;
+  }
+
   /* title-only hero (Loans & Lines of credit): 400px, title centred */
   main .hero.block.split:has(.hero-content-inner > h1:only-child) {
     --hero-h: 400px;
@@ -286,5 +301,63 @@ main .hero.block.split.title-xs :is(h1, h2) {
 @media (width >= 768px) and (width <= 991px) {
   main .hero.block.split.tablet-half .hero-image {
     height: 50vw;
+  }
+}
+
+/* prod brand3 hero below 992px: 70px panel padding, 10px under the title, 26px above the CTA
+   (46px after a section-title lead, Advice+ "Not sure where to start?"); 36 / 35px h2 titles */
+@media (width <= 991px) {
+  main .hero.block.split .hero-content {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  main .hero.block.split :is(h1, h2) {
+    margin-bottom: 10px;
+  }
+
+  main .hero.block.split .hero-content p.hero-lead + p.hero-cta {
+    margin-top: 26px;
+  }
+
+  main .hero.block.split.maroon .hero-content-inner:has(> h2) p.hero-lead + p.hero-cta {
+    margin-top: 46px;
+  }
+
+  main .hero.block.split .hero-content-inner > h2 {
+    font-size: 36px;
+    line-height: 39.6px;
+  }
+}
+
+@media (width <= 767px) {
+  main .hero.block.split .hero-content-inner > h2 {
+    font-size: 35px;
+    line-height: 38.5px;
+  }
+
+  /* Advice+ top hero (photo shown on mobile): 50 / 60px padding, copy inset 10px */
+  main .hero.block.split.image-mobile .hero-content {
+    padding: 50px 20px 60px 30px;
+  }
+}
+
+/* Advice+ desktop bands (tall / h400 / h500): copy centred with no extra bottom padding, 10px under
+   the title, 26px above the CTA; the Money Style copy column is 559px */
+@media (width >= 992px) {
+  main .hero.block.split:is(.tall, .h400, .h500) .hero-content-inner {
+    padding: 0;
+  }
+
+  main .hero.block.split:is(.tall, .h400, .h500) :is(h1, h2) {
+    margin-bottom: 10px;
+  }
+
+  main .hero.block.split:is(.tall, .h400, .h500) .hero-content p.hero-cta {
+    margin-top: 26px;
+  }
+
+  main .hero.block.split.aura .hero-content-inner {
+    max-width: 559px;
   }
 }

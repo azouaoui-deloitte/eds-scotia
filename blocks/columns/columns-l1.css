@@ -267,3 +267,63 @@ main .section.overlap .columns.box h3 + p {
   font-size: 16px;
   line-height: 21px;
 }
+
+/* box with an icon + button (Advice+ business advice): 28px title; below 1200px the button
+   drops under the heading (centred 992-1199, left on tablet, full width on mobile) and on
+   mobile the icon sits above the title */
+main .section:not(.overlap) .columns.box:has(picture) h3 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 30.8px;
+}
+
+main .section:not(.overlap) .columns.box:has(picture) > div {
+  min-height: 120px;
+}
+
+main .section:not(.overlap) .columns.box > div > div:first-child:has(> p:first-child > picture) {
+  align-items: center;
+}
+
+main .section:not(.overlap) .columns.box > div > div:first-child:has(> p:first-child > picture) > p:first-child {
+  margin: 0;
+}
+
+@media (width < 1200px) {
+  main .section:not(.overlap) .columns.box:has(picture) > div {
+    min-height: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  main .section:not(.overlap) .columns.box:has(picture) > div > div:first-child {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (width < 992px) {
+  main .section:not(.overlap) .columns.box:has(picture) > div {
+    align-items: flex-start;
+  }
+}
+
+@media (width < 768px) {
+  main .section:not(.overlap) .columns.box:has(picture) > div {
+    align-items: stretch;
+  }
+
+  main .section:not(.overlap) .columns.box > div > div:first-child:has(> p:first-child > picture) {
+    display: block;
+  }
+
+  main .section:not(.overlap) .columns.box > div > div:first-child:has(> p:first-child > picture) > p:first-child {
+    margin: 0 0 10px;
+  }
+
+  main .section:not(.overlap) .columns.box:has(picture) .button-wrapper a.button:any-link {
+    display: block;
+    width: 100%;
+  }
+}

@@ -7,7 +7,8 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
  * (tab 0 -> 1st cards block, tab 1 -> 2nd, ...). Selecting a tab shows its panel text and its
  * matching card grid, hiding the others. Backend-driven tab content on scotiabank.com cannot
  * be fetched cross-origin from Edge Delivery, so each tab carries its own authored cards.
- * Options (block classes): `pills` (filter pills), `panels` (show the active panel's copy).
+ * Options (block classes): `pills` (filter pills), `panels` (show the active panel's copy;
+ * dropdown instead of the tab bar below 992px).
  */
 export default function decorate(block) {
   const section = block.closest('.section');
@@ -84,6 +85,20 @@ export default function decorate(block) {
   // heading, panels hidden) and `panels` (the active tab's panel copy shows under the bar).
   const inPlace = block.classList.contains('pills') || block.classList.contains('panels');
   if (section && !inPlace) section.prepend(block);
+
+  // panels: below 992px the tab bar becomes a native dropdown (prod rec-tabs-select)
+  if (block.classList.contains('panels')) {
+    const select = document.createElement('select');
+    select.className = 'tabs-select';
+    select.setAttribute('aria-label', 'Select a topic');
+    panels.forEach((p, i) => select.add(new Option(p.dataset.label, String(i), i === 0, i === 0)));
+    select.addEventListener('change', () => tablist.children[Number(select.value)]?.click());
+    tablist.addEventListener('click', (e) => {
+      const tab = e.target.closest('.tabs-tab');
+      if (tab) select.value = String([...tablist.children].indexOf(tab));
+    });
+    tablist.before(select);
+  }
 
   // pills: when the pills wrap, show only the first row with a "Show more +" / "Show less -"
   // toggle (prod tablist toggle)

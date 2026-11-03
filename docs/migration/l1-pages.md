@@ -49,6 +49,7 @@ Package `scotia:scotia-l1-pages` (built by `ue-build-l1.mjs`) only has filter ro
 - Card grids that prod renders in a `tab-pane` are swipe carousels below 1200px (`cards … scroll`,
   `product-cards`), pager "n of m" stepping one card like prod; credit-cards Special offers is an
   arrow-only carousel below 768px.
-- Advice+: the RRSP quiz widget and "Show more" of Trending topics are not migrated (first 5 topics).
+- Advice+: RRSP quiz (`cards quiz`), Trending topics "Show more" (`cards icons more`), tabs `panels` render a
+  dropdown below 992px like prod; hero heights `h400` / `h500` for the Money Style / "Not sure" bands.
 - Creditor insurance: the Protection Planner gear icon is not migrated.
 - Personalised / backend content (Adobe Target, search) is a static snapshot.

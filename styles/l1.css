@@ -201,13 +201,53 @@ main:has(> .section.l1) {
     background: none;
   }
 
+  /* Advice+ "Read more featured articles": red outlined rectangle (prod rectangle-button) */
+  .section:has(.tabs.panels) a.button.secondary:any-link {
+    border-color: #ec111a;
+    border-radius: 5px;
+    color: #ec111a;
+  }
+
+  .section:has(.tabs.panels) a.button.secondary:any-link:hover,
+  .section:has(.tabs.panels) a.button.secondary:any-link:focus-visible {
+    background: #ec111a;
+    color: #fff;
+  }
+
+  .section:has(.tabs.panels) .cards-wrapper + .default-content-wrapper {
+    margin-top: 64px;
+  }
+
+  > .section:has(.hero) + .section:has(.tabs.panels) {
+    padding-top: 66px;
+  }
+
+  @media (width < 992px) {
+    .section:has(.tabs.panels) .cards-wrapper + .default-content-wrapper {
+      margin-top: 89px;
+    }
+
+    > .section:has(.hero) + .section:has(.tabs.panels) {
+      padding-top: 46px;
+    }
+
+    .section:has(.tabs.panels) p.button-wrapper {
+      display: flex;
+    }
+  }
+
   > .section:has(.hero) + .section:has(.columns.box) {
     padding-top: 70px;
   }
 
-  /* Advice+ quiz section: 696px column, small caps eyebrow, 30px question */
+  > .section:has(.hero.h500) + .section:has(.columns.box) {
+    padding: 60px 0 90px;
+  }
+
+  /* Advice+ quiz section (prod canvas-core quiz in a white box: 36px padding from 992px, 30px
+     below; 18px side padding on mobile) */
   .section.quiz {
-    padding-top: 82px;
+    padding: 82px 0 85px;
   }
 
   .section.quiz > div {
@@ -215,28 +255,60 @@ main:has(> .section.l1) {
   }
 
   .section.quiz .default-content-wrapper > p:first-child {
-    margin: 0 0 8px;
-    font-size: 11px;
-    line-height: 16px;
+    margin: 0 0 12px;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 700;
     letter-spacing: 2px;
+    text-transform: uppercase;
   }
 
   .section.quiz .default-content-wrapper > h3 {
     margin: 0 0 12px;
-    font-size: 30px;
-    line-height: 36px;
+    font-size: 32px;
+    line-height: 40px;
   }
 
   .section.quiz .default-content-wrapper > h3 + p {
-    margin: 0 0 50px;
-    font-size: 18px;
-    line-height: 27px;
+    margin: 0 0 24px;
+    font-size: 20px;
+    line-height: 30px;
   }
 
   @media (width < 1200px) {
-    .section:has(.tabs.panels) > div {
+    .section.tabs-container:has(.tabs.panels) > div {
       box-sizing: border-box;
       padding: 0 16px;
+    }
+
+    .section.quiz > div {
+      max-width: 822px;
+    }
+  }
+
+  /* Advice+: 90px from "Show more" to the Money Style band, 60px from that band to the next heading */
+  .section.center:has(.cards.icons.more) {
+    padding-bottom: 90px;
+  }
+
+  > .section:has(.hero.aura) + .section:not(.subnav, .hero-container) {
+    padding-top: 60px;
+  }
+
+  /* Monthly news cards to the "Not sure where to start?" band: 89px (prod), 120px below 992px */
+  .section:has(.cards.article.cols-2) {
+    padding-bottom: 89px;
+  }
+
+  @media (width < 992px) {
+    .section:has(.cards.article.cols-2) {
+      padding-bottom: 120px;
+    }
+  }
+
+  @media (width < 992px) {
+    .section.quiz {
+      padding: 31px 0 75px;
     }
 
     .section.quiz > div {
@@ -245,8 +317,31 @@ main:has(> .section.l1) {
   }
 
   @media (width < 768px) {
+    .section.tabs-container:has(.tabs.panels) > div {
+      padding: 0 46px;
+    }
+
+    .section:has(.tabs.panels) .cards-wrapper + .default-content-wrapper {
+      margin-top: 60px;
+    }
+
+    .section.quiz {
+      padding: 33px 0 72px;
+    }
+
     .section.quiz > div {
       padding: 0 48px;
+    }
+
+    .section.quiz .default-content-wrapper > h3 {
+      font-size: 21px;
+      line-height: 26px;
+    }
+
+    .section.quiz .default-content-wrapper > h3 + p {
+      margin-bottom: 18px;
+      font-size: 18px;
+      line-height: 27px;
     }
   }
 
@@ -590,7 +685,7 @@ main:has(> .section.l1) {
   .section.floating ul {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 0;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -609,6 +704,15 @@ main:has(> .section.l1) {
     font-size: 14px;
     line-height: 21px;
     text-decoration: none;
+  }
+
+  .section.floating li:first-child:not(:only-child) a:any-link {
+    border-bottom: 1px solid #fff;
+    border-radius: 4px 0 0;
+  }
+
+  .section.floating li:last-child:not(:only-child) a:any-link {
+    border-radius: 0 0 0 4px;
   }
 
   /* default content left (1/3) + block right (2/3): FAQ with side title, mortgage rates.
@@ -682,20 +786,20 @@ main:has(> .section.l1) {
       line-height: 38.5px;
     }
 
+    /* prod mobile sticky link: the first link only, docked bottom-left */
     .section.floating {
-      inset: auto auto 30px 22px;
+      inset: auto auto 0 32px;
     }
 
-    .section.floating ul {
-      flex-direction: row;
+    .section.floating li + li {
+      display: none;
     }
 
-    .section.floating a:any-link {
+    .section.floating a:any-link,
+    .section.floating li:first-child:not(:only-child) a:any-link {
       width: auto;
-      padding: 12px 12px 11px;
-      border-radius: 4px;
-      font-size: 12px;
-      line-height: 18px;
+      border: 0;
+      border-radius: 4px 4px 0 0;
     }
 
     .section.subnav {
