@@ -35,8 +35,36 @@ main:has(> .section.l1) {
   }
 
   .section.sand {
+    display: flex;
+    flex-direction: column;
     padding: 40px 0 84px;
     background: #f1efea;
+  }
+
+  /* the tabs block may be moved to the top of its section by tabs.js: keep the pills after the
+     heading + "Filter by category" line and before the card grids */
+  .section.sand > .default-content-wrapper {
+    order: 0;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .section.sand > .tabs-wrapper,
+  .section.sand > .tabs.block {
+    order: 1;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 30px;
+  }
+
+  .section.sand > .cards-wrapper {
+    order: 2;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .section.sand .default-content-wrapper > p {
+    text-align: left;
   }
 
   .section.sand .default-content-wrapper > h2 {
@@ -160,6 +188,11 @@ main:has(> .section.l1) {
   }
 
   @media (width >= 992px) {
+    .section.sand > .tabs-wrapper,
+    .section.sand > .tabs.block {
+      padding: 0 60px;
+    }
+
     .section.sand-light .columns.links > div {
       display: grid;
       grid-template-columns: 1fr 304px 304px;
