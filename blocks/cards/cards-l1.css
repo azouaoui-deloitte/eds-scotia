@@ -765,7 +765,12 @@ main .cards.icons.more > ul > li[hidden] {
   }
 }
 
-/* Advice+ tab grids: 12px under the title; 30px body padding on mobile */
+/* Advice+ tab grids: 40px under the panel copy (also on DA, whose cards.css has no tabs rule),
+   12px under the title; 30px body padding on mobile */
+main .section:has(.tabs.panels) .cards.featured {
+  margin-top: 40px;
+}
+
 @media (width < 768px) {
   main .cards.featured.article .cards-card-body {
     padding: 30px;

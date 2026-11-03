@@ -78,6 +78,7 @@
 
 .tabs.block.panels .tabs-panel h2 {
   margin: 0 0 8px;
+  color: #333;
   font-family: var(--heading-font-family);
   font-size: 36px;
   line-height: 39.6px;
