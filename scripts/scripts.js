@@ -102,6 +102,33 @@ function buildAutoBlocks() {
 }
 
 /**
+ * Turns a link into a button when the author formatted its whole label in the rich text
+ * editor: Bold = primary, Italic = secondary, Bold + Italic = accent. Formatting is the only
+ * link marker the AEM renderer and the Markdown pipeline keep (classes, target and spans are
+ * stripped). The marks may wrap the link (<strong><a>) or sit inside it (<a><strong>).
+ * @param {HTMLAnchorElement} a The link
+ * @returns {string|null} The button style applied, or null when the link has no style marks
+ */
+export function decorateButton(a) {
+  const label = a.textContent.trim();
+  const isMark = (el) => el?.matches('strong, em') && el.textContent.trim() === label;
+  const outer = [];
+  for (let el = a.parentElement; isMark(el); el = el.parentElement) outer.push(el);
+  const inner = [];
+  for (let el = a.firstElementChild; isMark(el); el = el.firstElementChild) inner.push(el);
+  const tags = [...outer, ...inner].map((el) => el.tagName);
+  const strong = tags.includes('STRONG');
+  const em = tags.includes('EM');
+  if (!strong && !em) return null;
+
+  const style = (strong && em && 'accent') || (strong && 'primary') || 'secondary';
+  inner.forEach((el) => el.replaceWith(...el.childNodes));
+  outer.at(-1)?.replaceWith(a);
+  a.classList.add('button', style);
+  return style;
+}
+
+/**
  * Decorates formatted links to style them as buttons.
  * @param {HTMLElement} main The main container element
  */
@@ -120,23 +147,7 @@ export function decorateButtons(main) {
     } catch { /* continue */ }
 
     // require authored formatting for buttonization
-    const strong = a.closest('strong');
-    const em = a.closest('em');
-    if (!strong && !em) return;
-
-    p.className = 'button-wrapper';
-    a.className = 'button';
-    if (strong && em) { // high-impact call-to-action
-      a.classList.add('accent');
-      const outer = strong.contains(em) ? strong : em;
-      outer.replaceWith(a);
-    } else if (strong) {
-      a.classList.add('primary');
-      strong.replaceWith(a);
-    } else {
-      a.classList.add('secondary');
-      em.replaceWith(a);
-    }
+    if (decorateButton(a)) p.className = 'button-wrapper';
   });
 }
 

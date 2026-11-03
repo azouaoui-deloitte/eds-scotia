@@ -1,9 +1,11 @@
-import { moveInstrumentation } from '../../scripts/scripts.js';
+import { decorateButton, moveInstrumentation } from '../../scripts/scripts.js';
+
+const STYLES = ['primary', 'secondary', 'accent'];
 
 /**
  * Scotiabank hero: left-hand content (brand lockup, heading, body, two CTAs) over a
- * right-hand image. Rows: [image] [richtext]. The last two links in the richtext become
- * the primary (dark) and secondary (outline) call to action buttons.
+ * right-hand image. Rows: [image] [richtext]. The links in the richtext become call to
+ * action buttons: Bold = primary (dark), Italic = secondary (outline).
  */
 export default function decorate(block) {
   const rows = [...block.children];
@@ -54,9 +56,13 @@ export default function decorate(block) {
       if (first?.tagName === 'P' && first.nextElementSibling?.matches('h1, h2')) first.classList.add('hero-eyebrow');
       inner.querySelector('h1 + p, h2 + p')?.classList.add('hero-lead');
     }
+    // the author's Bold (primary) / Italic (secondary) choice wins; unformatted links keep the
+    // positional default: first = primary (unless one is chosen explicitly), others = secondary
+    const styles = links.map((a) => decorateButton(a)
+      || STYLES.find((style) => a.classList.contains(style)));
     links.forEach((a, i) => {
-      a.classList.add('button');
-      a.classList.add(i === 0 ? 'primary' : 'secondary');
+      const style = styles[i] || (i === 0 && !styles.includes('primary') ? 'primary' : 'secondary');
+      a.classList.add('button', style);
       const p = a.closest('p');
       if (p) p.classList.add('hero-cta');
     });

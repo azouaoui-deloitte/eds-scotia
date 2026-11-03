@@ -6,6 +6,28 @@
     ]
   },
   {
+    "id": "text",
+    "components": [
+      "text"
+    ],
+    "rte": {
+      "actions": {
+        "bold": {
+          "tag": "strong",
+          "label": "Bold (on a link: primary button)"
+        },
+        "italic": {
+          "tag": "em",
+          "label": "Italic (on a link: secondary button)"
+        },
+        "link": {
+          "hideTarget": true,
+          "label": "Insert link (then Bold = primary button, Italic = secondary button)"
+        }
+      }
+    }
+  },
+  {
     "...": "./_section.json#/filters"
   },
   {
