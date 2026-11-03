@@ -68,11 +68,41 @@
 /* "You may be interested in": lifestyle photo background + card-art overlay + title */
 .cards.interest > ul > li {
   position: relative;
-  min-height: 481px; /* prod mobile/tablet tile pitch (text-anchored) */
+  min-height: 473px; /* prod mobile/tablet tile height */
   overflow: hidden;
   border-radius: 8px;
   display: flex;
   align-items: flex-end;
+}
+
+/* prod tile pitch below desktop is 505px (473 tile + 32 gap); match the gap so stacked tiles
+   don't drift */
+@media (width < 900px) {
+  .cards.interest > ul {
+    gap: 32px;
+  }
+}
+
+/* tablet: prod shows ONE centred narrow column (~424px, tile x172), not a full-width tile */
+@media (width >= 600px) and (width < 900px) {
+  .cards.interest > ul {
+    max-width: 424px;
+    margin-inline: auto;
+  }
+}
+
+/* mobile: prod leaves ~29px more between the heading and the first tile */
+@media (width < 600px) {
+  .cards.interest {
+    margin-top: 29px;
+  }
+}
+
+/* tablet: prod leaves ~31px between the centred heading and the first tile */
+@media (width >= 600px) and (width < 900px) {
+  .cards.interest {
+    margin-top: 31px;
+  }
 }
 
 @media (width >= 900px) {
@@ -169,7 +199,7 @@ main .section:has(.tabs) .cards.featured {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
-  padding: 30px 20px 38px;
+  padding: 30px 20px 38px 30px; /* prod mobile body left padding ~30 */
 }
 
 @media (width >= 600px) {
@@ -185,6 +215,19 @@ main .section:has(.tabs) .cards.featured {
   .cards.featured .cards-card-body {
     padding-top: 36px;
     padding-bottom: 42px;
+  }
+}
+
+/* tablet: prod's 3-col Featured grid is inset (cards start ~x24, body padding ~36) */
+@media (width >= 600px) and (width < 1000px) {
+  .cards.featured > ul {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  .cards.featured .cards-card-body {
+    padding-left: 36px;
+    padding-right: 36px;
   }
 }
 

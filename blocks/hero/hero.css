@@ -66,6 +66,12 @@
     font-size: 46px;
     line-height: 50.6px;
   }
+
+  /* prod spreads the two CTA groups into side-by-side columns (Already a client? left,
+     Not a client yet? at ~x384); fixed-width columns reproduce that pitch */
+  .hero.block .hero-cta {
+    width: 253px;
+  }
 }
 
 .hero.block .hero-content p {
@@ -165,5 +171,19 @@
   .hero.block h1 {
     font-size: 46px;
     letter-spacing: -1px;
+  }
+}
+
+/* tablet only: prod spreads the two CTA groups across the full content width (col 2 at ~x384).
+   Placed last so the pitch override wins over the base `.hero-cta` margin shorthand. */
+@media (width >= 768px) and (width < 992px) {
+  .hero.block .hero-content-inner {
+    max-width: 708px;
+  }
+
+  /* `.hero-content p` beats `.hero-cta`, so match the p to win the margin; apply only to the
+     first CTA group (the second is the last p) so the row doesn't overflow and wrap */
+  .hero.block .hero-content p.hero-cta:not(:last-of-type) {
+    margin: 8px 95px 0 0;
   }
 }

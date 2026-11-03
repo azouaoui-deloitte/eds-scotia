@@ -426,3 +426,11 @@ main .section.legal > div {
   gap: 12px;
   text-align: center;
 }
+
+/* mobile: prod wraps the CDIC line after "...used by the"; constrain width to match */
+@media (width < 600px) {
+  main .section.legal p {
+    max-width: 285px;
+    margin-inline: auto;
+  }
+}
