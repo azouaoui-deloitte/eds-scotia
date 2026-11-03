@@ -946,7 +946,23 @@ main:has(> .section.l1) {
   }
 
   .section:has(.cards.plain):has(+ .section .columns.maroon) {
-    padding-bottom: 60px;
+    padding-bottom: 107px;
+  }
+
+  /* Loans desktop grid rhythm (prod): "Let's get started" -> Advice+ 47px, 67px above "View more
+     Borrowing articles", 47px under it */
+  @media (width >= 1200px) {
+    .section.lead-center:has(> .cards-wrapper .cards.info.scroll:not(.cols-2)):has(+ .section.grey) {
+      padding-bottom: 47px;
+    }
+
+    .section.square-buttons .cards-wrapper:has(.cards.article.scroll) + .default-content-wrapper {
+      margin-top: 67px;
+    }
+
+    .section.grey.square-buttons:has(.cards.article.scroll) {
+      padding-bottom: 47px;
+    }
   }
 
   /* Mortgages FAQ (compact accordion): 60px bands like prod's spacers */
