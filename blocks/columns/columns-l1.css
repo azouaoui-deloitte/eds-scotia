@@ -1,0 +1,171 @@
+/* L1 page column variants (additive).
+   links  - link-list columns (heading + dotted links)
+   banner - call-to-action strip: text left, button(s) right
+   box    - banner in a white shadowed card;  maroon - banner on a dark red panel
+   media  - image column + text column in a light frame (eHOME) */
+/* stylelint-disable no-descending-specificity */
+main .columns:is(.links, .banner, .media) > div {
+  align-items: flex-start;
+  gap: 30px;
+}
+
+main .columns.links h2,
+main .columns.links h3 {
+  margin: 0 0 30px;
+  color: #333;
+  font-family: var(--heading-font-family);
+  font-size: 30px;
+  line-height: 33px;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+main .columns.links h4 {
+  margin: 0 0 24px;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: 400;
+}
+
+main .columns.links p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+main .columns.links ul {
+  margin: 0;
+  padding-left: 28px;
+}
+
+main .columns.links a:any-link {
+  color: #333;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  border-bottom: 1px dotted #333;
+  text-decoration: none;
+}
+
+main .columns.links.compact p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+main .columns.links.compact a:any-link {
+  font-family: var(--body-font-family);
+  border-bottom: 0;
+}
+
+main .columns.banner > div {
+  justify-content: space-between;
+}
+
+main .columns.banner h2,
+main .columns.banner h3 {
+  margin: 0 0 8px;
+  color: inherit;
+  font-family: var(--heading-font-family);
+  font-size: 30px;
+  line-height: 33px;
+  font-weight: 500;
+  letter-spacing: normal;
+}
+
+main .columns.banner p {
+  margin: 0;
+  color: inherit;
+}
+
+main .columns.banner .button-wrapper + .button-wrapper {
+  margin-top: 16px;
+}
+
+main .columns.box {
+  padding: 36px;
+  border: 1px solid #e2e8ee;
+  border-radius: 0;
+  background: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+}
+
+main .columns.maroon {
+  padding: 48px 36px;
+  background: #450000;
+  color: #fff;
+}
+
+main .columns.maroon a.button:any-link {
+  border-color: #fff;
+  background: #fff;
+  color: #333;
+}
+
+main .columns.maroon a.button.secondary:any-link {
+  background: transparent;
+  color: #fff;
+}
+
+main .columns.media {
+  padding: 28px;
+  background: #f5f5f5;
+}
+
+main .columns.media > div {
+  padding: 30px;
+  background: #fff;
+}
+
+main .columns.media .columns-img-col img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+
+main .columns.media h2 {
+  margin: 0 0 24px;
+  font-size: 36px;
+  line-height: 39.6px;
+  letter-spacing: -1px;
+}
+
+main .columns.media p {
+  margin: 0 0 16px;
+}
+
+@media (width >= 768px) {
+  main .columns.links > div {
+    flex-direction: row;
+  }
+
+  main .columns.links > div > div {
+    flex: 1 1 0;
+  }
+}
+
+@media (width >= 900px) {
+  main .columns.banner > div {
+    align-items: center;
+  }
+
+  main .columns.banner > div > div:last-child {
+    flex: 0 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  main .columns.banner .button-wrapper + .button-wrapper {
+    margin-top: 0;
+  }
+
+  main .columns.media > div {
+    align-items: center;
+    gap: 60px;
+    padding: 36px 60px;
+  }
+
+  main .columns.media > div > .columns-img-col {
+    flex: 0 0 300px;
+  }
+}

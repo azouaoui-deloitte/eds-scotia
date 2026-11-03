@@ -37,6 +37,46 @@
             {
               "name": "Legal (CDIC)",
               "value": "legal"
+            },
+            {
+              "name": "L1 page (first section)",
+              "value": "l1"
+            },
+            {
+              "name": "Grey band",
+              "value": "grey"
+            },
+            {
+              "name": "Beige band",
+              "value": "beige"
+            },
+            {
+              "name": "Dark band",
+              "value": "dark"
+            },
+            {
+              "name": "Centred text",
+              "value": "center"
+            },
+            {
+              "name": "Top divider",
+              "value": "divider"
+            },
+            {
+              "name": "Sub navigation",
+              "value": "subnav"
+            },
+            {
+              "name": "Floating side CTA",
+              "value": "floating"
+            },
+            {
+              "name": "Split 1/3 - 2/3",
+              "value": "split"
+            },
+            {
+              "name": "Wide (1320)",
+              "value": "wide"
             }
           ]
         }
@@ -54,7 +94,10 @@
         "hero",
         "cards",
         "columns",
-        "fragment"
+        "fragment",
+        "tabs",
+        "accordion",
+        "product-cards"
       ]
     }
   ]

@@ -37,14 +37,59 @@
       "id": "cards",
       "fields": [
         {
-          "component": "select",
+          "component": "multiselect",
           "name": "classes",
-          "value": "",
           "label": "Variant",
           "valueType": "string",
           "options": [
-            { "name": "Interest tiles", "value": "interest" },
-            { "name": "Featured offers", "value": "featured" }
+            {
+              "name": "Interest tiles",
+              "value": "interest"
+            },
+            {
+              "name": "Featured offers",
+              "value": "featured"
+            },
+            {
+              "name": "Info cards",
+              "value": "info"
+            },
+            {
+              "name": "Article cards (image top)",
+              "value": "article"
+            },
+            {
+              "name": "Centred icons",
+              "value": "icons"
+            },
+            {
+              "name": "Plain icon cards",
+              "value": "plain"
+            },
+            {
+              "name": "Link tiles",
+              "value": "links"
+            },
+            {
+              "name": "Promo tiles",
+              "value": "promo"
+            },
+            {
+              "name": "2 columns",
+              "value": "cols-2"
+            },
+            {
+              "name": "4 columns",
+              "value": "cols-4"
+            },
+            {
+              "name": "Red arrow CTA",
+              "value": "arrow"
+            },
+            {
+              "name": "Swipe on mobile",
+              "value": "scroll"
+            }
           ]
         }
       ]

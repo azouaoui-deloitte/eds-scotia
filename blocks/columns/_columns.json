@@ -33,6 +33,38 @@
           "name": "rows",
           "value": "",
           "label": "Rows"
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Style",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Link lists",
+              "value": "links"
+            },
+            {
+              "name": "Compact links",
+              "value": "compact"
+            },
+            {
+              "name": "CTA banner",
+              "value": "banner"
+            },
+            {
+              "name": "Banner in a card",
+              "value": "box"
+            },
+            {
+              "name": "Dark red panel",
+              "value": "maroon"
+            },
+            {
+              "name": "Image + text frame",
+              "value": "media"
+            }
+          ]
         }
       ]
     }

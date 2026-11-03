@@ -45,8 +45,15 @@ export default function decorate(block) {
     // brand lockup image (first picture) stays on top
     const brand = inner.querySelector('picture');
     if (brand) brand.closest('p')?.classList.add('hero-brands');
-    // style the two CTA links
-    const links = [...inner.querySelectorAll('a')];
+    // style the two CTA links (split variant: only links standing alone in their paragraph)
+    const split = block.classList.contains('split');
+    const links = [...inner.querySelectorAll('a')]
+      .filter((a) => !split || a.closest('p')?.textContent.trim() === a.textContent.trim());
+    if (split) {
+      const first = inner.firstElementChild;
+      if (first?.tagName === 'P' && first.nextElementSibling?.matches('h1, h2')) first.classList.add('hero-eyebrow');
+      inner.querySelector('h1 + p, h2 + p')?.classList.add('hero-lead');
+    }
     links.forEach((a, i) => {
       a.classList.add('button');
       a.classList.add(i === 0 ? 'primary' : 'secondary');

@@ -156,8 +156,88 @@
           {
             "name": "Legal (CDIC)",
             "value": "legal"
+          },
+          {
+            "name": "L1 page (first section)",
+            "value": "l1"
+          },
+          {
+            "name": "Grey band",
+            "value": "grey"
+          },
+          {
+            "name": "Beige band",
+            "value": "beige"
+          },
+          {
+            "name": "Dark band",
+            "value": "dark"
+          },
+          {
+            "name": "Centred text",
+            "value": "center"
+          },
+          {
+            "name": "Top divider",
+            "value": "divider"
+          },
+          {
+            "name": "Sub navigation",
+            "value": "subnav"
+          },
+          {
+            "name": "Floating side CTA",
+            "value": "floating"
+          },
+          {
+            "name": "Split 1/3 - 2/3",
+            "value": "split"
+          },
+          {
+            "name": "Wide (1320)",
+            "value": "wide"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "accordion",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Legal footnotes toggle",
+            "value": "footnotes"
+          },
+          {
+            "name": "Dark label",
+            "value": "dark"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "accordion-item",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "summary",
+        "label": "Question / label",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Answer / body",
+        "valueType": "string"
       }
     ]
   },
@@ -165,9 +245,8 @@
     "id": "cards",
     "fields": [
       {
-        "component": "select",
+        "component": "multiselect",
         "name": "classes",
-        "value": "",
         "label": "Variant",
         "valueType": "string",
         "options": [
@@ -178,6 +257,46 @@
           {
             "name": "Featured offers",
             "value": "featured"
+          },
+          {
+            "name": "Info cards",
+            "value": "info"
+          },
+          {
+            "name": "Article cards (image top)",
+            "value": "article"
+          },
+          {
+            "name": "Centred icons",
+            "value": "icons"
+          },
+          {
+            "name": "Plain icon cards",
+            "value": "plain"
+          },
+          {
+            "name": "Link tiles",
+            "value": "links"
+          },
+          {
+            "name": "Promo tiles",
+            "value": "promo"
+          },
+          {
+            "name": "2 columns",
+            "value": "cols-2"
+          },
+          {
+            "name": "4 columns",
+            "value": "cols-4"
+          },
+          {
+            "name": "Red arrow CTA",
+            "value": "arrow"
+          },
+          {
+            "name": "Swipe on mobile",
+            "value": "scroll"
           }
         ]
       }
@@ -225,6 +344,38 @@
         "name": "rows",
         "value": "",
         "label": "Rows"
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Link lists",
+            "value": "links"
+          },
+          {
+            "name": "Compact links",
+            "value": "compact"
+          },
+          {
+            "name": "CTA banner",
+            "value": "banner"
+          },
+          {
+            "name": "Banner in a card",
+            "value": "box"
+          },
+          {
+            "name": "Dark red panel",
+            "value": "maroon"
+          },
+          {
+            "name": "Image + text frame",
+            "value": "media"
+          }
+        ]
       }
     ]
   },
@@ -261,6 +412,96 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      },
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Style",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Split (L1 category hero)",
+            "value": "split"
+          },
+          {
+            "name": "Maroon panel",
+            "value": "maroon"
+          },
+          {
+            "name": "Sky panel",
+            "value": "sky"
+          },
+          {
+            "name": "Gold panel",
+            "value": "gold"
+          },
+          {
+            "name": "Aura gradient",
+            "value": "aura"
+          },
+          {
+            "name": "Image on mobile",
+            "value": "image-mobile"
+          },
+          {
+            "name": "No image on tablet",
+            "value": "no-image-tablet"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "product-cards",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Category filter + show more",
+            "value": "filter"
+          },
+          {
+            "name": "Credit card layout",
+            "value": "credit"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "product-card",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Card art (optional)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text (eyebrow, title, price, badge, offer, features, buttons)",
+        "valueType": "string"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "tags",
+        "label": "Filter categories (comma separated)",
+        "value": ""
       }
     ]
   },

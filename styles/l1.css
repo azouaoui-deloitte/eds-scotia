@@ -1,0 +1,389 @@
+/* Scotiabank L1 product landing pages (bank accounts, credit cards, investing, loans, mortgages,
+   insurance, Advice+). Enabled by the section style "l1" on the first section of a page, so the
+   personal page (no "l1" section) is never affected. Prod grid: 1110 / 930 / 690 / full-60. */
+/* stylelint-disable no-descending-specificity */
+main:has(> .section.l1) {
+  --bold-font-family: "Scotiabank-Bold", "Scotiabank-Regular-fallback", arial, sans-serif;
+
+  color: #333;
+
+  > .section {
+    margin: 0;
+    padding: 30px 0;
+  }
+
+  > .section > div {
+    max-width: none;
+    margin: 0 auto;
+    padding: 0 30px;
+  }
+
+  > .section:has(.hero) {
+    padding: 0;
+  }
+
+  > .section:has(.hero) > div {
+    max-width: none;
+    padding: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--heading-font-family);
+    font-weight: 500;
+    color: #333;
+    letter-spacing: normal;
+  }
+
+  .section > div > h2,
+  .section .default-content-wrapper > h2 {
+    margin: 0 0 30px;
+    text-align: left;
+    font-size: 36px;
+    line-height: 39.6px;
+    font-weight: 500;
+    letter-spacing: -1px;
+    color: #333;
+  }
+
+  .default-content-wrapper > h3 {
+    margin: 0 0 16px;
+    font-size: 30px;
+    line-height: 33px;
+  }
+
+  .default-content-wrapper > p {
+    margin: 0 0 16px;
+  }
+
+  .default-content-wrapper > h2 + p {
+    margin-top: -18px;
+    font-size: 17.6px;
+    line-height: 24px;
+  }
+
+  .default-content-wrapper a:any-link:not(.button),
+  .accordion a:any-link,
+  .product-cards a:any-link:not(.button) {
+    color: #333;
+    font-family: var(--bold-font-family);
+    border-bottom: 1px dotted #333;
+    text-decoration: none;
+  }
+
+  .default-content-wrapper a:any-link:not(.button):hover,
+  .accordion a:any-link:hover {
+    color: #333;
+    border-bottom-style: solid;
+  }
+
+  p.button-wrapper {
+    margin: 0;
+  }
+
+  a.button:any-link {
+    display: inline-block;
+    box-sizing: border-box;
+    min-height: 58px;
+    margin: 0;
+    padding: 18px 30px;
+    border: 1px solid #333;
+    border-radius: 999px;
+    font-family: var(--bold-font-family);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    text-align: center;
+    white-space: normal;
+  }
+
+  a.button.primary {
+    border-color: #ec111a;
+    background: #ec111a;
+    color: #fff;
+  }
+
+  a.button.primary:hover,
+  a.button.primary:focus-visible {
+    border-color: #be061b;
+    background: #be061b;
+    color: #fff;
+  }
+
+  a.button.secondary {
+    border-color: #333;
+    background: transparent;
+    color: #333;
+  }
+
+  a.button.secondary:hover,
+  a.button.secondary:focus-visible {
+    background: #333;
+    color: #fff;
+  }
+
+  a.button.accent {
+    border-color: #333;
+    background: #333;
+    color: #fff;
+  }
+
+  a.button.accent:hover,
+  a.button.accent:focus-visible {
+    border-color: #1a1a1a;
+    background: #1a1a1a;
+  }
+
+  /* bands */
+  .section.grey {
+    background: #fafbfd;
+  }
+
+  .section.beige {
+    background: #f6f0ea;
+  }
+
+  .section.dark {
+    background: #333;
+    color: #fff;
+  }
+
+  .section.dark h2,
+  .section.dark p {
+    color: #fff;
+  }
+
+  .section.dark a.button:any-link {
+    border-color: #fff;
+    background: #fff;
+    color: #333;
+  }
+
+  .section.maroon {
+    background: #1f1a1d;
+    color: #fff;
+  }
+
+  .section.center .default-content-wrapper {
+    text-align: center;
+  }
+
+  .section.center .default-content-wrapper > h2 {
+    text-align: center;
+  }
+
+  .section.divider {
+    border-top: 1px solid #e2e8ee;
+  }
+
+  /* CDIC band (reused "legal" style) */
+  .section.legal {
+    padding: 30px 0;
+  }
+
+  .section.legal > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+  }
+
+  .section.legal p {
+    margin: 0;
+  }
+
+  .section.legal img {
+    width: 160px;
+    height: auto;
+  }
+
+  /* sibling-page sub navigation overlapping the bottom of the hero */
+  .section.subnav {
+    position: relative;
+    z-index: 2;
+    padding: 0;
+    margin-top: -22px;
+  }
+
+  .section.subnav .default-content-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .section.subnav ul {
+    display: flex;
+    margin: 0;
+    padding: 0 28px;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e2e8ee;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 5%);
+  }
+
+  .section.subnav li {
+    margin: 0;
+  }
+
+  .section.subnav a:any-link {
+    display: block;
+    padding: 10px 17px 9px;
+    border-bottom: 3px solid transparent;
+    color: #333;
+    font-family: var(--body-font-family);
+    font-size: 16px;
+    line-height: 21px;
+    text-decoration: none;
+  }
+
+  .section.subnav strong a:any-link,
+  .section.subnav a:any-link:hover {
+    border-bottom-color: #ec111a;
+    font-family: var(--bold-font-family);
+    font-weight: 400;
+  }
+
+  /* sticky red side call-to-action tabs (fixed to the right edge) */
+  .section.floating {
+    position: fixed;
+    z-index: 30;
+    top: 250px;
+    right: 0;
+    padding: 0;
+    margin: 0;
+  }
+
+  .section.floating > div {
+    padding: 0;
+  }
+
+  .section.floating ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .section.floating a:any-link {
+    display: block;
+    box-sizing: border-box;
+    width: 120px;
+    padding: 16px;
+    border-radius: 4px 0 0 4px;
+    background: #ec111a;
+    box-shadow: 0 3px 17px rgb(0 0 0 / 10%);
+    color: #fff;
+    font-family: var(--bold-font-family);
+    font-size: 14px;
+    line-height: 21px;
+    text-decoration: none;
+  }
+
+  /* default content left (1/3) + block right (2/3): FAQ with side title, rates */
+  .section.split {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .section.wide > div {
+    max-width: 1320px;
+  }
+
+  @media (width < 768px) {
+    > .section > div {
+      max-width: none;
+      padding: 0 30px;
+    }
+
+    .section > div > h2,
+    .section .default-content-wrapper > h2 {
+      font-size: 32px;
+      line-height: 35.2px;
+    }
+
+    .section.floating {
+      inset: auto auto 30px 22px;
+    }
+
+    .section.floating ul {
+      flex-direction: row;
+    }
+
+    .section.floating a:any-link {
+      width: auto;
+      padding: 12px 12px 11px;
+      border-radius: 4px;
+      font-size: 12px;
+      line-height: 18px;
+    }
+
+    .section.subnav {
+      margin-top: 0;
+    }
+
+    .section.subnav > div {
+      padding: 0;
+    }
+
+    .section.subnav ul {
+      width: 100%;
+      justify-content: space-between;
+      padding: 0;
+      border-width: 1px 0;
+      box-shadow: none;
+    }
+
+    .section.subnav a:any-link {
+      padding: 10px 8px 9px;
+      font-size: 14px;
+    }
+  }
+
+  @media (width >= 768px) {
+    > .section > div {
+      max-width: 690px;
+      padding: 0;
+    }
+  }
+
+  @media (width >= 992px) {
+    > .section > div {
+      max-width: 930px;
+    }
+
+    .section.wide > div {
+      max-width: none;
+      padding: 0 60px;
+    }
+
+    .section.split {
+      grid-template-columns: 290px 610px;
+      justify-content: center;
+      column-gap: 30px;
+    }
+
+    .section.split > div {
+      max-width: none;
+      width: 100%;
+      margin: 0;
+    }
+
+    .section.split > div:first-child:not(:only-child) ~ div:not(:nth-child(2)) {
+      grid-column: 1 / -1;
+    }
+  }
+
+  @media (width >= 1200px) {
+    > .section > div {
+      max-width: 1110px;
+    }
+
+    .section.split {
+      grid-template-columns: 350px 730px;
+    }
+  }
+}

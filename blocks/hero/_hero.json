@@ -40,6 +40,42 @@
           "value": "",
           "label": "Text",
           "valueType": "string"
+        },
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Style",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Split (L1 category hero)",
+              "value": "split"
+            },
+            {
+              "name": "Maroon panel",
+              "value": "maroon"
+            },
+            {
+              "name": "Sky panel",
+              "value": "sky"
+            },
+            {
+              "name": "Gold panel",
+              "value": "gold"
+            },
+            {
+              "name": "Aura gradient",
+              "value": "aura"
+            },
+            {
+              "name": "Image on mobile",
+              "value": "image-mobile"
+            },
+            {
+              "name": "No image on tablet",
+              "value": "no-image-tablet"
+            }
+          ]
         }
       ]
     }

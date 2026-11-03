@@ -1,0 +1,124 @@
+/* stylelint-disable no-descending-specificity */
+.accordion .accordion-item {
+  border-top: 1px solid #949494;
+}
+
+.accordion .accordion-item:last-child {
+  border-bottom: 1px solid #949494;
+}
+
+.accordion .accordion-item-label {
+  position: relative;
+  display: block;
+  padding: 24px 37.5px 24px 0;
+  color: #333;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  line-height: 32.5px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.accordion .accordion-item-label::-webkit-details-marker {
+  display: none;
+}
+
+.accordion .accordion-item-label > p {
+  margin: 0;
+}
+
+.accordion .accordion-item-label::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  margin-top: -9px;
+  border-right: 1.5px solid #333;
+  border-bottom: 1.5px solid #333;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.accordion .accordion-item[open] > .accordion-item-label::after {
+  margin-top: -3px;
+  transform: rotate(-135deg);
+}
+
+.accordion .accordion-item-label:hover {
+  color: #000;
+}
+
+.accordion .accordion-item-label:focus-visible {
+  outline: 2px solid #007eab;
+  outline-offset: 2px;
+}
+
+.accordion .accordion-item-body {
+  padding: 0 37.5px 24px 0;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.accordion .accordion-item-body > :first-child {
+  margin-top: 0;
+}
+
+.accordion .accordion-item-body > :last-child {
+  margin-bottom: 0;
+}
+
+.accordion .accordion-item-body table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.accordion .accordion-item-body :is(th, td) {
+  padding: 8px;
+  border-bottom: 1px solid #e2e8ee;
+  text-align: left;
+}
+
+/* legal footnotes disclosure */
+.accordion.footnotes .accordion-item,
+.accordion.footnotes .accordion-item:last-child {
+  border: 0;
+}
+
+.accordion.footnotes .accordion-item-label {
+  display: inline-block;
+  padding: 0 22px 0 0;
+  color: #6f42c1;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.accordion.footnotes .accordion-item-label::after {
+  right: 4px;
+  width: 6px;
+  height: 6px;
+  margin-top: -5px;
+  border-color: #6f42c1;
+  border-width: 0 2px 2px 0;
+}
+
+.accordion.footnotes .accordion-item[open] > .accordion-item-label::after {
+  margin-top: -1px;
+}
+
+.accordion.footnotes .accordion-item-body {
+  padding: 24px 0 0;
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.accordion.footnotes .accordion-item-body p {
+  margin: 0 0 12px;
+}
+
+.accordion.footnotes.dark .accordion-item-label {
+  color: #333;
+  font-size: 14px;
+  line-height: 21px;
+}

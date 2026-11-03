@@ -1,0 +1,180 @@
+/* hero "split" variant (L1 category pages): colour panel with the text on the left half, photo
+   on the right (desktop); photo band on top of the panel on tablet; panel only on mobile.
+   Colours: maroon (default), sky, gold, aura (full-bleed gradient image, white text). */
+main .hero.block.split {
+  --hero-bg: #450000;
+  --hero-fg: #fff;
+
+  background: var(--hero-bg);
+  color: var(--hero-fg);
+}
+
+main .hero.block.split.sky {
+  --hero-bg: #ade0ee;
+  --hero-fg: #333;
+}
+
+main .hero.block.split.gold {
+  --hero-bg: #fdb913;
+  --hero-fg: #333;
+}
+
+main .hero.block.split.aura {
+  --hero-bg: #ec111a;
+}
+
+main .hero.block.split .hero-content {
+  background: var(--hero-bg);
+  color: var(--hero-fg);
+  padding: 40px 20px;
+}
+
+main .hero.block.split .hero-content-inner {
+  max-width: 513px;
+}
+
+main .hero.block.split h1,
+main .hero.block.split h2 {
+  margin: 0 0 8px;
+  color: var(--hero-fg);
+  font-family: var(--heading-font-family);
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  text-wrap: wrap;
+}
+
+main .hero.block.split .hero-content p {
+  margin: 0;
+  color: var(--hero-fg);
+  font-size: 16px;
+  line-height: 24px;
+}
+
+main .hero.block.split .hero-content p.hero-lead {
+  font-size: 18px;
+  line-height: 27px;
+}
+
+main .hero.block.split .hero-content p + p {
+  margin-top: 16px;
+}
+
+main .hero.block.split .hero-content p.hero-eyebrow + h1 {
+  margin-top: 0;
+}
+
+main .hero.block.split .hero-content a:any-link:not(.button) {
+  color: var(--hero-fg);
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  border-bottom: 1px dotted currentcolor;
+  text-decoration: none;
+}
+
+main .hero.block.split .hero-brands img {
+  height: 30px;
+  margin: 0 0 8px;
+}
+
+main .hero.block.split .hero-cta {
+  display: block;
+  width: auto;
+  margin: 20px 0 0;
+}
+
+main .hero.block.split .hero-content p.hero-cta + p.hero-cta {
+  margin-top: 16px;
+}
+
+main .hero.block.split .hero-cta a.button {
+  display: inline-block;
+  margin: 0;
+  padding: 18px 30px;
+  border: 1px solid #333;
+  border-radius: 999px;
+  background: #333;
+  color: #fff;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 800;
+}
+
+main .hero.block.split:is(.maroon, .aura) .hero-cta a.button {
+  border-color: #fff;
+  background: #fff;
+  color: #333;
+}
+
+main .hero.block.split .hero-image img {
+  height: 298px;
+  object-fit: cover;
+  object-position: right center;
+}
+
+@media (width <= 767px) {
+  main .hero.block.split .hero-image {
+    display: none;
+  }
+
+  main .hero.block.split.image-mobile .hero-image {
+    display: block;
+  }
+
+  main .hero.block.split .hero-content {
+    padding: 40px 20px 52px;
+  }
+}
+
+@media (width >= 768px) {
+  main .hero.block.split h1,
+  main .hero.block.split h2 {
+    font-size: 46px;
+    line-height: 50.6px;
+  }
+
+  main .hero.block.split .hero-content {
+    padding: 48px 39px 70px;
+  }
+
+  main .hero.block.split .hero-content-inner {
+    max-width: 690px;
+    margin: 0 auto;
+  }
+}
+
+@media (width >= 768px) and (width <= 991px) {
+  main .hero.block.split.no-image-tablet .hero-image {
+    display: none;
+  }
+}
+
+@media (width >= 992px) {
+  main .hero.block.split {
+    min-height: 432px;
+  }
+
+  main .hero.block.split .hero-image img {
+    height: 100%;
+  }
+
+  main .hero.block.split .hero-content {
+    width: 50%;
+    min-height: 432px;
+    padding: 40px 30px 40px max(47px, calc((100% - 1110px) / 2));
+  }
+
+  main .hero.block.split .hero-content-inner {
+    max-width: 513px;
+    margin: 0;
+  }
+
+  main .hero.block.split.aura .hero-content {
+    background: transparent;
+  }
+
+  main .hero.block.split .hero-content p.hero-cta {
+    margin-top: 20px;
+  }
+}
