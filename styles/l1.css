@@ -902,6 +902,23 @@ main:has(> .section.l1) {
     }
   }
 
+  /* Creditor desktop (prod spacers): 17px under "Reasons", 61px under the planner box, 62px at
+     the end of the article / contact bands */
+  @media (width >= 1200px) {
+    &:has(.cards.icons.highlights) .section.grey:has(.cards.icons.highlights) .default-content-wrapper > h2:only-child {
+      margin-bottom: 17px;
+    }
+
+    &:has(.cards.icons.highlights) .section.overlap {
+      padding-bottom: 61px;
+    }
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article),
+    &:has(.cards.icons.highlights) .section:has(+ .section .accordion.footnotes) {
+      padding-bottom: 62px;
+    }
+  }
+
   /* Creditor mobile: 44px under the article section headings, 192px between the two article bands,
      60px above "Ways to contact us" */
   @media (width < 768px) {
