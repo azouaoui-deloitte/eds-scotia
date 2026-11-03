@@ -807,6 +807,21 @@ main .cards.icons.more > ul > li[hidden] {
     display: block;
     text-align: left;
   }
+
+  /* mobile compare rhythm (prod): 20px titles, 14px after each rate row and note */
+  main .cards.product.compare .cards-card-body h3 {
+    font-size: 20px;
+    line-height: 27px;
+  }
+
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)),
+  main .cards.product.compare .cards-card-body p:has(> em:only-child) {
+    margin-bottom: 14px;
+  }
+
+  main .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)):has(+ p > em:only-child) {
+    margin-bottom: 8px;
+  }
 }
 
 /* Advice+ tab grids: 40px under the panel copy (also on DA, whose cards.css has no tabs rule),
@@ -1006,4 +1021,20 @@ main .cards.article:not(.featured) .cards-card-image {
 main .cards.article:not(.featured) > ul > li:hover .cards-card-image img {
   transform: scale(1.1);
   transition: transform 0.5s;
+}
+
+/* credit-card note with a toggletip on mobile: text wraps beside the 32px info button (prod) */
+@media (width < 768px) {
+  main .cards.product.compare .cards-card-body p > em:only-child:has(a.l1-tooltip-link) {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  main .cards.product.compare .cards-card-body p > em:only-child a.l1-tooltip-link:any-link {
+    flex: 0 0 32px;
+    float: none;
+    margin: 0;
+  }
 }
