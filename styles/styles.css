@@ -367,6 +367,11 @@ main .section:has(.tabs) {
   background: #f5f6fc;
 }
 
+/* tabbed Featured section: heading + subtitle centered above the tab bar / cards (prod) */
+main .section:has(.tabs) > div > p {
+  text-align: center;
+}
+
 /* floating back-to-top button (purple circle), shown after scrolling — matches prod */
 .back-to-top {
   position: fixed;

@@ -68,7 +68,7 @@
 /* "You may be interested in": lifestyle photo background + card-art overlay + title */
 .cards.interest > ul > li {
   position: relative;
-  min-height: 481px;
+  min-height: 481px; /* prod mobile/tablet tile pitch (text-anchored) */
   overflow: hidden;
   border-radius: 8px;
   display: flex;
@@ -145,20 +145,29 @@
   text-decoration: underline;
 }
 
-/* Featured offer tiles */
+/* in the tabbed section the tab bar sits above the heading, so prod keeps a gap between the
+   subtitle and the card grid that the tab bar no longer provides locally */
+main .section:has(.tabs) .cards.featured {
+  margin-top: 40px;
+}
+
+/* Featured offer tiles. Mobile uses natural heights (prod 426-513); a min-height floor
+   only kicks in from tablet up, where prod cards are uniform. */
 .cards.featured > ul > li {
+  position: relative;
   border: 1px solid #e5e5e5;
   box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
   display: flex;
   flex-direction: column;
-  min-height: 426px;
 }
 
-/* the body fills the card; content top-aligned with the CTA pushed to the bottom (prod) */
+/* the body fills the card; content top-aligned with the CTA pushed to the bottom (prod).
+   Mobile rhythm: ~30px above the title, ~38px below the bottom-anchored CTA. */
 .cards.featured .cards-card-body {
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  padding: 30px 20px 38px;
 }
 
 @media (width >= 600px) {
@@ -168,6 +177,12 @@
 
   .cards.featured > ul > li {
     min-height: 585px;
+  }
+
+  /* tablet/desktop rhythm: ~36px above title, ~42px below CTA (prod) */
+  .cards.featured .cards-card-body {
+    padding-top: 36px;
+    padding-bottom: 42px;
   }
 }
 
@@ -183,9 +198,10 @@
     margin-inline: auto;
   }
 
+  /* prod body rhythm: ~36px above the title (badge floats over the image, not in flow),
+     ~42px below so the bottom-anchored CTA sits ~62px above the card edge like prod. */
   .cards.featured .cards-card-body {
-    padding-left: 36px;
-    padding-right: 36px;
+    padding: 36px 36px 42px;
   }
 }
 
@@ -193,9 +209,10 @@
   font-family: var(--body-font-family);
   font-size: 16px;
   font-weight: 500;
-  line-height: 1.15;
+  line-height: 1.1; /* prod 17.6px */
   letter-spacing: normal;
   color: #2b2b2b;
+  margin: 0 0 12px; /* prod: no top margin, 12px below */
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
@@ -218,16 +235,20 @@
   text-decoration: underline;
 }
 
+/* prod floats the category pill over the image's top-left corner (out of the body flow) */
 .cards.featured .cards-card-badge {
-  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 16px;
+  z-index: 2;
   background: #006272;
   color: #fff;
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  padding: 4px 10px;
-  border-radius: 3px;
+  padding: 6px 12px;
+  border-radius: 0 0 3px 3px;
   margin: 0;
 }
 

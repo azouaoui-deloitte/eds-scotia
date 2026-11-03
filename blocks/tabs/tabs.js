@@ -61,11 +61,6 @@ export default function decorate(block) {
   // show the first tab's cards by default
   showCards(0);
 
-  // prod renders the tab bar ABOVE the section's "Featured" heading + subtitle, then the
-  // card grid directly (no per-tab text line). Move the tablist to the top of the section
-  // and hide the (UE-editable) panels so only the cards switch.
-  if (section) section.prepend(tablist);
-
   tablist.addEventListener('keydown', (e) => {
     const tabs = [...tablist.querySelectorAll('.tabs-tab')];
     const current = tabs.indexOf(document.activeElement);
@@ -80,4 +75,9 @@ export default function decorate(block) {
   });
 
   block.replaceChildren(tablist, ...panels);
+
+  // prod renders the tab bar ABOVE the section's "Featured" heading + subtitle. Move the whole
+  // block (tab bar + hidden, UE-editable panels) to the top of the section so the `.tabs.block`
+  // styling still applies and the cards grid follows the heading directly.
+  if (section) section.prepend(block);
 }
