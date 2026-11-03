@@ -216,6 +216,26 @@
           {
             "name": "No bottom padding",
             "value": "flush"
+          },
+          {
+            "name": "Centred lead heading",
+            "value": "lead-center"
+          },
+          {
+            "name": "Square buttons",
+            "value": "square-buttons"
+          },
+          {
+            "name": "Sub navigation (full width)",
+            "value": "subnav-wide"
+          },
+          {
+            "name": "Overlap previous band",
+            "value": "overlap"
+          },
+          {
+            "name": "Tabs (L1)",
+            "value": "tabs-l1"
           }
         ]
       }
@@ -564,6 +584,10 @@
           {
             "name": "Centred on mobile",
             "value": "center-mobile"
+          },
+          {
+            "name": "Natural image on tablet",
+            "value": "tablet-natural"
           }
         ]
       }

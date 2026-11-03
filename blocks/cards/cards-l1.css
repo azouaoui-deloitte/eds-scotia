@@ -111,13 +111,12 @@ main .cards:is(.info, .article, .icons, .plain) .cards-card-body p {
 }
 
 main .cards:is(.info, .article, .plain) .cards-card-body ul {
-  margin: 0;
+  margin: 0 0 16px;
   padding-left: 40px;
   font-size: 16px;
   line-height: 24px;
 }
 
-main .cards:is(.info, .article, .plain) .cards-card-body ul + p,
 main .cards:is(.info, .article, .plain) .cards-card-body p + p {
   margin-top: 12px;
 }
@@ -183,8 +182,8 @@ main .cards.article .cards-card-image img {
   object-fit: cover;
 }
 
-main .cards.article .cards-card-body h3,
-main .cards.article .cards-card-body h4 {
+main .cards.article .cards-card-body h4,
+main .cards.article.arrow .cards-card-body h3 {
   font-family: Scotiabank-Bold, var(--body-font-family);
   font-size: 18px;
   line-height: 27px;

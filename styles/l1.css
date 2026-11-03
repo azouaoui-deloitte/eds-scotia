@@ -196,6 +196,51 @@ main:has(> .section.l1) {
     font-weight: 400;
   }
 
+  /* tabs over card grids (Advice+): neutral band, left panel copy, dark active tab */
+  .section.tabs-l1 {
+    background: none;
+  }
+
+  .section.tabs-l1 .tabs-list {
+    justify-content: center;
+    gap: 0 24px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  .section.tabs-l1 .tabs-tab {
+    padding: 8px 4px 10px;
+    color: #333;
+    font-size: 16px;
+  }
+
+  .section.tabs-l1 .tabs-tab[aria-selected="true"] {
+    border-bottom-color: #333;
+    color: #333;
+    font-family: var(--bold-font-family);
+  }
+
+  .section.tabs-l1 .tabs-panel:not([hidden]) {
+    display: block;
+  }
+
+  .section.tabs-l1 .tabs-panel {
+    padding: 30px 0;
+    text-align: left;
+    font-size: 17.6px;
+    line-height: 24px;
+  }
+
+  .section.tabs-l1 .tabs-panel h2 {
+    margin: 0 0 8px;
+    font-size: 36px;
+    line-height: 39.6px;
+    letter-spacing: -1px;
+  }
+
+  .section.tabs-l1 .tabs-panel p {
+    margin: 0;
+  }
+
   /* bands */
   > .section:has(.hero) + .section:not(.subnav) {
     padding-top: 45px;
@@ -265,6 +310,36 @@ main:has(> .section.l1) {
     padding-bottom: 0;
   }
 
+  /* centred lead heading, then a left sub-heading at h2 size (Choose a borrowing solution) */
+  .section.lead-center .default-content-wrapper > h2:first-child {
+    text-align: center;
+  }
+
+  .section.lead-center .default-content-wrapper > h2 + h3 {
+    margin: 10px 0 30px;
+    font-size: 36px;
+    line-height: 39.6px;
+    letter-spacing: -1px;
+  }
+
+  .section.lead-center .default-content-wrapper > h2 + p {
+    margin: -22px 0 30px;
+    font-family: var(--bold-font-family);
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+  }
+
+  .section.lead-center .default-content-wrapper > h2 + p strong {
+    font-weight: 400;
+  }
+
+  .section.square-buttons a.button:any-link {
+    min-height: 0;
+    padding: 12px 22px;
+    border-radius: 4px;
+  }
+
   .section.flush .default-content-wrapper > h2 + p {
     margin: 4px 0 16px;
     font-size: 16px;
@@ -283,6 +358,10 @@ main:has(> .section.l1) {
 
   .section.center .default-content-wrapper > h2 {
     text-align: center;
+  }
+
+  .section.grey:has(+ .section.overlap) {
+    padding-bottom: 90px;
   }
 
   .section.divider {
@@ -421,6 +500,28 @@ main:has(> .section.l1) {
     border-bottom-color: #ec111a;
     font-family: var(--bold-font-family);
     font-weight: 400;
+  }
+
+  .section.subnav.subnav-wide ul {
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1110px;
+    padding: 0 12px;
+  }
+
+  .section.subnav.subnav-wide li {
+    padding: 0;
+  }
+
+  /* card overlapping the bottom of the previous band (Protection Planner) */
+  .section.overlap {
+    padding-top: 0;
+    margin-top: -60px;
+  }
+
+  .section.overlap .columns.box a:any-link:not(.button) {
+    color: #007eab;
+    border: 0;
   }
 
   /* sticky red side call-to-action tabs (fixed to the right edge) */

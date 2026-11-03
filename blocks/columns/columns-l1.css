@@ -101,6 +101,29 @@ main .columns.banner .button-wrapper + .button-wrapper {
   margin-top: 16px;
 }
 
+main .columns.banner:not(.box, .maroon, .media) {
+  margin-top: 42px;
+  padding-top: 36px;
+  border-top: 1px solid #e2e8ee;
+}
+
+main .columns.banner:not(.box, .maroon, .media) h2 {
+  font-size: 24px;
+  line-height: 26.4px;
+}
+
+main .columns.box > div > div:first-child:has(> p:first-child > picture) {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+main .columns.box > div > div:first-child > p:first-child > picture img {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
 main .columns.box {
   padding: 36px;
   border: 1px solid #e2e8ee;
@@ -112,6 +135,10 @@ main .columns.box {
 main .columns.maroon {
   padding: 48px 36px;
   background: #450000;
+  color: #fff;
+}
+
+main .columns.maroon h3 {
   color: #fff;
 }
 
