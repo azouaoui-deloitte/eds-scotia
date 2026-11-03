@@ -105,6 +105,49 @@ main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
   }
 }
 
+/* below 992 prod's rec--tablist is one native horizontal scroller (no wrap, no divider, visible
+   scrollbar): 16px above/below each label, labels 32px apart, the active one over the 2px red
+   rule; tablet centres the row, mobile bleeds it to the viewport edges (labels inset 16px)
+   under a soft shadow and starts it flush left */
+@media (width < 992px) {
+  main > .section > .tabs.block .tabs-list {
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 0 32px;
+    overflow-x: auto;
+    border-bottom: 0;
+  }
+
+  main > .section > .tabs.block .tabs-tab {
+    flex: none;
+    padding: 16px 0;
+    border-bottom: 0;
+    line-height: normal;
+    letter-spacing: -0.2px;
+    white-space: nowrap;
+  }
+
+  main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
+    padding-bottom: 16px;
+  }
+}
+
+/* tablet: prod's centred row carries ~15px more on its right (labels sit 7px left of centre) */
+@media (width >= 768px) and (width < 992px) {
+  main > .section > .tabs.block .tabs-list {
+    padding-right: 15px;
+  }
+}
+
+@media (width < 768px) {
+  main > .section > .tabs.block .tabs-list {
+    justify-content: flex-start;
+    margin-inline: -16px;
+    padding-inline: 16px 32px;
+    box-shadow: 0 2px 10px rgb(0 40 80 / 7%);
+  }
+}
+
 /* panels stay in the DOM (UE-editable); only the default bar shows the active one (below) */
 .tabs.block .tabs-panel {
   display: none;
