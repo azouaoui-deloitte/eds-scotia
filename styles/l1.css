@@ -1074,6 +1074,44 @@ main:has(> .section.l1) {
     }
   }
 
+  /* credit-cards below 1200px: the FAQ title stacks above the questions (prod), 24px apart;
+     prod "Show more" / band rhythm under the card grid */
+  @media (width < 1200px) {
+    .section.wide.faq-side.split {
+      display: block;
+    }
+
+    .section.wide.faq-side .default-content-wrapper > h2 {
+      margin-bottom: 24px;
+    }
+
+    .section.wide.faq-side .default-content-wrapper + .accordion-wrapper {
+      margin-top: 0;
+    }
+  }
+
+  @media (width >= 768px) and (width < 992px) {
+    .section.wide .cards.product.compare + .cards-product-more,
+    .section.wide .cards.product.compare .cards-product-more {
+      margin-top: 51px;
+    }
+
+    .section.wide.sand {
+      padding-bottom: 27px;
+    }
+  }
+
+  @media (width >= 992px) and (width < 1200px) {
+    .section.wide .cards.product.compare + .cards-product-more,
+    .section.wide .cards.product.compare .cards-product-more {
+      margin-top: 56px;
+    }
+
+    .section.wide.sand {
+      padding-bottom: 34px;
+    }
+  }
+
   /* credit-cards (wide grid, newer design system): prod mobile type scale */
   @media (width < 768px) {
     .section.wide .default-content-wrapper > h1 {
@@ -1086,14 +1124,87 @@ main:has(> .section.l1) {
       line-height: 40px;
     }
 
-    .section.wide.sand .default-content-wrapper > h2 {
+    .section.wide:not(.cc-top) .default-content-wrapper > h2 {
       font-size: 28px;
       line-height: 35px;
+    }
+
+    .section.wide.faq-side .default-content-wrapper > h2 {
+      margin-bottom: 24px;
+    }
+
+    .section.wide.faq-side .default-content-wrapper + .accordion-wrapper {
+      margin-top: 0;
+    }
+
+    .section.wide .cards.links > ul {
+      gap: 12px;
+    }
+
+    .section.wide .cards.links .cards-card-body a:any-link {
+      padding-block: 22px;
+    }
+
+    /* "Need help?" link lists (prod needhelp component on mobile) */
+    .section.wide.sand-light {
+      padding: 34px 0 25px;
+    }
+
+    .section.wide.sand-light .columns.links > div {
+      gap: 24px;
+    }
+
+    .section.wide.sand-light .columns.links h2 {
+      margin-bottom: 0;
+      font-size: 28px;
+      line-height: 35px;
+    }
+
+    .section.wide.sand-light .columns.links h4 {
+      margin-bottom: 16px;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .section.wide.sand-light .columns.links.compact p {
+      margin-bottom: 5px;
+    }
+
+    .section.wide.faq-side .accordion .accordion-item-label {
+      padding: 24px 40px 24px 0;
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .section.wide.sand {
+      padding-bottom: 14px;
+    }
+
+    .section.wide .cards.product.compare + .cards-product-more,
+    .section.wide .cards.product.compare .cards-product-more {
+      margin-top: 50px;
     }
 
     .section.wide .cards.product.compare .cards-card-body p {
       font-size: 14px;
       line-height: 21px;
+    }
+
+    .section.wide .cards.product.compare > ul > li > .cards-card-body:first-child > p {
+      line-height: 18px;
+    }
+
+    .section.wide .cards.product.compare .cards-card-body p:has(> strong:first-child + br) :is(strong, a:any-link) {
+      font-size: 14px;
+      line-height: 21px;
+    }
+
+    .section.wide .cards.product.compare .cards-card-body p:has(> strong:first-child + br) {
+      padding-bottom: 16px;
+    }
+
+    .section.wide .cards.product.compare .cards-card-body p:has(> strong:first-child + br) sup {
+      line-height: 0;
     }
   }
 

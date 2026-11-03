@@ -167,8 +167,10 @@ main:has(> .section.l1) {
     content: " \2192";
   }
 
-  .section.faq-side.split > div {
-    padding: 0;
+  @media (width >= 992px) {
+    .section.faq-side.split > div {
+      padding: 0;
+    }
   }
 
   .section.wide .cards.links .cards-card-body a:any-link {

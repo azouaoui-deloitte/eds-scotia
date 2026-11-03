@@ -297,7 +297,7 @@
 /* offer box */
 .cards.product.compare .cards-card-body p:has(> strong:first-child + br) {
   margin: 0 0 24px;
-  padding: 12px;
+  padding: 12px 12px 14px;
   background: #f5efe8;
 }
 
@@ -352,7 +352,7 @@
 
 .cards.product.compare .cards-card-body p:not(.button-wrapper) + .button-wrapper {
   margin-top: auto;
-  padding-top: 36px;
+  padding-top: 16px;
 }
 
 .cards.product.compare .cards-card-body .button-wrapper + .button-wrapper {
@@ -374,6 +374,17 @@
 .cards.product.compare .cards-card-body > p:last-child:not(.button-wrapper) {
   margin: 18px 0 0;
   text-align: center;
+}
+
+/* "See if it's right for you": prod link box 28px (25px below 992px) */
+.cards.product.compare .cards-card-image + .cards-card-body > p:last-child:not(.button-wrapper) {
+  padding-bottom: 7px;
+}
+
+@media (width < 992px) {
+  .cards.product.compare .cards-card-image + .cards-card-body > p:last-child:not(.button-wrapper) {
+    padding-bottom: 4px;
+  }
 }
 
 .cards.product.compare .cards-card-body > p:last-child:not(.button-wrapper) a:any-link {
@@ -417,6 +428,15 @@
 
 .cards.product.compare .cards-card-body p:has(> strong:last-child a.l1-tooltip-link) {
   align-items: center;
+  gap: 4px;
+}
+
+.cards.product.compare .cards-card-body p > strong:last-child a.l1-tooltip-link:any-link {
+  margin-left: 0;
+}
+
+.cards.product.compare .cards-card-body p:has(> strong:last-child a.l1-tooltip-link) strong {
+  white-space: nowrap;
 }
 
 @media (width < 992px) {
@@ -460,4 +480,20 @@
   color: #005e80;
   text-underline-position: under;
   text-underline-offset: 2px;
+}
+
+/* prod 992-1199px: rate rows and notes are 14px apart (8px at the other widths) */
+@media (width >= 992px) and (width < 1200px) {
+  .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)),
+  .cards.product.compare .cards-card-body p:has(> em:only-child) {
+    margin-bottom: 14px;
+  }
+
+  .cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)):has(+ p > em:only-child) {
+    margin-bottom: 8px;
+  }
+
+  .cards.product.compare .cards-card-body p:not(.button-wrapper) + .button-wrapper {
+    padding-top: 10px;
+  }
 }

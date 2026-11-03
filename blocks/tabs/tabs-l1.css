@@ -165,3 +165,29 @@
     line-height: 38.5px;
   }
 }
+
+/* prod 992-1199px pills: 26px under the collapsed row and under "Show more" */
+@media (width >= 992px) and (width < 1200px) {
+  .tabs.block.pills .tabs-list {
+    margin-bottom: 26px;
+  }
+
+  .tabs.block.pills .tabs-pills-toggle {
+    margin-bottom: 26px;
+  }
+}
+
+/* mobile pills: 42px tall, 16px side padding (prod cmp-tabs__tab) */
+@media (width < 768px) {
+  .tabs.block.pills .tabs-list {
+    row-gap: 12px;
+  }
+
+  .tabs.block.pills .tabs-tab {
+    padding: 8px 16px;
+  }
+
+  .tabs.block.pills .tabs-list.collapsed {
+    max-height: 42px;
+  }
+}
