@@ -83,6 +83,13 @@
   }
 }
 
+/* 1024-ish (900-1109): prod's 3-col interest uses a ~24px gap, not the wide 69px desktop gap */
+@media (width >= 900px) and (width < 1110px) {
+  .cards.interest > ul {
+    gap: 24px;
+  }
+}
+
 /* tablet: prod shows ONE centred narrow column (~424px, tile x172), not a full-width tile */
 @media (width >= 600px) and (width < 900px) {
   .cards.interest > ul {
@@ -210,14 +217,6 @@ main .section:has(.tabs) .cards.featured {
   color: #4a4a4a;
 }
 
-/* mobile: prod wraps the Featured title to multiple lines at lh 24 (not the tight 1.1 used on
-   wider viewports), which lifts natural card heights toward prod's 426-513 range */
-@media (width < 600px) {
-  .cards.featured .cards-card-body h3 {
-    line-height: 1.5;
-    text-wrap: pretty;
-  }
-}
 
 @media (width >= 600px) {
   .cards.featured > ul {
@@ -268,10 +267,13 @@ main .section:has(.tabs) .cards.featured {
 }
 
 .cards.featured .cards-card-body h3 {
-  font-family: var(--body-font-family);
+  /* prod renders the Featured title in the HEADLINE font (measures ~287px for the Invest title
+     vs ~269px in the body font), which wraps to 2 lines at every viewport; using the body font
+     kept it on 1 line and pushed the description/card height off. */
+  font-family: var(--heading-font-family);
   font-size: 16px;
-  font-weight: 500;
-  line-height: 1.1; /* prod 17.6px */
+  font-weight: 400;
+  line-height: 1.5; /* prod 24px at desktop AND mobile */
   letter-spacing: normal;
   color: #2b2b2b;
   margin: 0 0 12px; /* prod: no top margin, 12px below */
