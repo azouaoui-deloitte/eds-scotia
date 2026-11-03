@@ -316,7 +316,7 @@ main:has(> .section.l1) {
   }
 
   .section.lead-center .default-content-wrapper > h2 + h3 {
-    margin: 10px 0 30px;
+    margin: 45px 0 37px;
     font-size: 36px;
     line-height: 39.6px;
     letter-spacing: -1px;

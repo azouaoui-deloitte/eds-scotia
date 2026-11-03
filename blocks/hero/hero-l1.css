@@ -102,9 +102,23 @@ main .hero.block.split .hero-cta a.button {
   font-weight: 800;
 }
 
+main .hero.block.split .hero-cta a.button:hover,
+main .hero.block.split .hero-cta a.button:focus-visible {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+
 main .hero.block.split:is(.maroon, .aura) .hero-cta a.button {
   border-color: #fff;
   background: #fff;
+  color: #333;
+}
+
+main .hero.block.split:is(.maroon, .aura) .hero-cta a.button:hover,
+main .hero.block.split:is(.maroon, .aura) .hero-cta a.button:focus-visible {
+  border-color: #fff;
+  background: #f2f2f2;
   color: #333;
 }
 
