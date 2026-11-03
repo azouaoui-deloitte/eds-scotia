@@ -116,6 +116,10 @@
             {
               "name": "Compare layout (product)",
               "value": "compare"
+            },
+            {
+              "name": "3 columns from tablet",
+              "value": "cols-3"
             }
           ]
         }

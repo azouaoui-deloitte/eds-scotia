@@ -567,3 +567,10 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
     margin-bottom: 37px;
   }
 }
+
+/* cols-3: three columns from 768px (prod tablet 3-up grids) */
+@media (width >= 768px) {
+  main .cards:is(.info, .article, .plain).cols-3 > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
