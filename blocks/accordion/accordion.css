@@ -138,3 +138,10 @@
 .accordion.footnotes.bold .accordion-item-label::after {
   border-color: #0d0d0d;
 }
+
+/* two-line FAQ rows on mobile: prod 114px rows (30 / 29px around the title) */
+@media (width < 768px) {
+  .section:not(.split) .accordion:not(.compact, .footnotes) .accordion-item-label {
+    padding-bottom: 29px;
+  }
+}

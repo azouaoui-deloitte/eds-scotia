@@ -304,21 +304,101 @@
   }
 }
 
-/* product cards on mobile: 30px padding (prod card-content); button row as tall as its button */
-@media (width < 768px) {
-  .product-cards.grid > ul > li {
-    padding: 30px;
-  }
+/* grid: the button row is as tall as its button */
+.product-cards.grid .product-cards-actions p.button-wrapper {
+  display: flex;
+  justify-content: center;
+}
 
-  .product-cards.grid .product-cards-actions p.button-wrapper {
-    display: flex;
-    justify-content: center;
+/* grid, below 1200px: a card without an offer badge keeps prod's authored spacers (166px) above its buttons */
+@media (width < 1200px) {
+  .product-cards.grid .product-cards-body:not(:has(.product-cards-badge)) .product-cards-actions {
+    margin-top: 166px;
   }
 }
 
-/* grid, below 992px: an offer-less card keeps prod's authored spacers (166px) above its buttons */
-@media (width < 992px) {
-  .product-cards.grid .product-cards-body:not(:has(.product-cards-offer)) .product-cards-actions {
-    margin-top: 166px;
+/* grid on mobile: the two "Explore all" buttons side by side (143px, wrapping), 60px below */
+@media (width < 768px) {
+  main .product-cards-wrapper:has(.product-cards.grid) + .default-content-wrapper:not(:has(> :not(.button-wrapper))) {
+    flex-wrap: nowrap;
+    gap: 30px;
+    margin-top: 60px;
+  }
+
+  main .product-cards-wrapper:has(.product-cards.grid) + .default-content-wrapper p.button-wrapper {
+    display: flex;
+    flex: 1 1 0;
+  }
+
+  main .product-cards-wrapper:has(.product-cards.grid) + .default-content-wrapper a.button:any-link {
+    width: 100%;
+  }
+}
+
+/* "Explore all" row from 768px: 60px below the cards, as tall as its buttons */
+@media (width >= 768px) {
+  main .product-cards-wrapper:has(.product-cards.grid) + .default-content-wrapper:not(:has(> :not(.button-wrapper))) {
+    margin-top: 60px;
+  }
+
+  main .product-cards-wrapper:has(.product-cards.grid) + .default-content-wrapper p.button-wrapper {
+    display: flex;
+  }
+}
+
+/* grid at 768-1199px: buttons follow the copy (no bottom pinning); 36px top inset including the
+   1px border */
+@media (width >= 768px) and (width < 1200px) {
+  .product-cards.grid > ul > li {
+    padding-top: 35px;
+  }
+
+  .product-cards.grid .product-cards-body:not(:has(.product-cards-price)):has(.product-cards-badge) .product-cards-actions {
+    margin-top: 0;
+  }
+}
+
+/* grid at 992-1199px: 36px under the copy; the last card ends with an authored 30px spacer */
+@media (width >= 992px) and (width < 1200px) {
+  .product-cards.grid > ul > li {
+    padding-bottom: 36px;
+  }
+
+  .product-cards.grid > ul > li:last-child {
+    padding-bottom: 62px;
+  }
+}
+
+/* grid at 768-991px: 36px under the copy; the full-width last card keeps a one-line title */
+@media (width >= 768px) and (width < 992px) {
+  .product-cards.grid > ul > li:not(:last-child) {
+    padding-bottom: 36px;
+  }
+
+  .product-cards.grid > ul > li:last-child {
+    padding-bottom: 65px;
+  }
+
+  .product-cards.grid > ul > li:last-child:nth-child(odd) .product-cards-head :is(h2, h3, h4) {
+    min-height: 0;
+  }
+}
+
+/* stacked grid on mobile: 30px insets (prod card-content) including the 1px border; the last card
+   ends with an authored 30px spacer */
+@media (width < 768px) {
+  .product-cards.grid > ul > li {
+    padding: 29px;
+  }
+
+  .product-cards.grid > ul > li:last-child {
+    padding-bottom: 59px;
+  }
+}
+
+/* grid from 1200px: the cards end 64px under the copy (the GIC card's trailing authored spacer) */
+@media (width >= 1200px) {
+  .product-cards.grid > ul > li {
+    padding-bottom: 64px;
   }
 }

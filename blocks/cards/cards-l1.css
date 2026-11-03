@@ -1041,11 +1041,61 @@ main .cards.product.compare .cards-card-body p > em:only-child a.l1-tooltip-link
   margin: 0;
 }
 
-/* Investing "Ways to invest" on mobile: cards 2-3 keep prod's trailing empty list line (24px)
-   above their button */
+/* Ways-to-invest cards: prod's insets (30px mobile, 36px from 768px) include the 1px border */
 @media (width < 768px) {
+  main .cards.info.tablet-2 .cards-card-image {
+    padding-top: 29px;
+  }
+
+  main .cards.info.tablet-2 .cards-card-body {
+    padding-bottom: 29px;
+  }
+}
+
+@media (width >= 768px) and (width < 1200px) {
+  main .cards.info.tablet-2 .cards-card-image {
+    padding: 35px 35px 0;
+  }
+
+  main .cards.info.tablet-2 .cards-card-body {
+    padding-right: 35px;
+    padding-bottom: 35px;
+    padding-left: 35px;
+  }
+}
+
+/* Investing "Ways to invest": cards 2-3 keep prod's trailing empty list line (24px) above their
+   button below 1200px */
+@media (width < 1200px) {
   main .cards.info.tablet-2 > ul > li:not(:first-child) .cards-card-body > ul + p.button-wrapper:last-child {
     padding-top: 24px;
+  }
+}
+
+main .cards-wrapper:has(> .cards.info.tablet-2) {
+  margin-bottom: 15px;
+}
+
+/* 992-1199px: buttons follow the copy; cards 1-2 titles end with an authored empty line */
+@media (width >= 992px) and (width < 1200px) {
+  main .cards.info.tablet-2 .cards-card-body > p.button-wrapper:last-child {
+    margin-top: 0;
+  }
+
+  main .cards.info.tablet-2 > ul > li:not(:last-child) .cards-card-body h2 {
+    min-height: 99px;
+  }
+}
+
+/* tablet-2 at 768-991px: buttons follow the copy (no bottom pinning); the full-width last card keeps
+   one-line titles */
+@media (width >= 768px) and (width < 992px) {
+  main .cards.info.tablet-2 .cards-card-body > p.button-wrapper:last-child {
+    margin-top: 0;
+  }
+
+  main .cards.info.tablet-2 > ul > li:last-child:nth-child(odd) .cards-card-body h2 {
+    min-height: 0;
   }
 }
 

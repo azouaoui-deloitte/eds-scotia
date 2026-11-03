@@ -652,14 +652,105 @@ main:has(> .section.l1) {
     margin: 0 0 16px;
   }
 
+  /* heading-link on mobile (prod): heading, intro, then the link, stacked */
+  @media (width < 768px) {
+    .section.heading-link .default-content-wrapper {
+      grid-template-columns: minmax(0, 1fr);
+    }
+
+    .section.heading-link .default-content-wrapper > h2 {
+      margin-bottom: 29px;
+    }
+
+    .section.heading-link .default-content-wrapper > h2 + p {
+      grid-row: 3;
+      grid-column: 1;
+      margin-top: 18px;
+    }
+
+    .section.heading-link .default-content-wrapper > p + p {
+      grid-row: 2;
+      margin: 0;
+    }
+
+    .section.heading-link .cards.scroll.block .l1-pager {
+      margin-top: 25px;
+    }
+  }
+
+  @media (width >= 768px) and (width < 992px) {
+    .section.heading-link .cards.scroll.block .l1-pager {
+      margin-top: 24px;
+    }
+  }
+
+  /* calculator cards: icon 12px above the title below 1200px; at 992-1199px the intro wraps at 690px
+     (prod col-md-8) with the pager 40px below it (24px plus its 16px margin) */
+  @media (width < 1200px) {
+    .section.heading-link .cards.info.scroll .cards-card-body {
+      padding-top: 12px;
+    }
+  }
+
+  @media (width >= 992px) and (width < 1200px) {
+    .section.heading-link .default-content-wrapper > p:not(:has(a)) {
+      max-width: 690px;
+    }
+
+    .section.heading-link .cards.scroll.block .l1-pager {
+      margin-top: 24px;
+    }
+  }
+
+  /* Investing: an authored empty line closes the Resources column on mobile */
+  @media (width < 768px) {
+    &:has(.hero.split.title-s) .columns.links:not(.scroll) > div > div:last-child {
+      padding-bottom: 40px;
+    }
+  }
+
+  /* prod dark brand3 band (Investing "We can help you navigate market volatility"): bold title,
+     18px copy 10px below (15px on mobile), CTA 26px below; 70px padding below 992px, none at 992-1199px */
   .section.dark .default-content-wrapper > h2 {
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    font-family: var(--bold-font-family);
+    font-weight: 400;
   }
 
   .section.dark .default-content-wrapper > h2 + p {
-    margin: 0 0 28px;
-    font-size: 16px;
-    line-height: 24px;
+    margin: 0 0 26px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  @media (width < 992px) {
+    .section.dark {
+      padding: 70px 0;
+    }
+  }
+
+  @media (width >= 992px) and (width < 1200px) {
+    .section.dark {
+      padding: 1px 0 0;
+    }
+
+    .section.dark + .section {
+      padding-top: 50px;
+    }
+  }
+
+  @media (width < 768px) {
+    .section.dark {
+      padding-bottom: 63px;
+    }
+
+    .section.dark > div {
+      padding: 0 20px;
+    }
+
+    .section.dark .default-content-wrapper > h2 {
+      margin-bottom: 15px;
+    }
   }
 
   /* CDIC band (reused "legal" style) */
@@ -722,6 +813,19 @@ main:has(> .section.l1) {
     font-size: 16px;
     line-height: 24px;
     text-decoration: none;
+  }
+
+  /* prod: below 992px the hero copy ends 100px above the hero's bottom when the sub-nav overlaps it */
+  @media (width < 768px) {
+    > .section:has(.hero):has(+ .section.subnav:not(.subnav-wide)) .hero-content {
+      padding-bottom: 100px;
+    }
+  }
+
+  @media (width >= 768px) and (width < 992px) {
+    > .section:has(.hero):has(+ .section.subnav:not(.subnav-wide)) .hero-content:not(:has(.hero-content-inner > h1:only-child)) {
+      padding-bottom: 100px;
+    }
   }
 
   /* below 992px the bar runs full width (items centred; scrolling from the left on mobile) */
@@ -1042,9 +1146,7 @@ main:has(> .section.l1) {
       padding-bottom: 96px;
     }
 
-    > .section:has(.hero):has(+ .section.subnav:not(.subnav-wide)) .hero-content {
-      padding-bottom: 100px;
-    }
+
 
     > .section > div {
       max-width: none;

@@ -329,6 +329,11 @@ main .hero.block.split.title-xs :is(h1, h2) {
     margin-top: 46px;
   }
 
+  /* Investing: the CTA follows the lead (with its disclaimer) 10px lower */
+  main .hero.block.split.title-s .hero-content p.hero-lead + p.hero-cta {
+    margin-top: 10px;
+  }
+
   main .hero.block.split .hero-content-inner > h2 {
     font-size: 36px;
     line-height: 39.6px;
@@ -364,5 +369,35 @@ main .hero.block.split.title-xs :is(h1, h2) {
 
   main .hero.block.split.aura .hero-content-inner {
     max-width: 559px;
+  }
+}
+
+/* Investing at 992-1199px: prod keeps the 30vw band and starts the copy at its top edge
+   (10px under the title, CTA 28px under the lead) */
+@media (width >= 992px) and (width < 1200px) {
+  main .hero.block.split.ratio.title-s .hero-content {
+    justify-content: flex-start;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  main .hero.block.split.ratio.title-s .hero-content-inner {
+    margin-top: -2px;
+    padding-bottom: 0;
+  }
+
+  main .hero.block.split.ratio.title-s h1 {
+    margin-bottom: 10px;
+  }
+
+  main .hero.block.split.ratio.title-s .hero-content p.hero-cta {
+    margin-top: 28px;
+  }
+}
+
+@media (width >= 1200px) {
+  main .hero.block.split.ratio.title-s .hero-content {
+    padding-top: 57px;
+    padding-bottom: 75px;
   }
 }
