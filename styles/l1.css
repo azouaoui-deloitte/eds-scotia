@@ -609,6 +609,23 @@ main:has(> .section.l1) {
   }
 
   @media (width < 768px) {
+    .section.center:has(.cards.article) .default-content-wrapper > h2 {
+      margin-bottom: 33px;
+    }
+
+    .section.subnav.subnav-wide ul {
+      justify-content: flex-start;
+      max-width: none;
+      padding: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .section.subnav.subnav-wide a:any-link {
+      padding: 10px 36px 9px 11px;
+      white-space: nowrap;
+    }
+
     > .section > div {
       max-width: none;
       padding: 0 30px;
