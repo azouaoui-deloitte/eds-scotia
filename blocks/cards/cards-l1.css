@@ -171,7 +171,11 @@ main .cards.info .cards-card-body h2 + p {
 }
 
 main .cards.info.block .cards-card-image + .cards-card-body > h3:first-child {
-  margin-bottom: 14px;
+  margin-bottom: 7px;
+}
+
+main .section.grey .cards.info.cols-2:has(ul) {
+  margin-top: 8px;
 }
 
 main .section.beige .cards.info .cards-card-image + .cards-card-body > h3:first-child {
@@ -192,7 +196,15 @@ main .cards.article .cards-card-image img {
 }
 
 main .cards.article.block .cards-card-body > h4:first-child {
-  margin-bottom: 23px;
+  margin-bottom: 11px;
+}
+
+main .cards.featured.article.block .cards-card-body > h4:first-child {
+  margin-bottom: 0;
+}
+
+main .cards.article.cols-2 {
+  margin-top: 12px;
 }
 
 main .cards.plain.block .cards-card-body > h4:first-child {
