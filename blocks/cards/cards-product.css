@@ -28,6 +28,10 @@
   overflow: visible;
 }
 
+.cards.product > ul > li > .cards-card-body:not(:has(*)) {
+  display: none;
+}
+
 /* category pill (first text-only cell) */
 .cards.product > ul > li > .cards-card-body:first-child {
   position: absolute;
@@ -220,4 +224,160 @@
   font-size: 14px;
   line-height: 20px;
   cursor: pointer;
+}
+
+/* compare: credit-cards page "Featured credit cards" tiles (card art left, label + title, offer
+   box, rate rows with notes, Apply now / Compare / See if it's right for you) */
+.cards.product.compare > ul {
+  gap: 32px;
+}
+
+.cards.product.compare > ul > li {
+  margin-top: 0;
+  padding: 26px 18px 27px;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: none;
+  color: #0d0d0d;
+}
+
+.cards.product.compare .cards-card-image {
+  order: 0;
+  justify-content: flex-start;
+  height: auto;
+  padding: 0;
+}
+
+.cards.product.compare .cards-card-image img {
+  width: 128px;
+  margin-bottom: 23px;
+}
+
+.cards.product.compare > ul > li > .cards-card-body:first-child {
+  position: static;
+  order: 1;
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: #707070;
+  text-transform: none;
+}
+
+.cards.product.compare .cards-card-image + .cards-card-body {
+  display: flex;
+  order: 2;
+  flex-direction: column;
+  padding: 0;
+  color: #0d0d0d;
+}
+
+.cards.product.compare .cards-card-body h3 {
+  margin: 0 0 24px;
+  color: #0d0d0d;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;
+  text-align: left;
+}
+
+.cards.product.compare .cards-card-body p {
+  margin: 0 0 8px;
+  color: #0d0d0d;
+}
+
+/* offer box */
+.cards.product.compare .cards-card-body p:has(> strong:first-child + br) {
+  margin: 0 0 24px;
+  padding: 12px;
+  background: #f5efe8;
+}
+
+.cards.product.compare .cards-card-body p > strong:first-child:has(+ br) {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.cards.product.compare .cards-card-body p:has(> strong:first-child + br) a:any-link {
+  color: #525252;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.cards.product.compare .cards-card-body p:has(> strong:first-child + br) a:any-link::after {
+  content: " \2192";
+  display: inline;
+  width: auto;
+  height: auto;
+  margin: 0;
+  border: 0;
+  transform: none;
+}
+
+/* rate rows: label left, bold value right; notes in a light box */
+.cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cards.product.compare .cards-card-body p:has(> strong:last-child):not(:has(br)) strong {
+  text-align: right;
+}
+
+.cards.product.compare .cards-card-body p:has(> em:only-child) {
+  margin: -4px 0 8px;
+  padding: 8px 12px;
+  background: #f8f8f5;
+}
+
+.cards.product.compare .cards-card-body p > em:only-child {
+  font-style: normal;
+}
+
+/* actions */
+.cards.product.compare .cards-card-body .button-wrapper {
+  margin: 0;
+}
+
+.cards.product.compare .cards-card-body .button-wrapper:first-of-type {
+  margin-top: auto;
+  padding-top: 44px;
+}
+
+.cards.product.compare .cards-card-body .button-wrapper + .button-wrapper {
+  margin-top: 16px;
+}
+
+.cards.product.compare a.button:any-link {
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.cards.product.compare a.button.secondary:any-link {
+  padding: 8px 16px 9px;
+  border-color: #949494;
+}
+
+.cards.product.compare .cards-card-body > p:last-child:not(.button-wrapper) {
+  margin: 18px 0 0;
+  text-align: center;
+}
+
+.cards.product.compare .cards-card-body > p:last-child:not(.button-wrapper) a:any-link {
+  color: #0d0d0d;
+  font-family: var(--body-font-family);
+  border-bottom: 1px dashed #0d0d0d;
+}
+
+.cards.product.compare .cards-card-body > p:last-child:not(.button-wrapper) a:any-link::after {
+  content: none;
+}
+
+.cards.product.compare + .cards-product-more,
+.cards.product.compare .cards-product-more {
+  margin-top: 40px;
 }

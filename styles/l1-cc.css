@@ -1,0 +1,146 @@
+/* L1 credit-cards page sections (newer prod design: 1320 container, sand bands, side FAQ). */
+/* stylelint-disable no-descending-specificity */
+main:has(> .section.l1) {
+  .section.cc-top {
+    padding-top: 0;
+  }
+
+  .section.cc-top .default-content-wrapper > p:first-child {
+    margin: 0;
+    padding: 8px 0 7px;
+    font-size: 14px;
+    line-height: 21px;
+  }
+
+  .section.cc-top .default-content-wrapper > h1 {
+    margin: 24px 0;
+    font-size: 36px;
+    line-height: 40px;
+    letter-spacing: normal;
+  }
+
+  .section.cc-top .default-content-wrapper > h1 + p {
+    margin: 0 0 42px;
+    color: #525252;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  .section.cc-top .default-content-wrapper > h2,
+  .section.wide .default-content-wrapper > h2 {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: normal;
+    color: #3d3d3d;
+  }
+
+  .section.sand {
+    padding: 40px 0 84px;
+    background: #f1efea;
+  }
+
+  .section.sand .default-content-wrapper > h2 {
+    margin-bottom: 0;
+  }
+
+  .section.sand .default-content-wrapper > h2 + p {
+    margin: 0 0 22px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  .section.sand-light .columns.links h2 {
+    font-size: 32px;
+    line-height: 40px;
+  }
+
+  .section.sand-light .columns.links h4 {
+    margin-bottom: 24px;
+  }
+
+  .section.sand-light {
+    padding: 60px 0;
+    background: #faf9f7;
+  }
+
+  .section.wide .cards.links > ul {
+    gap: 24px;
+  }
+
+  .section.wide:has(.cards.links) {
+    padding-bottom: 62px;
+  }
+
+  .section.wide:has(.cards.links) .default-content-wrapper > h2 {
+    margin-bottom: 60px;
+  }
+
+  .section.cc-top .default-content-wrapper > h2 {
+    margin-bottom: 36px;
+  }
+
+  .section.cc-top .cards.promo > ul {
+    gap: 24px;
+    padding: 4px;
+  }
+
+  .section.cc-top .cards.promo > ul > li {
+    min-height: 412px;
+    box-sizing: border-box;
+    padding: 32px;
+  }
+
+  .section.cc-top .cards.promo .cards-card-body > p:first-child strong {
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: #e2a511;
+    color: #000;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .section.cc-top .cards.promo > ul > li:nth-child(2n) .cards-card-body > p:first-child strong {
+    background: #b2d8b6;
+    color: #000;
+  }
+
+  .section.faq-side.split > div {
+    padding: 0;
+  }
+
+  .section.wide .cards.links .cards-card-body a:any-link {
+    min-height: 70px;
+    box-sizing: border-box;
+    padding: 23px 24px;
+    color: #525252;
+    font-size: 16px;
+  }
+
+  .section.faq-side .accordion .accordion-item {
+    border-top: 0;
+    border-bottom: 1px solid #e2e2e2;
+  }
+
+  .section.faq-side .accordion .accordion-item:last-child {
+    border-bottom: 0;
+  }
+
+  .section.faq-side .accordion .accordion-item-label {
+    padding: 24px 40px 24px 0;
+    color: #3d3d3d;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  @media (width >= 992px) {
+    .section.sand-light .columns.links > div {
+      display: grid;
+      grid-template-columns: 1fr 304px 304px;
+      gap: 32px;
+    }
+
+    .section.faq-side.split {
+      grid-template-columns: 440px 850px;
+    }
+  }
+}
