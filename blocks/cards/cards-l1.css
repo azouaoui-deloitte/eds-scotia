@@ -416,7 +416,7 @@ main .cards.promo > ul > li:nth-child(2n) a.button:any-link {
 }
 
 @media (width < 768px) {
-  main .cards:is(.article, .info):not(.scroll) > ul {
+  main .cards.info:not(.scroll) > ul {
     margin: 0 -6px;
   }
 }
@@ -550,7 +550,7 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
 
 /* article.arrow below 992px: natural height, prod body rhythm (32 / 30 padding, 64px to the arrow) */
 @media (width < 768px) {
-  main .cards.article.arrow .cards-card-body {
+  main .cards.article .cards-card-body {
     padding: 32px 30px 31px;
   }
 }
@@ -558,5 +558,12 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
 @media (width < 992px) {
   main .cards.article.arrow .cards-card-body > p:last-child:has(> a:only-child) {
     padding-top: 64px;
+  }
+}
+
+/* prod tab-pane card carousels sit 15px lower under their pager than product cards */
+@media (width >= 768px) {
+  main .cards.scroll:not(.promo) .l1-pager {
+    margin-bottom: 37px;
   }
 }
