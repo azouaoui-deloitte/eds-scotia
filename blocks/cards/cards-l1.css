@@ -154,7 +154,7 @@ main .cards:is(.info, .article) .cards-card-body > p:last-child > a:only-child:n
 }
 
 main .cards:is(.info, .article) .cards-card-body .button-wrapper {
-  margin-top: auto;
+  margin-top: 0;
   padding-top: 16px;
   text-align: center;
 }
@@ -427,12 +427,13 @@ main .cards.promo > ul > li:nth-child(2n) a.button:any-link {
 
 @media (width >= 768px) and (width < 1200px) {
   main .cards.scroll > ul {
+    gap: 22px;
     padding-left: 6px;
     scroll-padding-left: 6px;
   }
 
   main .cards.scroll > ul > li {
-    flex-basis: 342px;
+    flex-basis: 326px;
   }
 }
 
@@ -443,7 +444,7 @@ main .cards.promo > ul > li:nth-child(2n) a.button:any-link {
   }
 
   main .cards.scroll > ul > li {
-    flex-basis: 470px;
+    flex-basis: 454px;
   }
 }
 

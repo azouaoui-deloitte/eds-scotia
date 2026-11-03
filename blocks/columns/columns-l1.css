@@ -192,6 +192,15 @@ main .columns.banner > div > div:first-child {
 }
 
 @media (width >= 768px) {
+  main .columns.banner > div {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  main .columns.banner > div > div:last-child {
+    flex: 0 0 auto;
+  }
+
   main .columns.links > div {
     flex-direction: row;
   }

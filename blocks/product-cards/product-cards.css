@@ -231,12 +231,13 @@
 
 @media (width >= 768px) {
   .product-cards > ul {
+    gap: 22px;
     padding-left: 6px;
     scroll-padding-left: 6px;
   }
 
   .product-cards > ul > li {
-    flex-basis: 342px;
+    flex-basis: 326px;
   }
 }
 
@@ -247,7 +248,7 @@
   }
 
   .product-cards > ul > li {
-    flex-basis: 470px;
+    flex-basis: 454px;
   }
 }
 

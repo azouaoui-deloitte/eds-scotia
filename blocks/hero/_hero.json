@@ -98,6 +98,10 @@
             {
               "name": "Title 36px",
               "value": "title-xs"
+            },
+            {
+              "name": "Centred on tablet",
+              "value": "center-tablet"
             }
           ]
         }

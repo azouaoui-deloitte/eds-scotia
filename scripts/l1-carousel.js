@@ -1,7 +1,8 @@
 /**
  * Swipe carousel with a "‹ 1 of N ›" pager for a block's <ul> of cards (L1 pages: product cards,
  * cards.scroll). The list scrolls horizontally with scroll-snap; the pager is hidden by CSS on
- * desktop where the list becomes a grid. Pages = ceil(visible items / items per view).
+ * desktop where the list becomes a grid. Like prod, the pager steps one card at a time:
+ * positions = visible items - items per view + 1.
  * @param {Element} block the block element (the pager is prepended to it)
  * @param {Element} ul the scrolling list
  */
@@ -17,8 +18,8 @@ export default function buildPager(block, ul) {
     return b ? b.offsetLeft - a.offsetLeft : a.offsetWidth;
   };
   const perView = () => Math.max(1, Math.floor((ul.clientWidth + 8) / pitch()));
-  const pages = () => Math.max(1, Math.ceil(visible().length / perView()));
-  const current = () => Math.min(pages() - 1, Math.round(ul.scrollLeft / (pitch() * perView())));
+  const pages = () => Math.max(1, visible().length - perView() + 1);
+  const current = () => Math.min(pages() - 1, Math.round(ul.scrollLeft / pitch()));
   const update = () => {
     const n = pages();
     const c = current();
@@ -26,7 +27,7 @@ export default function buildPager(block, ul) {
     prev.disabled = c === 0;
     next.disabled = c >= n - 1;
   };
-  const go = (d) => ul.scrollTo({ left: (current() + d) * pitch() * perView(), behavior: 'smooth' });
+  const go = (d) => ul.scrollTo({ left: (current() + d) * pitch(), behavior: 'smooth' });
   prev.addEventListener('click', () => go(-1));
   next.addEventListener('click', () => go(1));
   ul.addEventListener('scroll', () => window.requestAnimationFrame(update), { passive: true });
