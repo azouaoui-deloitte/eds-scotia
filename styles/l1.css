@@ -406,6 +406,29 @@ main:has(> .section.l1) {
     padding-top: 0;
   }
 
+  /* Loans at 992-1199px: prod shows the swipe lists as grids (2 columns for cols-2, one row
+     otherwise) and keeps the hidden pager's slot above them */
+  @media (width >= 992px) and (width < 1200px) {
+    &:has(.cards.clickable) .cards.scroll:not(.promo) > ul {
+      display: grid;
+      grid-auto-columns: minmax(0, 1fr);
+      grid-auto-flow: column;
+      gap: 30px 29px;
+      margin: 0;
+      padding: 0 0 4px;
+      overflow: visible;
+    }
+
+    &:has(.cards.clickable) .cards.scroll.cols-2:not(.promo) > ul {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-flow: row;
+    }
+
+    &:has(.cards.clickable) .cards.scroll:not(.promo) .l1-pager {
+      visibility: hidden;
+    }
+  }
+
   /* Bank accounts mobile: the next heading 84px under the account cards, 90px under the savings
      cards; prod's 30px spacer between the two link columns; the CDIC band 16px under them */
   @media (width < 768px) {
@@ -1549,6 +1572,10 @@ main:has(> .section.l1) {
       display: block;
     }
 
+    .section.wide.faq-side.split > div {
+      width: auto;
+    }
+
     .section.wide.faq-side .default-content-wrapper > h2 {
       margin-bottom: 24px;
     }
@@ -1959,6 +1986,60 @@ main a.l1-tooltip-link:any-link {
 
 .l1-modal:has(.product-cards) {
   width: min(1040px, calc(100vw - 32px));
+}
+
+/* info-card modal (Investing "Let's have a conversation"): centred title, two icon cards, centred
+   closing line */
+.l1-modal:has(.cards.info) {
+  width: min(1040px, calc(100vw - 32px));
+}
+
+.l1-modal:has(.cards.info) .l1-modal-title {
+  flex: 1 1 auto;
+  padding-left: 48px;
+  text-align: center;
+}
+
+.l1-modal .cards.info > ul {
+  display: grid;
+  gap: 30px;
+  margin: 12px 0 30px;
+  padding: 0;
+  list-style: none;
+}
+
+.l1-modal .cards.info > ul > li {
+  padding: 0;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 11%);
+}
+
+.l1-modal .cards.info .cards-card-image img {
+  display: block;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 12px;
+}
+
+.l1-modal .cards.info a:any-link:not(.button) {
+  border: 0;
+  color: #007eab;
+  font-family: var(--bold-font-family);
+}
+
+.l1-modal .cards.info a:any-link:not(.button)::after {
+  content: " \203A";
+}
+
+.l1-modal-body:has(.cards.info) .default-content-wrapper > p {
+  text-align: center;
+}
+
+@media (width >= 768px) {
+  .l1-modal .cards.info > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (width < 768px) {

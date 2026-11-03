@@ -261,7 +261,8 @@ main:has(> .section.l1) {
     }
 
     .section.faq-side.split {
-      grid-template-columns: 440px 850px;
+      grid-template-columns: minmax(0, 440fr) minmax(0, 850fr);
+      column-gap: 32px;
     }
   }
 }

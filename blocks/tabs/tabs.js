@@ -14,7 +14,16 @@ export default function decorate(block) {
   const section = block.closest('.section');
   // sibling card grids, in document (tab) order
   const cardBlocks = section ? [...section.querySelectorAll('.cards.featured, .cards.product')] : [];
-  const showCards = (idx) => cardBlocks.forEach((cb, j) => { cb.style.display = j === idx ? '' : 'none'; });
+  // panels: the button row authored right after a tab's card grid belongs to that tab
+  const ctaOf = (cb) => {
+    const next = cb.closest('.cards-wrapper')?.nextElementSibling;
+    return block.classList.contains('panels') && next?.matches('.default-content-wrapper') ? next : null;
+  };
+  const showCards = (idx) => cardBlocks.forEach((cb, j) => {
+    cb.style.display = j === idx ? '' : 'none';
+    const cta = ctaOf(cb);
+    if (cta) cta.style.display = j === idx ? '' : 'none';
+  });
 
   const tablist = document.createElement('div');
   tablist.className = 'tabs-list';
