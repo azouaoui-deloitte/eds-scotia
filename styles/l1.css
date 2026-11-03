@@ -406,6 +406,26 @@ main:has(> .section.l1) {
     padding-top: 0;
   }
 
+  /* Bank accounts mobile: the next heading 84px under the account cards, 90px under the savings
+     cards; prod's 30px spacer between the two link columns; the CDIC band 16px under them */
+  @media (width < 768px) {
+    .section:has(> .product-cards-wrapper .product-cards:not(.grid)) {
+      padding-bottom: 56px;
+    }
+
+    &:has(.product-cards:not(.grid)) .section:has(> .cards-wrapper .cards.info.cols-2) {
+      padding-bottom: 60px;
+    }
+
+    &:has(.product-cards:not(.grid)) .columns.links:not(.scroll, .bullets) > div {
+      gap: 30px;
+    }
+
+    &:has(.product-cards:not(.grid)) .section.legal {
+      padding-top: 16px;
+    }
+  }
+
   /* Loans mobile: the grey band starts 30px under the banner button, its heading 45px in, its end
      74px under the cards (33px card bottom inset); "How borrowing works" 45px into the next band;
      the Advice+ band starts 64px under the Ways-to-apply cards, 45px / 47px padding; calculators

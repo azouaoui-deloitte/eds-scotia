@@ -446,3 +446,10 @@ main .hero.block.split.title-xs :is(h1, h2) {
     margin-top: 36px;
   }
 }
+
+/* Bank accounts on mobile: prod's hero copy ends with a 26px spacer */
+@media (width < 768px) {
+  main .hero.block.split.maroon:not(.no-image-tablet, .tablet-natural) .hero-content {
+    padding-bottom: 96px;
+  }
+}
