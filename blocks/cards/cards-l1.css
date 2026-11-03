@@ -1049,7 +1049,9 @@ main .cards.product.compare .cards-card-body p > em:only-child a.l1-tooltip-link
   }
 }
 
-/* Mortgages "Ready to apply": prod card copy ends with a trailing <br> line (24px) */
-main:has(.columns.links.scroll) .section.grey .cards.info.cols-3 .cards-card-body > h4 + p:not(:last-child) {
-  padding-bottom: 24px;
+/* Mortgages "Ready to apply" on tablet: prod card copy ends with a trailing <br> line (24px) */
+@media (width >= 768px) and (width < 992px) {
+  main:has(.columns.links.scroll) .section.grey .cards.info.cols-3 .cards-card-body > h4 + p:not(:last-child) {
+    padding-bottom: 24px;
+  }
 }
