@@ -429,3 +429,35 @@
     padding-top: 16px;
   }
 }
+
+/* personal page Credit cards tab: prod card-clickable states (the CTA's hit area covers the
+   card; hovering drops the shadow, zooms the art for 0.5s and underlines the CTA). The
+   credit-cards page's compare grid keeps its own states. */
+.cards.product:not(.compare) > ul > li {
+  transition: 0.3s;
+}
+
+.cards.product:not(.compare) > ul > li:hover {
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 10%);
+}
+
+.cards.product:not(.compare) .cards-card-image {
+  overflow: hidden;
+}
+
+.cards.product:not(.compare) > ul > li:hover .cards-card-image img {
+  transform: scale(1.1);
+  transition: transform 0.5s;
+}
+
+.cards.product:not(.compare) .cards-card-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cards.product:not(.compare) .cards-card-body:last-child a:any-link:not(.button):hover {
+  color: #005e80;
+  text-underline-position: under;
+  text-underline-offset: 2px;
+}

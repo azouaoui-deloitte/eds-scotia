@@ -116,6 +116,36 @@
   border: 2px solid #1b1b1b;
 }
 
+/* personal (default) hero: prod bns_button states - #333 with a 1px border (padding +1 keeps
+   the box size); hover and focus invert the fill (secondary eases over 0.2s) */
+.hero.block:not(.split) a.button.primary,
+.hero.block:not(.split) a.button.secondary {
+  padding: 13px 29px;
+  border: 1px solid #333;
+}
+
+.hero.block:not(.split) a.button.primary {
+  background: #333;
+  color: #fff;
+}
+
+.hero.block:not(.split) a.button.secondary {
+  color: #333;
+  transition: 0.2s;
+}
+
+.hero.block:not(.split) a.button.primary:hover,
+.hero.block:not(.split) a.button.primary:focus {
+  background: transparent;
+  color: #333;
+}
+
+.hero.block:not(.split) a.button.secondary:hover,
+.hero.block:not(.split) a.button.secondary:focus {
+  background: #333;
+  color: #fff;
+}
+
 /* Desktop: prod's full-bleed hero — image spans the hero, a light panel on the left
    (~50%) carries the text (covering the image's dark band); the car shows on the right. */
 @media (width >= 992px) {

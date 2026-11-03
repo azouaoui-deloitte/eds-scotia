@@ -75,6 +75,7 @@
 /* "You may be interested in": lifestyle photo background + card-art overlay + title */
 .cards.interest > ul > li {
   position: relative;
+  isolation: isolate; /* the photo sits at z-index -1, under the in-flow text band */
   min-height: 473px; /* prod mobile/tablet tile height */
   overflow: hidden;
   border-radius: 8px;
@@ -135,6 +136,7 @@
 .cards.interest .cards-card-image {
   position: absolute;
   inset: 0;
+  z-index: -1;
 }
 
 .cards.interest .cards-card-image img {
@@ -145,8 +147,6 @@
 }
 
 .cards.interest .cards-card-body {
-  position: relative;
-  z-index: 1;
   width: 100%;
   color: #fff;
   background: linear-gradient(transparent, rgb(0 0 0 / 15%) 40%, rgb(0 0 0 / 78%));
@@ -205,10 +205,10 @@
   display: contents;
 }
 
-/* prod's link glyphs sit ~3px higher in the band than an evenly spaced 24px line box */
+/* prod's link glyphs sit ~3px higher in the band than an evenly spaced 24px line box
+   (offset margins keep the band spacing and leave the tile as the link's containing block) */
 .cards.interest .cards-card-body > p:last-child {
-  position: relative;
-  top: -3px;
+  margin: -3px 0 3px;
 }
 
 .cards.interest .cards-card-link {
@@ -216,9 +216,21 @@
   font-weight: 400;
 }
 
-.cards.interest .cards-card-link:hover,
+/* prod: the whole tile is the link (pointer anywhere, no visual hover change) and keyboard
+   focus rings the tile, not the link text */
+.cards.interest .cards-card-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
 .cards.interest .cards-card-link:focus-visible {
-  text-decoration: underline;
+  outline: none;
+}
+
+.cards.interest > ul > li:has(.cards-card-link:focus-visible) {
+  outline: rgb(0 95 204) auto 1px;
+  outline-offset: 1px;
 }
 
 /* in the tabbed section the tab bar sits above the heading, so prod keeps a gap between the
@@ -230,10 +242,12 @@ main .section:has(.tabs) .cards.featured {
 /* Featured offer tiles. Prod mobile cards are NOT uniform (426-513): 426 is the floor and
    taller content grows up to ~513. Keep the 426 floor (not a uniform fixed height) so short
    cards match prod's minimum while longer offers expand naturally. */
+/* stylelint-disable-next-line no-descending-specificity */
 .cards.featured > ul > li {
   position: relative;
-  border: 1px solid #e5e5e5;
-  box-shadow: 0 1px 4px rgb(0 0 0 / 6%);
+  border: 1px solid #e2e8ee;
+  box-shadow: 0 2px 10px rgb(0 0 0 / 10%);
+  transition: 0.3s;
   display: flex;
   flex-direction: column;
   min-height: 426px;
@@ -341,10 +355,34 @@ main .section:has(.tabs) .cards.featured {
   margin-bottom: 0;
 }
 
-.cards.featured .cards-card-link:hover,
-.cards.featured .cards-card-link:focus-visible {
+/* prod card-clickable: the CTA's hit area covers the card (one focusable link per card), so
+   hovering anywhere drops the shadow, zooms the image (0.5s, on hover only) and underlines the
+   CTA; keyboard focus keeps the browser ring on the CTA only */
+.cards.featured .cards-card-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.cards.featured .cards-card-link:hover {
   color: #005e80;
   text-decoration: underline;
+  text-underline-position: under;
+  text-underline-offset: 2px;
+}
+
+/* stylelint-disable-next-line no-descending-specificity */
+.cards.featured > ul > li:hover {
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 10%);
+}
+
+.cards.featured .cards-card-image {
+  overflow: hidden;
+}
+
+.cards.featured > ul > li:hover .cards-card-image img {
+  transform: scale(1.1);
+  transition: transform 0.5s;
 }
 
 /* prod floats the category pill over the image's top-left corner (out of the body flow) */

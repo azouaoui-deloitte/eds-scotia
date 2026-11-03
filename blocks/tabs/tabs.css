@@ -40,6 +40,36 @@ main > .section > .tabs.block {
   border-bottom-color: #d3242f;
 }
 
+/* personal (default) tab bar: prod rec--tab - 15px #2b2b2b labels that embolden on hover/focus
+   (no colour change); the selected tab is bold over a 2px red rule (padding +1 keeps the
+   height); keyboard focus shows the 5px ring, mouse focus/press none */
+main > .section > .tabs.block .tabs-tab {
+  font-size: 15px;
+  color: #2b2b2b;
+}
+
+main > .section > .tabs.block .tabs-tab:hover,
+main > .section > .tabs.block .tabs-tab:focus {
+  color: #2b2b2b;
+  font-weight: 700;
+}
+
+main > .section > .tabs.block .tabs-tab:focus-visible {
+  outline: rgb(0 95 204) auto 5px;
+}
+
+main > .section > .tabs.block .tabs-tab:active,
+main > .section > .tabs.block .tabs-tab:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+main > .section > .tabs.block .tabs-tab[aria-selected="true"] {
+  color: #2b2b2b;
+  font-weight: 700;
+  border-bottom: 2px solid #ed0722;
+  padding-bottom: 7px;
+}
+
 /* panels stay in the DOM (UE-editable) but prod shows no per-tab text line; the cards switch */
 .tabs.block .tabs-panel {
   display: none;
