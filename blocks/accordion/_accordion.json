@@ -42,8 +42,18 @@
           "label": "Options",
           "valueType": "string",
           "options": [
-            { "name": "Legal footnotes toggle", "value": "footnotes" },
-            { "name": "Dark label", "value": "dark" }
+            {
+              "name": "Legal footnotes toggle",
+              "value": "footnotes"
+            },
+            {
+              "name": "Dark label",
+              "value": "dark"
+            },
+            {
+              "name": "Compact rows",
+              "value": "compact"
+            }
           ]
         }
       ]

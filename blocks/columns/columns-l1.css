@@ -36,7 +36,23 @@ main .columns.links p {
 
 main .columns.links ul {
   margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+main .columns.links li {
+  margin: 0 0 20px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+main .columns.links.bullets ul {
   padding-left: 28px;
+  list-style: disc;
+}
+
+main .columns.links.bullets li {
+  margin: 0;
 }
 
 main .columns.links a:any-link {
@@ -137,6 +153,17 @@ main .columns.media p {
   margin: 0 0 16px;
 }
 
+main .columns:is(.media, .banner) a:any-link:not(.button) {
+  color: inherit;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  border-bottom: 1px dotted currentcolor;
+  text-decoration: none;
+}
+
+main .columns.banner > div > div:first-child {
+  max-width: 620px;
+}
+
 @media (width >= 768px) {
   main .columns.links > div {
     flex-direction: row;
@@ -170,6 +197,6 @@ main .columns.media p {
   }
 
   main .columns.media > div > .columns-img-col {
-    flex: 0 0 300px;
+    flex: 0 0 245px;
   }
 }

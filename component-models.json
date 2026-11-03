@@ -204,6 +204,18 @@
           {
             "name": "Heading + link",
             "value": "heading-link"
+          },
+          {
+            "name": "Light grey band",
+            "value": "light"
+          },
+          {
+            "name": "Charcoal band",
+            "value": "charcoal"
+          },
+          {
+            "name": "No bottom padding",
+            "value": "flush"
           }
         ]
       }
@@ -464,6 +476,10 @@
           {
             "name": "Image + text frame",
             "value": "media"
+          },
+          {
+            "name": "Bulleted links",
+            "value": "bullets"
           }
         ]
       }

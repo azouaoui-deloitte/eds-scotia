@@ -122,3 +122,9 @@
   font-size: 14px;
   line-height: 21px;
 }
+
+/* compact items (76px rows: mortgage FAQs) */
+.accordion.compact .accordion-item-label {
+  padding: 22px 37.5px 22px 0;
+  line-height: 31px;
+}

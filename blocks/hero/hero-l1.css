@@ -203,7 +203,7 @@ main .hero.block.split .hero-image img {
   main .hero.block.split .hero-content {
     width: 50%;
     min-height: var(--hero-h);
-    padding: 40px 30px 40px max(47px, calc((100% - 1110px) / 2));
+    padding: 66px 30px 66px max(47px, calc((100% - 1110px) / 2));
   }
 
   main .hero.block.split .hero-content-inner {
