@@ -359,6 +359,10 @@
             "value": "tablet-2"
           },
           {
+            "name": "Whole card clickable (hover drops the shadow)",
+            "value": "clickable"
+          },
+          {
             "name": "Show more after 3 (product)",
             "value": "more"
           },

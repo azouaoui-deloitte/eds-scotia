@@ -357,8 +357,9 @@ main .section:has(.tabs) .cards.featured {
 
 /* prod card-clickable: the CTA's hit area covers the card (one focusable link per card), so
    hovering anywhere drops the shadow, zooms the image (0.5s, on hover only) and underlines the
-   CTA; keyboard focus keeps the browser ring on the CTA only */
-.cards.featured .cards-card-link::before {
+   CTA; keyboard focus keeps the browser ring on the CTA only. L1 article grids (Advice+) keep
+   prod's link-only states (cards-l1.css). */
+.cards.featured:not(.article) .cards-card-link::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -372,15 +373,15 @@ main .section:has(.tabs) .cards.featured {
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
-.cards.featured > ul > li:hover {
+.cards.featured:not(.article) > ul > li:hover {
   box-shadow: 0 0 0 0 rgb(0 0 0 / 10%);
 }
 
-.cards.featured .cards-card-image {
+.cards.featured:not(.article) .cards-card-image {
   overflow: hidden;
 }
 
-.cards.featured > ul > li:hover .cards-card-image img {
+.cards.featured:not(.article) > ul > li:hover .cards-card-image img {
   transform: scale(1.1);
   transition: transform 0.5s;
 }

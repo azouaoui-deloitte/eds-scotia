@@ -150,6 +150,7 @@ main .cards:is(.info, .article) .cards-card-body > p:last-child > a:only-child:n
 }
 
 main .cards:is(.info, .article) .cards-card-body > p:last-child > a:only-child:not(.button):hover {
+  color: #005e80;
   text-decoration: underline;
 }
 
@@ -1003,35 +1004,27 @@ main .cards:is(.info, .article) .cards-card-body > ul + p.button-wrapper:last-ch
   padding-top: 0;
 }
 
-/* prod card-float-low cards (info / article with one chevron CTA): the CTA's hit area covers the
-   card; hovering anywhere drops the shadow, zooms the image (0.5s) and underlines the CTA;
-   keyboard focus keeps the browser ring on the CTA */
-main .cards:is(.info, .article):not(.featured) > ul > li:not(:has(.cards-card-body :is(ul, p:not(:last-child)) a)) {
+/* prod card-float-low cards: no card-level hover, the chevron CTA darkens and underlines.
+   clickable (prod card-clickable, Loans): the CTA's hit area covers the card, hovering anywhere
+   drops the shadow and underlines the CTA; keyboard focus keeps the ring on the CTA */
+main .cards.clickable > ul > li {
   position: relative;
   transition: box-shadow 0.3s;
 }
 
-main .cards:is(.info, .article):not(.featured) > ul > li:not(:has(.cards-card-body :is(ul, p:not(:last-child)) a)) .cards-card-body > p:last-child > a:only-child:not(.button)::before {
+main .cards.clickable .cards-card-body > p:last-child > a:only-child:not(.button)::before {
   content: "";
   position: absolute;
   inset: 0;
 }
 
-main .cards:is(.info, .article):not(.featured) > ul > li:not(:has(.cards-card-body :is(ul, p:not(:last-child)) a)):hover {
+main .cards.clickable > ul > li:hover {
   box-shadow: 0 0 0 0 rgb(0 0 0 / 10%);
 }
 
-main .cards:is(.info, .article):not(.featured) > ul > li:hover .cards-card-body > p:last-child > a:only-child:not(.button) {
+main .cards.clickable > ul > li:hover .cards-card-body > p:last-child > a:only-child:not(.button) {
+  color: #005e80;
   text-decoration: underline;
-}
-
-main .cards.article:not(.featured) .cards-card-image {
-  overflow: hidden;
-}
-
-main .cards.article:not(.featured) > ul > li:hover .cards-card-image img {
-  transform: scale(1.1);
-  transition: transform 0.5s;
 }
 
 /* credit-card note with a toggletip: text wraps beside the 32px info button (prod labelBox) */
@@ -1054,4 +1047,9 @@ main .cards.product.compare .cards-card-body p > em:only-child a.l1-tooltip-link
   main .cards.info.tablet-2 > ul > li:not(:first-child) .cards-card-body > ul + p.button-wrapper:last-child {
     padding-top: 24px;
   }
+}
+
+/* Mortgages "Ready to apply": prod card copy ends with a trailing <br> line (24px) */
+main:has(.columns.links.scroll) .section.grey .cards.info.cols-3 .cards-card-body > h4 + p:not(:last-child) {
+  padding-bottom: 24px;
 }
