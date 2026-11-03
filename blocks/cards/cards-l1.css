@@ -428,6 +428,7 @@ main .cards.promo > ul > li:nth-child(2n) a.button:any-link {
 @media (width >= 768px) and (width < 1200px) {
   main .cards.scroll > ul {
     padding-left: 6px;
+    scroll-padding-left: 6px;
   }
 
   main .cards.scroll > ul > li {
@@ -516,4 +517,17 @@ main .cards.promo.scroll .l1-pager .l1-pager-next::before {
 main .cards.product .cards-card-body p > em a.l1-tooltip-link {
   float: right;
   margin: 4px 0 0 8px;
+}
+
+/* article.arrow below 992px: natural height, prod body rhythm (32 / 30 padding, 64px to the arrow) */
+@media (width < 768px) {
+  main .cards.article.arrow .cards-card-body {
+    padding: 32px 30px 31px;
+  }
+}
+
+@media (width < 992px) {
+  main .cards.article.arrow .cards-card-body > p:last-child:has(> a:only-child) {
+    padding-top: 64px;
+  }
 }

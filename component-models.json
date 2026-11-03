@@ -588,6 +588,14 @@
           {
             "name": "Natural image on tablet",
             "value": "tablet-natural"
+          },
+          {
+            "name": "Title 37px",
+            "value": "title-s"
+          },
+          {
+            "name": "Title 36px",
+            "value": "title-xs"
           }
         ]
       }

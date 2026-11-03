@@ -157,7 +157,7 @@ main:has(> .section.l1) {
     align-items: center;
     justify-content: center;
     gap: 22px;
-    margin: 31px 0 22px;
+    margin: 61px 0 22px;
     font-size: 16px;
     line-height: 24px;
   }
@@ -562,6 +562,12 @@ main:has(> .section.l1) {
       padding: 0 30px;
     }
 
+    .section > div > h2,
+    .section .default-content-wrapper > h2 {
+      font-size: 35px;
+      line-height: 38.5px;
+    }
+
     .section.floating {
       inset: auto auto 30px 22px;
     }
@@ -579,7 +585,7 @@ main:has(> .section.l1) {
     }
 
     .section.subnav {
-      margin-top: 0;
+      margin-top: -30px;
     }
 
     .section.subnav > div {
@@ -594,9 +600,13 @@ main:has(> .section.l1) {
       box-shadow: none;
     }
 
+    .section.subnav li {
+      padding: 0;
+    }
+
     .section.subnav a:any-link {
-      padding: 10px 8px 9px;
-      font-size: 14px;
+      padding: 18px 8px 15px;
+      font-size: 16px;
     }
   }
 

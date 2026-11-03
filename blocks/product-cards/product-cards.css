@@ -232,6 +232,7 @@
 @media (width >= 768px) {
   .product-cards > ul {
     padding-left: 6px;
+    scroll-padding-left: 6px;
   }
 
   .product-cards > ul > li {
