@@ -406,6 +406,42 @@ main:has(> .section.l1) {
     padding-top: 0;
   }
 
+  /* Loans mobile: the grey band starts 30px under the banner button, its heading 45px in, its end
+     74px under the cards (33px card bottom inset); "How borrowing works" 45px into the next band;
+     the Advice+ band starts 64px under the Ways-to-apply cards, 45px / 47px padding; calculators
+     46px apart */
+  @media (width < 768px) {
+    .section.lead-center:has(.columns.banner):has(+ .section.grey) {
+      padding-bottom: 23px;
+    }
+
+    .section.lead-center:has(.columns.banner) + .section.grey {
+      padding-top: 45px;
+      padding-bottom: 74px;
+    }
+
+    .section.lead-center:has(.columns.banner) + .section.grey + .section.flush {
+      padding-top: 45px;
+    }
+
+    .cards.info.scroll.clickable .cards-card-body {
+      padding-bottom: 33px;
+    }
+
+    .section.lead-center:not(:has(.columns.banner)):has(+ .section.grey.square-buttons) {
+      padding-bottom: 59px;
+    }
+
+    .section.lead-center + .section.grey.square-buttons {
+      padding-top: 45px;
+      padding-bottom: 47px;
+    }
+
+    &:has(.cards.clickable) .cards.plain > ul {
+      gap: 46px;
+    }
+  }
+
   .section.flush + .section.grey {
     padding-top: 76px;
   }
@@ -539,10 +575,10 @@ main:has(> .section.l1) {
   }
 
   .section.lead-center .default-content-wrapper > h2 + p {
-    margin: -22px 0 30px;
+    margin: -19px 0 30px;
     font-family: var(--bold-font-family);
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 17.6px;
+    line-height: 17.6px;
     text-align: center;
   }
 
@@ -863,6 +899,42 @@ main:has(> .section.l1) {
 
   .section.subnav.subnav-wide li {
     padding: 0;
+  }
+
+  /* subnav-select: on mobile prod swaps the bar for a native dropdown (45px, 19px inset) in a 47px
+     band; the hero copy (title + its 10px margin) then ends 80px above the hero's bottom */
+  .section.subnav select.l1-subnav-select {
+    display: none;
+  }
+
+  @media (width < 768px) {
+    .section.subnav.subnav-select ul {
+      display: none;
+    }
+
+    .section.subnav.subnav-select > div {
+      padding: 0 18px 0 19px;
+      background: #fff;
+      border: 1px solid #e2e8ee;
+    }
+
+    .section.subnav.subnav-select select.l1-subnav-select {
+      display: block;
+      width: 100%;
+      height: 45px;
+      padding: 0 14px;
+      border: 1px solid #767676;
+      border-radius: 3px;
+      background-color: #fff;
+      color: #000;
+      font-family: var(--body-font-family);
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    > .section:has(.hero):has(+ .section.subnav.subnav-select) .hero-content {
+      padding-bottom: 70px;
+    }
   }
 
   /* subnav-wide from 1200px: a 1140px bar (15px past the content box), items 40px apart after a
@@ -1187,6 +1259,44 @@ main:has(> .section.l1) {
 
   .section:has(.cards.plain):has(+ .section .columns.maroon) {
     padding-bottom: 107px;
+  }
+
+  /* Loans mobile: 77px under the calculators; maroon CTA box with prod's 10px icon slot above the
+     title, buttons 20px / 19px apart (64px button rows); Resources band 59px under it, its heading
+     45px in, 15px bottom padding; legal footnotes link centred */
+  @media (width < 768px) {
+    .section:has(.cards.plain):has(+ .section .columns.maroon) {
+      padding-bottom: 77px;
+    }
+
+    .columns.banner.maroon h3 {
+      margin-top: 10px;
+    }
+
+    .columns.banner.maroon > div {
+      gap: 20px;
+    }
+
+    .columns.banner.maroon .button-wrapper + .button-wrapper {
+      margin-top: 14px;
+    }
+
+    .section:has(.columns.maroon):has(+ .section.grey) {
+      padding-bottom: 59px;
+    }
+
+    .section:has(.columns.maroon) + .section.grey {
+      padding-top: 45px;
+      padding-bottom: 15px;
+    }
+
+    .section:has(.columns.maroon) + .section.grey ~ .section .accordion.footnotes .accordion-item {
+      text-align: center;
+    }
+
+    .section:has(.columns.maroon) + .section.grey ~ .section .accordion.footnotes .accordion-item-body {
+      text-align: left;
+    }
   }
 
   /* Loans desktop grid rhythm (prod): "Let's get started" -> Advice+ 47px, 67px above "View more

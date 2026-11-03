@@ -175,6 +175,10 @@ main .cards.info.block .cards-card-image + .cards-card-body > h3:first-child {
   margin-bottom: 7px;
 }
 
+main .cards.info.clickable.block .cards-card-image + .cards-card-body > h3:first-child {
+  margin-bottom: 12px;
+}
+
 main .section.grey .cards.info.cols-2:has(ul) {
   margin-top: 8px;
 }

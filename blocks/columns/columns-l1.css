@@ -112,6 +112,55 @@ main .columns.banner:not(.box, .maroon, .media) h2 {
   line-height: 30px;
 }
 
+/* plain banner with an h2 (Loans "Take steps today"): prod 32px bold title in a col-md-8 /
+   col-lg-9 column, the button filling the remaining column; stacked with a centred button on
+   mobile */
+main .columns.banner:not(.box, .maroon, .media):has(h2) h2 {
+  color: #2b2b2b;
+  font-family: var(--bold-font-family);
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 35.2px;
+}
+
+@media (width < 768px) {
+  main .columns.banner:not(.box, .maroon, .media):has(h2) {
+    margin-top: 61px;
+    padding-top: 46px;
+  }
+
+  main .columns.banner:not(.box, .maroon, .media):has(h2) > div {
+    align-items: center;
+    gap: 16px;
+  }
+}
+
+@media (width >= 768px) {
+  main .columns.banner:not(.box, .maroon, .media):has(h2) > div {
+    gap: 30px;
+  }
+
+  main .columns.banner:not(.box, .maroon, .media):has(h2) > div > div:first-child {
+    flex: 0 0 calc((100% + 30px) * 2 / 3 - 30px);
+    max-width: none;
+  }
+
+  main .columns.banner:not(.box, .maroon, .media):has(h2) > div > div:last-child {
+    flex: 1 1 0;
+  }
+
+  main .columns.banner:not(.box, .maroon, .media):has(h2) .button-wrapper,
+  main .columns.banner:not(.box, .maroon, .media):has(h2) a.button:any-link {
+    width: 100%;
+  }
+}
+
+@media (width >= 992px) {
+  main .columns.banner:not(.box, .maroon, .media):has(h2) > div > div:first-child {
+    flex-basis: calc((100% + 30px) * 3 / 4 - 30px);
+  }
+}
+
 
 main .columns.box > div > div:first-child > p:first-child > picture img {
   display: block;
@@ -602,8 +651,12 @@ main .columns.banner.maroon h3 {
 /* stacked link columns on mobile: no column gap (the last link's 16px margin separates them);
    plain box banner (Investing "Ready to talk"), stacked below 1200px: 36px title, copy 20px lower, button 20px below */
 @media (width < 768px) {
-  main .columns.links:not(.scroll) > div {
+  main .columns.links:not(.scroll, .bullets) > div {
     gap: 0;
+  }
+
+  main .columns.links.bullets > div {
+    gap: 16px;
   }
 
   main .section.accordion-container + .section > .columns-wrapper:has(.columns.box):not(:has(picture)) {

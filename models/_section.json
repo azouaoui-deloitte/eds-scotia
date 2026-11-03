@@ -111,6 +111,10 @@
               "value": "subnav-wide"
             },
             {
+              "name": "Sub navigation (dropdown on mobile)",
+              "value": "subnav-select"
+            },
+            {
               "name": "Overlap previous band",
               "value": "overlap"
             },
