@@ -206,8 +206,32 @@ main:has(> .section.l1) {
     padding-top: 45px;
   }
 
-  > .section:has(+ .section.grey) {
+  > .section:has(.cards.scroll):has(+ .section.grey) {
     padding-bottom: 90px;
+  }
+
+  .section.subnav + .section.lead-center {
+    padding-top: 47px;
+  }
+
+  .section.lead-center:has(.columns.banner) {
+    padding-bottom: 0;
+  }
+
+  .section.lead-center:has(.columns.banner) + .section.grey {
+    padding-top: 0;
+  }
+
+  .section.flush + .section.grey {
+    padding-top: 76px;
+  }
+
+  .section.grey:has(> .accordion-wrapper) {
+    padding-bottom: 28px;
+  }
+
+  .section.grey .default-content-wrapper + .accordion-wrapper {
+    margin-top: 32px;
   }
 
   .section.grey {

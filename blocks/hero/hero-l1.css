@@ -218,6 +218,15 @@ main .hero.block.split .hero-image img {
     --hero-h: 35vw;
   }
 
+  /* title-only hero (Loans & Lines of credit): 400px, title centred */
+  main .hero.block.split:has(.hero-content-inner > h1:only-child) {
+    --hero-h: 400px;
+  }
+
+  main .hero.block.split .hero-content-inner:has(> h1:only-child) {
+    padding-bottom: 0;
+  }
+
   main .hero.block.split .hero-image {
     position: absolute;
     inset: 0;

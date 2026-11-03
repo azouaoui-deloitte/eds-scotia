@@ -170,7 +170,11 @@ main .cards.info .cards-card-body h2 + p {
   line-height: 15.4px;
 }
 
-main .cards.info .cards-card-image + .cards-card-body > h3:first-child {
+main .cards.info.block .cards-card-image + .cards-card-body > h3:first-child {
+  margin-bottom: 14px;
+}
+
+main .section.beige .cards.info .cards-card-image + .cards-card-body > h3:first-child {
   margin-bottom: 40px;
 }
 
@@ -185,6 +189,14 @@ main .cards.article .cards-card-image img {
   height: auto;
   aspect-ratio: 2 / 1;
   object-fit: cover;
+}
+
+main .cards.article.block .cards-card-body > h4:first-child {
+  margin-bottom: 23px;
+}
+
+main .cards.plain.block .cards-card-body > h4:first-child {
+  margin-bottom: 22px;
 }
 
 main .cards.article .cards-card-body h4,
