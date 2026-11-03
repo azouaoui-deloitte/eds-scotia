@@ -104,7 +104,13 @@ export default function decorate(block) {
     };
     toggle.addEventListener('click', () => { open = !open; tablist.classList.remove('collapsed'); render(); });
     tablist.after(toggle);
-    window.addEventListener('resize', () => { tablist.classList.remove('collapsed'); render(); });
-    window.requestAnimationFrame(render);
+    // re-evaluate once the section is laid out (it is hidden while loading) and on resize
+    let lastWidth = 0;
+    new ResizeObserver(() => {
+      if (tablist.offsetWidth === lastWidth) return;
+      lastWidth = tablist.offsetWidth;
+      tablist.classList.remove('collapsed');
+      render();
+    }).observe(tablist);
   }
 }
