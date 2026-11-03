@@ -214,6 +214,10 @@ main .hero.block.split .hero-image img {
     --hero-h: 30vw;
   }
 
+  main .hero.block.split.ratio35 {
+    --hero-h: 35vw;
+  }
+
   main .hero.block.split .hero-image {
     position: absolute;
     inset: 0;

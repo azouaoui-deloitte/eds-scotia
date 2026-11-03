@@ -328,6 +328,18 @@ main:has(> .section.l1) {
     padding-bottom: 90px;
   }
 
+  .section.center:has(.cards.article) .default-content-wrapper > h2 {
+    margin-bottom: 45px;
+  }
+
+  .section.center:has(.cards.icons) .default-content-wrapper > h2 {
+    margin-bottom: 14px;
+  }
+
+  .cards-wrapper + .accordion-wrapper:has(.footnotes) {
+    margin-top: 28px;
+  }
+
   .section.divider {
     padding-top: 106px;
     border-top: 1px solid #e2e8ee;
@@ -480,7 +492,7 @@ main:has(> .section.l1) {
   /* card overlapping the bottom of the previous band (Protection Planner) */
   .section.overlap {
     padding-top: 0;
-    margin-top: -60px;
+    margin-top: 0;
   }
 
   .section.overlap .columns.box a:any-link:not(.button) {

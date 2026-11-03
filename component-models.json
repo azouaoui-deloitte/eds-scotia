@@ -600,6 +600,10 @@
           {
             "name": "Centred on tablet",
             "value": "center-tablet"
+          },
+          {
+            "name": "Height 35vw",
+            "value": "ratio35"
           }
         ]
       }
