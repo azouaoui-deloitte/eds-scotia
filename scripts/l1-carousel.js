@@ -15,9 +15,9 @@ export default function buildPager(block, ul) {
   const pitch = () => {
     const [a, b] = visible();
     if (!a) return 1;
-    return b ? b.offsetLeft - a.offsetLeft : a.offsetWidth;
+    return (b ? b.offsetLeft - a.offsetLeft : a.offsetWidth) || a.offsetWidth || 1;
   };
-  const perView = () => Math.max(1, Math.floor((ul.clientWidth + 8) / pitch()));
+  const perView = () => Math.max(1, Math.round(ul.clientWidth / pitch()) || 1);
   const pages = () => Math.max(1, visible().length - perView() + 1);
   const current = () => Math.min(pages() - 1, Math.round(ul.scrollLeft / pitch()));
   const update = () => {
@@ -32,6 +32,7 @@ export default function buildPager(block, ul) {
   next.addEventListener('click', () => go(1));
   ul.addEventListener('scroll', () => window.requestAnimationFrame(update), { passive: true });
   window.addEventListener('resize', update);
+  if (window.ResizeObserver) new ResizeObserver(() => update()).observe(ul);
   block.prepend(pager);
   window.requestAnimationFrame(update);
   return update;
