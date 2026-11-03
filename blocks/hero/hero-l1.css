@@ -159,6 +159,11 @@ main .hero.block.split .hero-image img {
     text-align: center;
   }
 
+  main .hero.block.split.center-mobile h1 {
+    font-size: 32px;
+    line-height: 35.2px;
+  }
+
   main .hero.block.split .hero-content {
     padding: 72px 20px 52px;
   }

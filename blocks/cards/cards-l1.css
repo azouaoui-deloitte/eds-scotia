@@ -113,6 +113,7 @@ main .cards:is(.info, .article, .icons, .plain) .cards-card-body p {
 main .cards:is(.info, .article, .plain) .cards-card-body ul {
   margin: 0 0 16px;
   padding-left: 40px;
+  list-style: disc;
   font-size: 16px;
   line-height: 24px;
 }
