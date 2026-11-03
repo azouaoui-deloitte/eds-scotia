@@ -401,3 +401,15 @@ main .hero.block.split.title-xs :is(h1, h2) {
     padding-bottom: 75px;
   }
 }
+
+/* Creditor at 992-1199px: copy top-aligned 18px down in a 413px column, 10px under the title */
+@media (width >= 992px) and (width < 1200px) {
+  main .hero.block.split.ratio35 .hero-content {
+    justify-content: flex-start;
+    padding: 18px 52px 0 47px;
+  }
+
+  main .hero.block.split.ratio35 h1 {
+    margin-bottom: 10px;
+  }
+}

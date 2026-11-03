@@ -865,6 +865,71 @@ main:has(> .section.l1) {
     padding: 0;
   }
 
+  /* subnav-wide from 1200px: a 1140px bar (15px past the content box), items 40px apart after a
+     40px inset */
+  @media (width >= 1200px) {
+    .section.subnav.subnav-wide ul {
+      justify-content: flex-start;
+      width: calc(100% + 30px);
+      max-width: none;
+      margin: 0 -15px;
+      padding: 0 0 0 40px;
+      overflow: hidden;
+    }
+
+    .section.subnav.subnav-wide li {
+      flex: 0 0 auto;
+      padding-right: 40px;
+    }
+
+    .section.subnav.subnav-wide a:any-link {
+      white-space: nowrap;
+    }
+  }
+
+  /* subnav-wide at 768-1199px: full-width bar, items from the left edge (prod clips the last one);
+     on tablet the hero copy ends 96px above the hero's bottom */
+  @media (width >= 768px) and (width < 992px) {
+    .section.subnav.subnav-wide {
+      margin-top: -30px;
+    }
+
+    > .section:has(.hero):has(+ .section.subnav-wide) .hero-content {
+      padding-bottom: 96px;
+    }
+  }
+
+  @media (width >= 992px) and (width < 1200px) {
+    .section.subnav.subnav-wide {
+      margin-top: -31px;
+    }
+  }
+
+  @media (width >= 768px) and (width < 1200px) {
+    .section.subnav.subnav-wide > div {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .section.subnav.subnav-wide ul {
+      justify-content: flex-start;
+      max-width: none;
+      padding: 0;
+      overflow: hidden;
+      box-shadow: none;
+    }
+
+    .section.subnav.subnav-wide li {
+      flex: 0 0 auto;
+      padding-right: 40px;
+    }
+
+    .section.subnav.subnav-wide a:any-link {
+      white-space: nowrap;
+    }
+  }
+
   /* card overlapping the bottom of the previous band (Protection Planner) */
   .section.overlap {
     padding-top: 0;
@@ -1006,13 +1071,26 @@ main:has(> .section.l1) {
     }
   }
 
-  /* Creditor desktop (prod spacers): 17px under "Reasons", 61px under the planner box, 62px at
-     the end of the article / contact bands */
+  /* Creditor desktop (prod spacers): 17px under "Reasons", 76px under its pager at 992-1199px,
+     61px under the planner box, 62px at the end of the article / contact bands (120px between the
+     two article bands), legal footnotes 61px under the contact cards */
   @media (width >= 1200px) {
     &:has(.cards.icons.highlights) .section.grey:has(.cards.icons.highlights) .default-content-wrapper > h2:only-child {
       margin-bottom: 17px;
     }
 
+    &:has(.cards.icons.highlights) .section.overlap .columns.box h3 + p {
+      margin-top: 4px;
+    }
+  }
+
+  @media (width >= 992px) and (width < 1200px) {
+    &:has(.cards.icons.highlights) .section.grey:has(.cards.icons.highlights) {
+      padding-bottom: 76px;
+    }
+  }
+
+  @media (width >= 768px) {
     &:has(.cards.icons.highlights) .section.overlap {
       padding-bottom: 61px;
     }
@@ -1021,11 +1099,69 @@ main:has(> .section.l1) {
     &:has(.cards.icons.highlights) .section:has(+ .section .accordion.footnotes) {
       padding-bottom: 62px;
     }
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article):has(+ .section.center .cards.article) {
+      padding-bottom: 90px;
+    }
+
+    &:has(.cards.icons.highlights) .cards-wrapper + .accordion-wrapper:has(.footnotes) {
+      margin-top: 61px;
+    }
+  }
+
+  /* Creditor legal footnotes: 16px link, centred below 992px */
+  &:has(.cards.icons.highlights) .accordion.footnotes.dark .accordion-item-label {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @media (width < 992px) {
+    &:has(.cards.icons.highlights) .accordion.footnotes.dark .accordion-item {
+      text-align: center;
+    }
+
+    &:has(.cards.icons.highlights) .accordion.footnotes.dark .accordion-item-body {
+      text-align: left;
+    }
+  }
+
+  /* Creditor tablet: the second article band is one row of content-sized cards (prod flex row),
+     legal footnotes 90px under the contact cards */
+  @media (width >= 768px) and (width < 992px) {
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article) + .section.center .cards.article > ul {
+      grid-template-columns: 192px 194px 1fr;
+    }
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article) + .section.center .cards.article .cards-card-image {
+      height: auto;
+    }
+
+    &:has(.cards.icons.highlights) .section.center:has(.cards.article) + .section.center .cards.article .cards-card-image img {
+      height: auto;
+      aspect-ratio: 2;
+    }
+
+    &:has(.cards.icons.highlights) .cards-wrapper + .accordion-wrapper:has(.footnotes) {
+      margin-top: 90px;
+    }
   }
 
   /* Creditor mobile: 44px under the article section headings, 192px between the two article bands,
-     60px above "Ways to contact us" */
+     120px above "Ways to contact us", legal footnotes 94px under the contact cards; article cards
+     1px taller (prod 472/424) */
   @media (width < 768px) {
+    &:has(.cards.icons.highlights) .section:has(+ .section .accordion.footnotes) {
+      padding-bottom: 62px;
+    }
+
+    &:has(.cards.icons.highlights) .cards-wrapper + .accordion-wrapper:has(.footnotes) {
+      margin-top: 94px;
+    }
+
+    &:has(.cards.icons.highlights) .cards.article .cards-card-body {
+      padding-bottom: 31px;
+    }
+
     &:has(.cards.icons.highlights) .section.center:has(.cards.article) .default-content-wrapper > h2 {
       margin-bottom: 44px;
     }
