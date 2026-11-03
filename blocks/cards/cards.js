@@ -41,4 +41,6 @@ export default function decorate(block) {
   block.replaceChildren(ul);
   // L1 pages: swipe carousel with pager below 1200px
   if (block.classList.contains('scroll')) import('../../scripts/l1-carousel.js').then((m) => m.default(block, ul));
+  // cards.product: optional "Show more" after 3 cards
+  if (block.classList.contains('product') && block.classList.contains('more')) import('./cards-product.js').then((m) => m.default(block, ul));
 }

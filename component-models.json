@@ -225,6 +225,10 @@
           {
             "name": "Dark label",
             "value": "dark"
+          },
+          {
+            "name": "Compact rows",
+            "value": "compact"
           }
         ]
       }
@@ -267,6 +271,10 @@
             "value": "featured"
           },
           {
+            "name": "Credit card products",
+            "value": "product"
+          },
+          {
             "name": "Info cards",
             "value": "info"
           },
@@ -305,6 +313,14 @@
           {
             "name": "Swipe on mobile",
             "value": "scroll"
+          },
+          {
+            "name": "Show more after 3 (product)",
+            "value": "more"
+          },
+          {
+            "name": "Compare layout (product)",
+            "value": "compare"
           }
         ]
       }
@@ -333,6 +349,72 @@
         "value": "",
         "label": "Text",
         "valueType": "string"
+      }
+    ]
+  },
+  {
+    "id": "card-product",
+    "fields": [
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "category",
+        "label": "Category pill (e.g. Travel & lifestyle)",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Card art",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text (title, Special offer:, annual fee / interest rates)",
+        "valueType": "string"
+      },
+      {
+        "component": "aem-content",
+        "valueType": "string",
+        "name": "link",
+        "label": "Link"
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "linkText",
+        "label": "Link text (e.g. View more card details)",
+        "value": ""
+      },
+      {
+        "component": "select",
+        "valueType": "string",
+        "name": "linkType",
+        "label": "Link style",
+        "options": [
+          {
+            "name": "Chevron link",
+            "value": ""
+          },
+          {
+            "name": "Button (primary)",
+            "value": "primary"
+          },
+          {
+            "name": "Button (secondary)",
+            "value": "secondary"
+          }
+        ]
       }
     ]
   },

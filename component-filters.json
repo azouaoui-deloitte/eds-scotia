@@ -30,7 +30,8 @@
   {
     "id": "cards",
     "components": [
-      "card"
+      "card",
+      "card-product"
     ]
   },
   {

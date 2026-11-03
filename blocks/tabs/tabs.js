@@ -2,7 +2,8 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 
 /**
  * Accessible tabs. Each row is a tab: [label] [rich content].
- * Each tab is paired, by order, with a sibling `cards.featured` block in the same section
+ * Each tab is paired, by order, with a sibling `cards.featured` / `cards.product` block in the
+ * same section
  * (tab 0 -> 1st cards block, tab 1 -> 2nd, ...). Selecting a tab shows its panel text and its
  * matching card grid, hiding the others. Backend-driven tab content on scotiabank.com cannot
  * be fetched cross-origin from Edge Delivery, so each tab carries its own authored cards.
@@ -10,7 +11,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
 export default function decorate(block) {
   const section = block.closest('.section');
   // sibling card grids, in document (tab) order
-  const cardBlocks = section ? [...section.querySelectorAll('.cards.featured')] : [];
+  const cardBlocks = section ? [...section.querySelectorAll('.cards.featured, .cards.product')] : [];
   const showCards = (idx) => cardBlocks.forEach((cb, j) => { cb.style.display = j === idx ? '' : 'none'; });
 
   const tablist = document.createElement('div');

@@ -145,6 +145,21 @@
           }
         },
         {
+          "title": "Product Card",
+          "id": "card-product",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "Product Card",
+                  "model": "card-product"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "plugins": {
