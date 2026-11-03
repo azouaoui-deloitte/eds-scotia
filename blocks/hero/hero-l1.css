@@ -253,6 +253,15 @@ main .hero.block.split .hero-image img {
     padding-bottom: 11px;
   }
 
+  main .hero.block.split.tall .hero-content-inner {
+    padding: 11px 0 0;
+  }
+
+  main .hero.block.split .hero-content-inner > h2 {
+    font-size: 36px;
+    line-height: 39.6px;
+  }
+
   main .hero.block.split.aura .hero-content {
     background: transparent;
   }

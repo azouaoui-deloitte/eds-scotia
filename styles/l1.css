@@ -201,6 +201,10 @@ main:has(> .section.l1) {
     background: none;
   }
 
+  > .section:has(.hero) + .section:has(.columns.box) {
+    padding-top: 70px;
+  }
+
   /* bands */
   > .section:has(.hero) + .section:not(.subnav) {
     padding-top: 45px;
@@ -356,7 +360,7 @@ main:has(> .section.l1) {
     margin-bottom: 45px;
   }
 
-  .section.center:has(.cards.icons) .default-content-wrapper > h2 {
+  .section.center:has(.cards.icons) .default-content-wrapper > h2:only-child {
     margin-bottom: 14px;
   }
 
@@ -699,6 +703,10 @@ main:has(> .section.l1) {
   @media (width >= 1200px) {
     .l1-pager {
       display: none;
+    }
+
+    > .section:has(.tabs.panels) > div {
+      max-width: 1078px;
     }
 
     > .section > div {
