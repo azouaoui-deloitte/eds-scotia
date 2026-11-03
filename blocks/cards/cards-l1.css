@@ -976,3 +976,34 @@ main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body
 main .cards:is(.info, .article) .cards-card-body > ul + p.button-wrapper:last-child {
   padding-top: 0;
 }
+
+/* prod card-float-low cards (info / article with one chevron CTA): the CTA's hit area covers the
+   card; hovering anywhere drops the shadow, zooms the image (0.5s) and underlines the CTA;
+   keyboard focus keeps the browser ring on the CTA */
+main .cards:is(.info, .article):not(.featured) > ul > li:not(:has(.cards-card-body :is(ul, p:not(:last-child)) a)) {
+  position: relative;
+  transition: box-shadow 0.3s;
+}
+
+main .cards:is(.info, .article):not(.featured) > ul > li:not(:has(.cards-card-body :is(ul, p:not(:last-child)) a)) .cards-card-body > p:last-child > a:only-child:not(.button)::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+main .cards:is(.info, .article):not(.featured) > ul > li:not(:has(.cards-card-body :is(ul, p:not(:last-child)) a)):hover {
+  box-shadow: 0 0 0 0 rgb(0 0 0 / 10%);
+}
+
+main .cards:is(.info, .article):not(.featured) > ul > li:hover .cards-card-body > p:last-child > a:only-child:not(.button) {
+  text-decoration: underline;
+}
+
+main .cards.article:not(.featured) .cards-card-image {
+  overflow: hidden;
+}
+
+main .cards.article:not(.featured) > ul > li:hover .cards-card-image img {
+  transform: scale(1.1);
+  transition: transform 0.5s;
+}
