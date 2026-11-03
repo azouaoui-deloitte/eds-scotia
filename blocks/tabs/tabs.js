@@ -84,4 +84,27 @@ export default function decorate(block) {
   // heading, panels hidden) and `panels` (the active tab's panel copy shows under the bar).
   const inPlace = block.classList.contains('pills') || block.classList.contains('panels');
   if (section && !inPlace) section.prepend(block);
+
+  // pills: when the pills wrap, show only the first row with a "Show more +" / "Show less -"
+  // toggle (prod tablist toggle)
+  if (block.classList.contains('pills')) {
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'tabs-pills-toggle';
+    toggle.setAttribute('aria-controls', tablist.id = `tabs-list-${Math.random().toString(36).slice(2, 8)}`);
+    let open = false;
+    const render = () => {
+      const tabs = [...tablist.children];
+      const wraps = tabs.length > 1 && tabs[tabs.length - 1].offsetTop > tabs[0].offsetTop;
+      const collapsed = wraps && !open;
+      tablist.classList.toggle('collapsed', collapsed);
+      toggle.hidden = !wraps && !open;
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.innerHTML = open ? 'Show less <span aria-hidden="true">-</span>' : 'Show more <span aria-hidden="true">+</span>';
+    };
+    toggle.addEventListener('click', () => { open = !open; tablist.classList.remove('collapsed'); render(); });
+    tablist.after(toggle);
+    window.addEventListener('resize', () => { tablist.classList.remove('collapsed'); render(); });
+    window.requestAnimationFrame(render);
+  }
 }

@@ -215,6 +215,10 @@ async function loadLazy(doc) {
 
   const main = doc.querySelector('main');
   await loadSections(main);
+  // L1 pages: fragment-based modals (.../modals/<id>) and toggletips (.../tooltips/<id>)
+  // eslint-disable-next-line import/no-cycle
+  // eslint-disable-next-line import/no-cycle
+  if (main.querySelector('a[href*="/modals/"], a[href*="/tooltips/"]')) import('./l1-modal.js').then((m) => m.default(main));
   decorateBackToTop();
 
   const { hash } = window.location;

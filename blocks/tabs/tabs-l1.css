@@ -82,3 +82,25 @@
 .tabs.block.panels .tabs-panel p {
   margin: 0;
 }
+
+.tabs.block.pills .tabs-list.collapsed {
+  max-height: 50px;
+  overflow: hidden;
+}
+
+.tabs.block.pills .tabs-pills-toggle {
+  display: block;
+  margin: -12px 0 24px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #0d0d0d;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+  font-size: 14px;
+  line-height: 21px;
+  cursor: pointer;
+}
+
+.tabs.block.pills .tabs-pills-toggle[hidden] {
+  display: none;
+}
