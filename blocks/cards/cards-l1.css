@@ -57,6 +57,10 @@ main .cards.info .cards-card-image {
 }
 
 main .cards.info .cards-card-image + .cards-card-body {
+  padding-top: 15px;
+}
+
+main .cards.info .cards-card-image + .cards-card-body:has(> h4:first-child) {
   padding-top: 12px;
 }
 
@@ -108,7 +112,7 @@ main .cards:is(.info, .article, .icons, .plain) .cards-card-body p {
 
 main .cards:is(.info, .article, .plain) .cards-card-body ul {
   margin: 0;
-  padding-left: 28px;
+  padding-left: 40px;
   font-size: 16px;
   line-height: 24px;
 }
@@ -151,8 +155,23 @@ main .cards:is(.info, .article) .cards-card-body > p:last-child > a:only-child:n
 
 main .cards:is(.info, .article) .cards-card-body .button-wrapper {
   margin-top: auto;
-  padding-top: 24px;
+  padding-top: 16px;
   text-align: center;
+}
+
+/* two-line title + small subtitle (Ways to invest) */
+main .cards.info .cards-card-body h2 {
+  min-height: 66px;
+}
+
+main .cards.info .cards-card-body h2 + p {
+  margin-bottom: 30px;
+  font-size: 15.4px;
+  line-height: 15.4px;
+}
+
+main .cards.info .cards-card-image + .cards-card-body > h3:first-child {
+  margin-bottom: 40px;
 }
 
 /* article: image on top (2:1) */

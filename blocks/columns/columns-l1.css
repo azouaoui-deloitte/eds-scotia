@@ -77,6 +77,10 @@ main .columns.banner p {
   color: inherit;
 }
 
+main .columns.banner.box h2 + p {
+  margin-top: 20px;
+}
+
 main .columns.banner .button-wrapper + .button-wrapper {
   margin-top: 16px;
 }

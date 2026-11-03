@@ -52,9 +52,39 @@
   letter-spacing: normal;
 }
 
-.product-cards .product-cards-head {
+.product-cards .product-cards-head:has(.product-cards-price) {
   padding-bottom: 16px;
   border-bottom: 1px solid rgb(0 0 0 / 10%);
+}
+
+/* cards without a price line (investment products): 3-line title box, badge 32px under it */
+.product-cards .product-cards-body:not(:has(.product-cards-price)) .product-cards-head :is(h2, h3, h4) {
+  min-height: 99px;
+}
+
+.product-cards .product-cards-body:not(:has(.product-cards-price)) .product-cards-offer {
+  padding: 32px 0 30px;
+}
+
+.product-cards .product-cards-body:not(:has(.product-cards-price)) .product-cards-features {
+  padding-top: 31px;
+}
+
+.product-cards .product-cards-body {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.product-cards .product-cards-body:not(:has(.product-cards-price)) .product-cards-actions {
+  gap: 30px;
+  margin-top: auto;
+  padding-top: 15px;
+}
+
+.product-cards .product-cards-body:not(:has(.product-cards-price, .product-cards-badge)) .product-cards-offer {
+  padding: 30px 0 0;
+  border: 0;
 }
 
 .product-cards .product-cards-body > div > .product-cards-price {

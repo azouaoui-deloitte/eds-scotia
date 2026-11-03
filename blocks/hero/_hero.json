@@ -82,6 +82,10 @@
             {
               "name": "Height 30vw",
               "value": "ratio"
+            },
+            {
+              "name": "Centred on mobile",
+              "value": "center-mobile"
             }
           ]
         }

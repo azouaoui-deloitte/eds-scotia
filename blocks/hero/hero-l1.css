@@ -1,6 +1,7 @@
 /* hero "split" variant (L1 category pages): colour panel with the text on the left half, photo
    on the right (desktop); photo band on top of the panel on tablet; panel only on mobile.
    Colours: maroon (default), sky, gold, aura (full-bleed gradient image, white text). */
+/* stylelint-disable no-descending-specificity */
 main .hero.block.split {
   --hero-bg: #450000;
   --hero-fg: #fff;
@@ -137,6 +138,10 @@ main .hero.block.split .hero-image img {
     display: block;
   }
 
+  main .hero.block.split.center-mobile .hero-content {
+    text-align: center;
+  }
+
   main .hero.block.split .hero-content {
     padding: 72px 20px 52px;
   }
@@ -181,6 +186,8 @@ main .hero.block.split .hero-image img {
   }
 
   main .hero.block.split .hero-image {
+    position: absolute;
+    inset: 0;
     height: 100%;
   }
 

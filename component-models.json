@@ -196,6 +196,14 @@
           {
             "name": "Wide (1320)",
             "value": "wide"
+          },
+          {
+            "name": "Centred intro",
+            "value": "intro"
+          },
+          {
+            "name": "Heading + link",
+            "value": "heading-link"
           }
         ]
       }
@@ -454,6 +462,10 @@
           {
             "name": "Height 30vw",
             "value": "ratio"
+          },
+          {
+            "name": "Centred on mobile",
+            "value": "center-mobile"
           }
         ]
       }

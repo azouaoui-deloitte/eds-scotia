@@ -77,6 +77,14 @@
             {
               "name": "Wide (1320)",
               "value": "wide"
+            },
+            {
+              "name": "Centred intro",
+              "value": "intro"
+            },
+            {
+              "name": "Heading + link",
+              "value": "heading-link"
             }
           ]
         }
