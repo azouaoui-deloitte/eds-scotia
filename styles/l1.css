@@ -838,10 +838,6 @@ main a.l1-tooltip-link:any-link {
   width: min(1040px, calc(100vw - 32px));
 }
 
-.l1-modal .l1-pager {
-  display: none;
-}
-
 @media (width < 768px) {
   .l1-modal .l1-pager {
     display: flex;
