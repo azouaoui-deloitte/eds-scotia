@@ -316,8 +316,13 @@ main .hero.block.split.title-xs :is(h1, h2) {
     margin-bottom: 10px;
   }
 
-  main .hero.block.split .hero-content p.hero-lead + p.hero-cta {
+  main .hero.block.split .hero-content p.hero-lead + p {
     margin-top: 26px;
+  }
+
+  /* featured-benefit block between the lead and the CTA (Mortgages): prod 15px spacer after it */
+  main .hero.block.split .hero-content-inner:has(> p.hero-lead + p:not(.hero-cta)) {
+    padding-bottom: 15px;
   }
 
   main .hero.block.split.maroon .hero-content-inner:has(> h2) p.hero-lead + p.hero-cta {

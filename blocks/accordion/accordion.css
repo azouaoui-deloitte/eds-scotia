@@ -10,11 +10,11 @@
 .accordion .accordion-item-label {
   position: relative;
   display: block;
-  padding: 24px 37.5px 24px 0;
+  padding: 30px 37.5px 24px 0;
   color: #333;
   font-family: var(--body-font-family);
-  font-size: 16px;
-  line-height: 32.5px;
+  font-size: 18px;
+  line-height: 27px;
   cursor: pointer;
   list-style: none;
 }
@@ -125,8 +125,7 @@
 
 /* compact items (76px rows: mortgage FAQs) */
 .accordion.compact .accordion-item-label {
-  padding: 22px 37.5px 22px 0;
-  line-height: 31px;
+  padding: 25px 37.5px 23px 0;
 }
 
 .accordion.footnotes.bold .accordion-item-label {

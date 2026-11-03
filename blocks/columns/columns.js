@@ -15,4 +15,9 @@ export default function decorate(block) {
       }
     });
   });
+
+  // scroll (L1 link lists): swipe carousel with a pager below 1200px
+  if (block.classList.contains('scroll')) {
+    import('../../scripts/l1-carousel.js').then((m) => m.default(block, block.firstElementChild));
+  }
 }

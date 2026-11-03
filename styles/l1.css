@@ -65,6 +65,46 @@ main:has(> .section.l1) {
     line-height: 17.6px;
   }
 
+  /* two-paragraph sub-heading (Mortgages tools): 16px apart */
+  .section:not(.heading-link) .default-content-wrapper > h2 + p:has(+ p:not(.button-wrapper)) {
+    margin-bottom: 16px;
+  }
+
+  .section:not(.heading-link) .default-content-wrapper > h2 + p + p:not(.button-wrapper) {
+    margin: 0 0 30px;
+    font-size: 17.6px;
+    line-height: 17.6px;
+  }
+
+  /* section opening with a leading 45px icon, then an h3 30px above its copy (Mortgage Protection) */
+  .default-content-wrapper > p:first-child:has(> picture:only-child):has(+ h3) {
+    margin: 15px 0;
+    line-height: 0;
+  }
+
+  .default-content-wrapper > p:first-child:has(> picture:only-child) img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .default-content-wrapper > p:first-child:has(> picture:only-child) + h3 {
+    margin-bottom: 30px;
+  }
+
+  /* button row under a 3-up article grid (prod tablet: 60px) */
+  @media (width >= 768px) and (width < 992px) {
+    .section.grey .cards-wrapper:has(.cards.article.cols-3) + .default-content-wrapper:not(:has(> :not(.button-wrapper))) {
+      margin-top: 60px;
+    }
+  }
+
+  /* button row under a card carousel (prod swipe container inset + spacer) */
+  @media (width < 1200px) {
+    .cards-wrapper:has(.cards.scroll:not(.promo)) + .default-content-wrapper:not(:has(> :not(.button-wrapper))) {
+      margin-top: 90px;
+    }
+  }
+
   .default-content-wrapper a:any-link:not(.button),
   .accordion a:any-link,
   .product-cards a:any-link:not(.button) {
@@ -350,7 +390,7 @@ main:has(> .section.l1) {
     padding-top: 45px;
   }
 
-  > .section:has(.cards.scroll):has(+ .section.grey) {
+  > .section:has(.cards.scroll):has(+ .section:is(.grey, .light)) {
     padding-bottom: 90px;
   }
 
@@ -418,8 +458,52 @@ main:has(> .section.l1) {
     max-width: 760px;
   }
 
+  /* STEP band (prod brand3 hero without image): 18px copy, 10px under the title, 46px to the CTA */
+  .section.light .default-content-wrapper > h3 {
+    margin-bottom: 10px;
+  }
+
   .section.light .default-content-wrapper > h3 + p {
-    margin-bottom: 20px;
+    margin-bottom: 46px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  @media (width < 992px) {
+    .section.light {
+      padding: 70px 0;
+    }
+  }
+
+  @media (width < 768px) {
+    .section.light {
+      padding-top: 44px;
+    }
+
+    .section.light > div {
+      padding: 0 20px;
+      text-align: center;
+    }
+
+    .section.light .default-content-wrapper > h3 {
+      text-align: center;
+    }
+
+    .section.light .default-content-wrapper > h3 + p {
+      margin-bottom: 26px;
+    }
+
+    .section.light a.button:any-link {
+      display: block;
+    }
+
+    .cards-wrapper:has(.cards.scroll:not(.promo)) + .default-content-wrapper:not(:has(> :not(.button-wrapper))) {
+      margin-top: 62px;
+    }
+
+    .section.grey .cards-wrapper:has(.cards.article.cols-3) + .default-content-wrapper:not(:has(> :not(.button-wrapper))) {
+      margin-top: 61px;
+    }
   }
 
   .section.charcoal {
@@ -733,6 +817,48 @@ main:has(> .section.l1) {
 
   .section.split > div:not(.default-content-wrapper) {
     grid-row: 3;
+  }
+
+  /* Mortgage rates: the split row follows the intro 16px lower */
+  .section.flush + .section.split {
+    padding-top: 0;
+  }
+
+  .section.flush + .section.split > .accordion-wrapper {
+    margin-top: -19px;
+  }
+
+  /* "Looking to renew? Find out more" (prod lead-text: 19.2px, centred in its column) */
+  .section.split > .default-content-wrapper:first-child > p:last-child:has(> a) {
+    font-size: 19.2px;
+    line-height: 28.8px;
+    text-align: center;
+  }
+
+  /* Mortgages FAQ (compact accordion): 60px bands like prod's spacers */
+  .section:has(.accordion.compact) {
+    padding: 60px 0;
+  }
+
+  /* Mortgages: first section 60px under the hero (prod spacer), at every width */
+  > .section:has(.hero.sky.center-tablet) + .section:not(.subnav) {
+    padding-top: 60px;
+  }
+
+  @media (width < 992px) {
+    .section.flush + .section.split {
+      padding-bottom: 91px;
+    }
+  }
+
+  @media (width < 768px) {
+    .section.flush + .section.split {
+      padding-bottom: 44px;
+    }
+
+    .section.flush + .section.split > .accordion-wrapper {
+      margin-top: 4px;
+    }
   }
 
   .section.split a.button.secondary:any-link {
@@ -1150,5 +1276,12 @@ main a.l1-tooltip-link:any-link {
     justify-content: center;
     gap: 22px;
     margin: 0 0 16px;
+  }
+}
+
+/* Mortgages tablet: prod "Show all" buttons sit in a 210px column, so their label wraps */
+@media (width >= 768px) and (width < 992px) {
+  main:has(.hero.split.sky.center-tablet) .section.grey .cards-wrapper + .default-content-wrapper a.button:any-link {
+    max-width: 197px;
   }
 }

@@ -67,6 +67,10 @@
             {
               "name": "Bulleted links",
               "value": "bullets"
+            },
+            {
+              "name": "Swipe carousel below 1200px",
+              "value": "scroll"
             }
           ]
         }

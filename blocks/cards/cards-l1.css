@@ -561,10 +561,56 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
   }
 }
 
-/* prod tab-pane card carousels sit 15px lower under their pager than product cards */
-@media (width >= 768px) {
+/* card carousels below 1200px (prod swipeable cards): 6px inset, 18 / 17px gaps, the list bleeds
+   to the viewport's right edge so the next card peeks in; 48px pager (18px count) 12px above */
+@media (width < 1200px) {
+  main .cards.scroll:not(.promo) > ul {
+    gap: 18px;
+    margin-right: calc((100% - 100vw) / 2);
+    padding-left: 6px;
+    scroll-padding-left: 6px;
+  }
+
+  main .cards.scroll:not(.promo) > ul > li {
+    box-sizing: border-box;
+    flex-basis: calc(100vw - 72px);
+  }
+
   main .cards.scroll.block:not(.promo) .l1-pager {
-    margin-bottom: 37px;
+    gap: 8px;
+    margin: 53px 0 12px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  main .cards.scroll.block:not(.promo) .l1-pager button {
+    width: 48px;
+    height: 48px;
+  }
+
+  main .cards.cols-2.scroll.block .l1-pager {
+    margin-top: 61px;
+  }
+}
+
+@media (width >= 768px) and (width < 1200px) {
+  main .cards.scroll:not(.promo) > ul {
+    gap: 17px;
+  }
+
+  main .cards.scroll:not(.promo) > ul > li {
+    flex-basis: 331px;
+  }
+}
+
+@media (width >= 992px) and (width < 1200px) {
+  main .cards.scroll:not(.promo) > ul {
+    padding-left: 0;
+    scroll-padding-left: 0;
+  }
+
+  main .cards.scroll:not(.promo) > ul > li {
+    flex-basis: 459px;
   }
 }
 
@@ -820,4 +866,20 @@ main .cards.icons.more .cards-card-image {
   main .cards.icons.more .cards-product-more {
     margin-top: 18px;
   }
+}
+
+/* info cards: 30px padding on mobile (prod card-content) */
+@media (width < 768px) {
+  main .cards.info .cards-card-body {
+    padding: 30px;
+  }
+
+  main .cards.info .cards-card-image {
+    padding: 30px 30px 0;
+  }
+}
+
+/* grey tools carousel (Mortgages): 12px under the icon card title */
+main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body > h4:first-child {
+  margin-bottom: 12px;
 }

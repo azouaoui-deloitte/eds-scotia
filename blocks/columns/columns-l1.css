@@ -327,3 +327,194 @@ main .section:not(.overlap) .columns.box > div > div:first-child:has(> p:first-c
     width: 100%;
   }
 }
+
+/* charcoal banner (Mortgages "Connect with a Home Financing Advisor" band): no rule above, 30px
+   under the title; 2/3 copy + 1/3 column with the button centred (stacked on mobile) */
+main .section.charcoal .columns.banner {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+main .section.charcoal .columns.banner h3 {
+  margin-bottom: 30px;
+}
+
+main .section.charcoal .columns.banner h3 + p {
+  margin-bottom: 16px;
+}
+
+main .section.charcoal .columns.banner > div > div:first-child {
+  max-width: none;
+}
+
+main .section.charcoal .columns.banner > div > div:last-child {
+  text-align: center;
+}
+
+@media (width < 768px) {
+  main .section.charcoal .columns.banner > div {
+    gap: 0;
+  }
+
+  main .section.charcoal .columns.banner > div > div:last-child {
+    width: 100%;
+  }
+}
+
+@media (width >= 768px) {
+  main .section.charcoal .columns.banner > div {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+
+  main .section.charcoal .columns.banner > div > div:first-child {
+    flex: 0 0 calc(66.667% - 10px);
+  }
+
+  main .section.charcoal .columns.banner > div > div:last-child {
+    flex: 0 0 calc(33.333% - 20px);
+  }
+}
+
+/* media (eHOME) on tablet: 20px grey frame bleeding 15px past the grid, 280px art, copy column
+   centred against it */
+@media (width >= 768px) and (width < 992px) {
+  main .columns.media {
+    margin: 0 -15px;
+    padding: 20px;
+  }
+
+  main .columns.media > div {
+    align-items: center;
+    gap: 45px;
+    padding: 0 15px 0 30px;
+  }
+
+  main .columns.media > div > .columns-img-col {
+    flex: 0 0 280px;
+  }
+
+  main .columns.media .columns-img-col img {
+    max-width: 280px;
+  }
+
+  main .columns.media .columns-img-col p {
+    margin: 0;
+  }
+
+  main .columns.media h2 {
+    margin-bottom: 30px;
+  }
+
+  main .columns.media p {
+    margin-bottom: 17px;
+  }
+}
+
+/* links + scroll (Mortgages "Ready to apply" lists): swipe carousel below 1200px, same geometry
+   as the card carousels; prod 28px bold list titles */
+@media (width < 1200px) {
+  main .columns.links.scroll > div:not(.l1-pager) {
+    flex-direction: row;
+    gap: 18px;
+    margin-right: calc((100% - 100vw) / 2);
+    padding-left: 6px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-left: 6px;
+    scrollbar-width: none;
+  }
+
+  main .columns.links.scroll > div:not(.l1-pager) > div {
+    box-sizing: border-box;
+    flex: 0 0 calc(100vw - 72px);
+    padding-top: 10px;
+    scroll-snap-align: start;
+  }
+
+  main .columns.links.scroll ul {
+    padding-top: 20px;
+  }
+
+  main .columns.links.scroll h3 {
+    margin-bottom: 12px;
+    font-family: Scotiabank-Bold, var(--body-font-family);
+    font-size: 28px;
+    line-height: 30.8px;
+    font-weight: 400;
+  }
+
+  main .columns.links.scroll .l1-pager {
+    flex-direction: row;
+    gap: 8px;
+    margin: 53px 0 12px;
+    font-size: 18px;
+    line-height: 27px;
+  }
+
+  main .columns.links.scroll .l1-pager button {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (width >= 768px) and (width < 1200px) {
+  main .columns.links.scroll > div:not(.l1-pager) {
+    gap: 17px;
+  }
+
+  main .columns.links.scroll > div:not(.l1-pager) > div {
+    flex-basis: 331px;
+  }
+}
+
+@media (width >= 992px) and (width < 1200px) {
+  main .columns.links.scroll > div:not(.l1-pager) {
+    padding-left: 0;
+    scroll-padding-left: 0;
+  }
+
+  main .columns.links.scroll > div:not(.l1-pager) > div {
+    flex-basis: 459px;
+  }
+}
+
+/* media (eHOME) on mobile: no frame, 280px art centred above the copy, centred link */
+@media (width < 768px) {
+  main .columns.media {
+    margin: 0 -15px;
+    padding: 0;
+    background: none;
+  }
+
+  main .columns.media > div {
+    gap: 0;
+    padding: 0 15px;
+    background: none;
+  }
+
+  main .columns.media .columns-img-col {
+    text-align: center;
+  }
+
+  main .columns.media .columns-img-col p {
+    margin: 0;
+    line-height: 0;
+  }
+
+  main .columns.media .columns-img-col img {
+    width: 280px;
+    max-width: 100%;
+  }
+
+  main .columns.media h2 {
+    margin-bottom: 29px;
+    font-size: 35px;
+    line-height: 38.5px;
+  }
+
+  main .columns.media p:last-child:has(> a:only-child) {
+    text-align: center;
+  }
+}
