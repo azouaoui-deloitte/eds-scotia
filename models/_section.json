@@ -113,10 +113,6 @@
             {
               "name": "Overlap previous band",
               "value": "overlap"
-            },
-            {
-              "name": "Tabs (L1)",
-              "value": "tabs-l1"
             }
           ]
         }

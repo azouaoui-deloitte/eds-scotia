@@ -232,10 +232,6 @@
           {
             "name": "Overlap previous band",
             "value": "overlap"
-          },
-          {
-            "name": "Tabs (L1)",
-            "value": "tabs-l1"
           }
         ]
       }
@@ -261,6 +257,10 @@
           {
             "name": "Compact rows",
             "value": "compact"
+          },
+          {
+            "name": "Bold label (credit cards)",
+            "value": "bold"
           }
         ]
       }
@@ -644,6 +644,27 @@
         "name": "tags",
         "label": "Filter categories (comma separated)",
         "value": ""
+      }
+    ]
+  },
+  {
+    "id": "tabs",
+    "fields": [
+      {
+        "component": "multiselect",
+        "name": "classes",
+        "label": "Options",
+        "valueType": "string",
+        "options": [
+          {
+            "name": "Filter pills (stay under the heading)",
+            "value": "pills"
+          },
+          {
+            "name": "Show the active panel copy",
+            "value": "panels"
+          }
+        ]
       }
     ]
   },

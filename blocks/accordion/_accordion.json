@@ -53,6 +53,10 @@
             {
               "name": "Compact rows",
               "value": "compact"
+            },
+            {
+              "name": "Bold label (credit cards)",
+              "value": "bold"
             }
           ]
         }

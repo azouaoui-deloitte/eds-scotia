@@ -9,7 +9,8 @@
             "resourceType": "core/franklin/components/block/v1/block",
             "template": {
               "name": "Tabs",
-              "filter": "tabs"
+              "filter": "tabs",
+              "model": "tabs"
             }
           }
         }
@@ -32,6 +33,27 @@
     }
   ],
   "models": [
+    {
+      "id": "tabs",
+      "fields": [
+        {
+          "component": "multiselect",
+          "name": "classes",
+          "label": "Options",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "Filter pills (stay under the heading)",
+              "value": "pills"
+            },
+            {
+              "name": "Show the active panel copy",
+              "value": "panels"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "tab",
       "fields": [

@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
 /* tabs "pills": filter pills (credit-cards page category filter), each paired with a cards grid */
 .tabs.block.pills .tabs-list {
   justify-content: flex-start;
@@ -31,4 +33,52 @@
 
 .tabs.block.pills .tabs-panel {
   display: none;
+}
+
+/* tabs "panels": the active tab's panel copy (heading + intro) shows under the bar (Advice+) */
+.tabs.block.panels .tabs-list {
+  justify-content: center;
+  gap: 0 24px;
+  border-bottom: 1px solid #ccc;
+}
+
+.tabs.block.panels .tabs-tab {
+  padding: 8px 4px 10px;
+  color: #333;
+  font-size: 16px;
+}
+
+.tabs.block.panels .tabs-tab:hover,
+.tabs.block.panels .tabs-tab:focus-visible {
+  color: #333;
+  border-bottom-color: #ccc;
+}
+
+.tabs.block.panels .tabs-tab[aria-selected="true"] {
+  border-bottom-color: #333;
+  color: #333;
+  font-family: Scotiabank-Bold, var(--body-font-family);
+}
+
+.tabs.block.panels .tabs-panel:not([hidden]) {
+  display: block;
+  padding: 30px 0;
+  color: #333;
+  font-size: 17.6px;
+  line-height: 24px;
+  text-align: left;
+}
+
+.tabs.block.panels .tabs-panel h2 {
+  margin: 0 0 8px;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  line-height: 39.6px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  text-align: left;
+}
+
+.tabs.block.panels .tabs-panel p {
+  margin: 0;
 }

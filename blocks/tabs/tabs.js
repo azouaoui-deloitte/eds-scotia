@@ -7,6 +7,7 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
  * (tab 0 -> 1st cards block, tab 1 -> 2nd, ...). Selecting a tab shows its panel text and its
  * matching card grid, hiding the others. Backend-driven tab content on scotiabank.com cannot
  * be fetched cross-origin from Edge Delivery, so each tab carries its own authored cards.
+ * Options (block classes): `pills` (filter pills), `panels` (show the active panel's copy).
  */
 export default function decorate(block) {
   const section = block.closest('.section');
@@ -76,8 +77,11 @@ export default function decorate(block) {
 
   block.replaceChildren(tablist, ...panels);
 
-  // prod renders the tab bar ABOVE the section's "Featured" heading + subtitle. Move the whole
-  // block (tab bar + hidden, UE-editable panels) to the top of the section so the `.tabs.block`
-  // styling still applies and the cards grid follows the heading directly.
-  if (section) section.prepend(block);
+  // Default (personal "Featured"): prod renders the tab bar ABOVE the section's heading +
+  // subtitle, so the whole block (tab bar + hidden, UE-editable panels) moves to the top of the
+  // section and the cards grid follows the heading directly.
+  // Options keep the block where it is authored: `pills` (category filter pills under the
+  // heading, panels hidden) and `panels` (the active tab's panel copy shows under the bar).
+  const inPlace = block.classList.contains('pills') || block.classList.contains('panels');
+  if (section && !inPlace) section.prepend(block);
 }
