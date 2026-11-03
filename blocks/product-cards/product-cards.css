@@ -266,3 +266,9 @@
     flex-basis: auto;
   }
 }
+
+@media (width >= 768px) {
+  main .product-cards.block .l1-pager {
+    margin-bottom: 30px;
+  }
+}

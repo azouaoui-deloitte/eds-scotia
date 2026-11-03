@@ -12,7 +12,7 @@ main:has(> .section.l1) {
     padding: 30px 0;
   }
 
-  > .section[class] > div {
+  > .section > div {
     max-width: none;
     margin: 0 auto;
     padding: 0 30px;
@@ -626,7 +626,7 @@ main:has(> .section.l1) {
       white-space: nowrap;
     }
 
-    > .section[class] > div {
+    > .section > div {
       max-width: none;
       padding: 0 30px;
     }
@@ -688,14 +688,14 @@ main:has(> .section.l1) {
   }
 
   @media (width >= 768px) {
-    > .section[class] > div {
+    > .section > div {
       max-width: 690px;
       padding: 0;
     }
   }
 
   @media (width >= 992px) {
-    > .section[class] > div {
+    > .section > div {
       max-width: 930px;
     }
 
@@ -728,6 +728,13 @@ main:has(> .section.l1) {
     }
   }
 
+  /* the personal page's 900-1109px side gutter (styles.css) must not change the L1 grid */
+  @media (width >= 900px) and (width < 1110px) {
+    .section:not(:has(.hero.block), .wide) > div {
+      padding: 0;
+    }
+  }
+
   @media (width >= 1200px) {
     .l1-pager {
       display: none;
@@ -737,7 +744,7 @@ main:has(> .section.l1) {
       max-width: 1078px;
     }
 
-    > .section[class] > div {
+    > .section > div {
       max-width: 1110px;
     }
 

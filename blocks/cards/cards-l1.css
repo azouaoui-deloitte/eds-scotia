@@ -563,7 +563,7 @@ main .cards.product .cards-card-body p > em a.l1-tooltip-link {
 
 /* prod tab-pane card carousels sit 15px lower under their pager than product cards */
 @media (width >= 768px) {
-  main .cards.scroll:not(.promo) .l1-pager {
+  main .cards.scroll.block:not(.promo) .l1-pager {
     margin-bottom: 37px;
   }
 }
