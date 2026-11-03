@@ -32,11 +32,9 @@
   border-bottom-color: #d3242f;
 }
 
+/* panels stay in the DOM (UE-editable) but prod shows no per-tab text line; the cards switch */
 .tabs.block .tabs-panel {
-  padding: 2px 0 0;
-  text-align: center;
-  color: #333;
-  font-size: 15px;
+  display: none;
 }
 
 .tabs.block .tabs-panel a {
