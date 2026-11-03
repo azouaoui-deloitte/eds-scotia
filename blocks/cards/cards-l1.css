@@ -998,6 +998,8 @@ main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body
 
 /* pill button right under a list (Investing "Ways to invest"): the list's 16px margin only */
 main .cards:is(.info, .article) .cards-card-body > ul + p.button-wrapper:last-child {
+  display: flex;
+  justify-content: center;
   padding-top: 0;
 }
 
@@ -1044,4 +1046,12 @@ main .cards.product.compare .cards-card-body p > em:only-child a.l1-tooltip-link
   flex: 0 0 32px;
   float: none;
   margin: 0;
+}
+
+/* Investing "Ways to invest" on mobile: cards 2-3 keep prod's trailing empty list line (24px)
+   above their button */
+@media (width < 768px) {
+  main .cards.info.tablet-2 > ul > li:not(:first-child) .cards-card-body > ul + p.button-wrapper:last-child {
+    padding-top: 24px;
+  }
 }
