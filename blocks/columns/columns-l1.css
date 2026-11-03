@@ -461,6 +461,85 @@ main .section.charcoal .columns.banner > div > div:last-child {
   }
 }
 
+/* media (eHOME) at 992-1199px: 40px grey frame bleeding 15px past the grid, the white panel as
+   tall as the 263px art, copy 30px right of it */
+@media (width >= 992px) and (width < 1200px) {
+  main .columns.media {
+    margin: 0 -15px;
+    padding: 40px;
+  }
+
+  main .columns.media > div {
+    align-items: center;
+    gap: 30px;
+    padding: 0 15px;
+  }
+
+  main .columns.media > div > .columns-img-col {
+    flex: 0 0 263px;
+  }
+
+  main .columns.media .columns-img-col img {
+    display: block;
+    max-width: 263px;
+  }
+
+  main .columns.media .columns-img-col p {
+    margin: 0;
+  }
+
+  main .columns.media h2 {
+    margin-bottom: 30px;
+  }
+
+  main .columns.media p {
+    margin-bottom: 17px;
+  }
+
+  main .columns.media > div > div:last-child > :last-child {
+    margin-bottom: 0;
+  }
+}
+
+/* media (eHOME) from 1200px: same frame, 280px art 37px in, copy 51px right of it */
+@media (width >= 1200px) {
+  main .columns.media {
+    margin: 0 -15px;
+    padding: 40px;
+  }
+
+  main .columns.media > div {
+    align-items: center;
+    gap: 51px;
+    padding: 0 15px 0 37px;
+  }
+
+  main .columns.media > div > .columns-img-col {
+    flex: 0 0 280px;
+  }
+
+  main .columns.media .columns-img-col img {
+    display: block;
+    max-width: 280px;
+  }
+
+  main .columns.media .columns-img-col p {
+    margin: 0;
+  }
+
+  main .columns.media h2 {
+    margin-bottom: 30px;
+  }
+
+  main .columns.media p {
+    margin-bottom: 17px;
+  }
+
+  main .columns.media > div > div:last-child > :last-child {
+    margin-bottom: 0;
+  }
+}
+
 /* links + scroll (Mortgages "Ready to apply" lists): swipe carousel below 1200px, same geometry
    as the card carousels; prod 28px bold list titles */
 @media (width < 1200px) {

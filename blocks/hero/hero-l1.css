@@ -413,3 +413,36 @@ main .hero.block.split.title-xs :is(h1, h2) {
     margin-bottom: 10px;
   }
 }
+
+/* Mortgages at 992-1199px (prod 520px hero): copy 53px from the top, the featured benefit 25px under
+   the lead, the CTA 38px under the offer */
+@media (width >= 992px) and (width < 1200px) {
+  main .hero.block.split.sky.center-tablet:not(.title-s) .hero-content {
+    padding-top: 53px;
+    padding-bottom: 43px;
+  }
+
+  main .hero.block.split.sky.center-tablet:not(.title-s) .hero-content p.hero-lead + p {
+    margin-top: 25px;
+  }
+
+  main .hero.block.split.sky.center-tablet:not(.title-s) .hero-content p.hero-cta {
+    margin-top: 38px;
+  }
+}
+
+/* Mortgages from 1200px: featured benefit 25px under the lead, the CTA 36px under the offer, 55px
+   bottom padding */
+@media (width >= 1200px) {
+  main .hero.block.split.sky.center-tablet:not(.title-s) .hero-content {
+    padding-bottom: 55px;
+  }
+
+  main .hero.block.split.sky.center-tablet:not(.title-s) .hero-content p.hero-lead + p {
+    margin-top: 25px;
+  }
+
+  main .hero.block.split.sky.center-tablet:not(.title-s) .hero-content p.hero-cta {
+    margin-top: 36px;
+  }
+}
