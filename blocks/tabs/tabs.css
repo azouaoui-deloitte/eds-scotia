@@ -4,6 +4,12 @@
   margin: 0;
 }
 
+/* the default block is moved to the section top (a `.section > div` capped at 1110px), so it
+   needs the section's auto inline margins back to stay centred above 1110px */
+main > .section > .tabs.block {
+  margin-inline: auto;
+}
+
 .tabs.block .tabs-list {
   display: flex;
   flex-wrap: wrap;
