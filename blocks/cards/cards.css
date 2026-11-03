@@ -57,11 +57,18 @@
   }
 }
 
-/* interest tiles stack until desktop, matching prod (tablet shows one column) */
+/* interest tiles stack until desktop, matching prod (tablet shows one column). Prod desktop:
+   centred 1155px row of 369px tiles with 24px gaps, ~53px below the heading (net of block
+   spacing); the row is wider than the 1110px section, so it bleeds out symmetrically */
 @media (width >= 900px) {
+  .cards.interest {
+    margin-top: 55px;
+  }
+
   .cards.interest > ul {
     grid-template-columns: repeat(3, 1fr);
-    gap: 69px;
+    gap: 24px;
+    margin-inline: calc((100% - 1155px) / 2);
   }
 }
 
@@ -83,10 +90,16 @@
   }
 }
 
-/* 1024-ish (900-1109): prod's 3-col interest uses a ~24px gap, not the wide 69px desktop gap */
-@media (width >= 900px) and (width < 1110px) {
+/* 1024-ish (900-1199): prod's 3-col interest row is a centred 940px grid (284px tiles, 44px gaps) */
+@media (width >= 900px) and (width < 1200px) {
+  .cards.interest {
+    margin-top: 49px;
+  }
+
   .cards.interest > ul {
-    gap: 24px;
+    gap: 44px;
+    max-width: 940px;
+    margin-inline: auto;
   }
 }
 
@@ -95,26 +108,27 @@
   .cards.interest > ul {
     max-width: 424px;
     margin-inline: auto;
+    gap: 34px; /* prod tablet tile pitch 507 */
   }
 }
 
-/* mobile: prod leaves ~29px more between the heading and the first tile */
+/* mobile: prod leaves ~50px more between the heading and the first tile */
 @media (width < 600px) {
   .cards.interest {
-    margin-top: 29px;
+    margin-top: 50px;
   }
 }
 
-/* tablet: prod leaves ~31px between the centred heading and the first tile */
+/* tablet: prod leaves ~60px between the centred heading and the first tile */
 @media (width >= 600px) and (width < 900px) {
   .cards.interest {
-    margin-top: 31px;
+    margin-top: 60px;
   }
 }
 
 @media (width >= 900px) {
   .cards.interest > ul > li {
-    min-height: 560px;
+    min-height: 510px;
   }
 }
 
@@ -135,30 +149,32 @@
   z-index: 1;
   width: 100%;
   color: #fff;
-  padding: 24px 24px 24px 20px;
   background: linear-gradient(transparent, rgb(0 0 0 / 15%) 40%, rgb(0 0 0 / 78%));
+
+  /* prod overlay: a 160px band at the tile bottom with title and link spaced evenly
+     (link ~28px above the tile bottom for a 2-line title) */
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 0 20px;
 }
 
-/* desktop tiles sit edge-to-edge with wide gaps; text aligns to the card edge */
-@media (width >= 900px) {
-  .cards.interest .cards-card-body {
-    padding-left: 0;
-  }
-}
-
-/* mobile/tablet: text block sits closer to the tile bottom, matching prod */
-@media (width <= 899px) {
-  .cards.interest .cards-card-body {
-    padding-bottom: 0;
-  }
-}
-
-/* the credit-card art floats above the title, overlapping the photo */
+/* the credit-card art floats over the photo, centred, its bottom 240px above the tile bottom
+   (80px above the band), like prod; the band is flush with the tile bottom */
 .cards.interest .cards-card-body picture {
   position: absolute;
-  bottom: 120px;
-  left: 24px;
-  width: 58%;
+  bottom: 240px;
+  left: 0;
+  right: 0;
+  width: 160px;
+  margin-inline: auto;
+}
+
+@media (width >= 900px) {
+  .cards.interest .cards-card-body picture {
+    width: 220px;
+  }
 }
 
 .cards.interest .cards-card-body picture img {
@@ -169,12 +185,35 @@
 
 .cards.interest .cards-card-body h3 {
   color: #fff;
-  font-size: 20px;
-  margin-bottom: 32px;
+  font-family: scotiabank-bold, var(--body-font-family);
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 27px;
+  letter-spacing: normal;
+  text-wrap: wrap;
+  margin: 0;
+}
+
+.cards.interest .cards-card-body > p {
+  font-size: 16px;
+  line-height: 24px;
+  margin: 0;
+}
+
+/* the card-art wrapper must not count as a flex item in the evenly spaced band */
+.cards.interest .cards-card-body > p:has(picture) {
+  display: contents;
+}
+
+/* prod's link glyphs sit ~3px higher in the band than an evenly spaced 24px line box */
+.cards.interest .cards-card-body > p:last-child {
+  position: relative;
+  top: -3px;
 }
 
 .cards.interest .cards-card-link {
   color: #fff;
+  font-weight: 400;
 }
 
 .cards.interest .cards-card-link:hover,
@@ -263,6 +302,15 @@ main .section:has(.tabs) .cards.featured {
      ~42px below so the bottom-anchored CTA sits ~62px above the card edge like prod. */
   .cards.featured .cards-card-body {
     padding: 36px 36px 42px;
+  }
+}
+
+/* 1024-ish: prod's Featured grid is a centred 930px row (290px cards, 30px gaps, x47 at 1024);
+   L1 article grids keep their own layout */
+@media (width >= 1000px) and (width < 1200px) {
+  .cards.featured:not(.article) > ul {
+    max-width: 930px;
+    column-gap: 30px;
   }
 }
 
