@@ -697,10 +697,11 @@ main:has(> .section.l1) {
     justify-content: center;
   }
 
+  /* prod navigation-bar: 60px items (10px padding), 40px apart after a 40px inset */
   .section.subnav ul {
     display: flex;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 0 0 40px;
     list-style: none;
     background: #fff;
     border: 1px solid #e2e8ee;
@@ -709,18 +710,37 @@ main:has(> .section.l1) {
 
   .section.subnav li {
     margin: 0;
-    padding: 0 20px;
+    padding: 0 40px 0 0;
   }
 
   .section.subnav a:any-link {
     display: block;
-    padding: 18px 12px 15px;
+    padding: 18px 10px 15px;
     border-bottom: 3px solid transparent;
     color: #333;
     font-family: var(--body-font-family);
     font-size: 16px;
-    line-height: 21px;
+    line-height: 24px;
     text-decoration: none;
+  }
+
+  /* below 992px the bar runs full width (items centred; scrolling from the left on mobile) */
+  @media (width < 992px) {
+    .section.subnav:not(.subnav-wide) {
+      margin-top: -30px;
+    }
+
+    .section.subnav:not(.subnav-wide) > div {
+      max-width: none;
+      padding: 0;
+      background: #fff;
+      border: 1px solid #e2e8ee;
+    }
+
+    .section.subnav:not(.subnav-wide) ul {
+      border: 0;
+      box-shadow: none;
+    }
   }
 
   .section.subnav strong a:any-link,
@@ -980,6 +1000,10 @@ main:has(> .section.l1) {
       padding-bottom: 96px;
     }
 
+    > .section:has(.hero):has(+ .section.subnav:not(.subnav-wide)) .hero-content {
+      padding-bottom: 100px;
+    }
+
     > .section > div {
       max-width: none;
       padding: 0 30px;
@@ -1028,7 +1052,7 @@ main:has(> .section.l1) {
 
     .section.subnav li {
       flex: 0 0 auto;
-      padding: 0 20px 0 0;
+      padding: 0 40px 0 0;
     }
 
     .section.subnav li:first-child {

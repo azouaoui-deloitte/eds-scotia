@@ -43,7 +43,8 @@
           "valueType": "string",
           "options": [
             { "name": "Category filter + show more", "value": "filter" },
-            { "name": "Credit card layout", "value": "credit" }
+            { "name": "Credit card layout", "value": "credit" },
+            { "name": "Grid at every width (no carousel)", "value": "grid" }
           ]
         }
       ]

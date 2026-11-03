@@ -957,3 +957,19 @@ main .section.grey .cards.info.scroll.block .cards-card-image + .cards-card-body
     font-weight: 700;
   }
 }
+
+/* tablet-2: two columns from 768 to 991px, an odd last card spans the row (prod has-3-cols rows) */
+@media (width >= 768px) and (width < 992px) {
+  main .cards.info.tablet-2:not(.cols-2) > ul:has(> li:nth-child(3)) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  main .cards.tablet-2 > ul > li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* pill button right under a list (Investing "Ways to invest"): the list's 16px margin only */
+main .cards:is(.info, .article) .cards-card-body > ul + p.button-wrapper:last-child {
+  padding-top: 0;
+}

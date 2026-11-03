@@ -272,3 +272,53 @@
     margin-bottom: 30px;
   }
 }
+
+/* grid (Investing "Popular accounts and products"): plain grid at every width, no pager -
+   1 column, 2 from 768px (an odd last card spans the row), 3 from 992px */
+.product-cards.grid > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 30px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+@media (width >= 768px) {
+  .product-cards.grid > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .product-cards.grid > ul > li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (width >= 992px) {
+  .product-cards.grid > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .product-cards.grid > ul > li:last-child:nth-child(odd) {
+    grid-column: auto;
+  }
+}
+
+/* product cards on mobile: 30px padding (prod card-content); button row as tall as its button */
+@media (width < 768px) {
+  .product-cards.grid > ul > li {
+    padding: 30px;
+  }
+
+  .product-cards.grid .product-cards-actions p.button-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* grid, below 992px: an offer-less card keeps prod's authored spacers (166px) above its buttons */
+@media (width < 992px) {
+  .product-cards.grid .product-cards-body:not(:has(.product-cards-offer)) .product-cards-actions {
+    margin-top: 166px;
+  }
+}

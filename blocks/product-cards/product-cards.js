@@ -124,6 +124,7 @@ export default function decorate(block) {
     img.closest('picture').replaceWith(pic);
   });
   block.replaceChildren(ul);
-  block.productCardsUpdate = buildPager(block, ul);
+  // grid: a plain grid at every width (no swipe carousel / pager)
+  if (!block.classList.contains('grid')) block.productCardsUpdate = buildPager(block, ul);
   if (block.classList.contains('filter')) buildFilter(block, ul);
 }

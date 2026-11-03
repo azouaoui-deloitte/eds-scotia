@@ -114,6 +114,10 @@
               "value": "highlights"
             },
             {
+              "name": "2 columns on tablet (odd last card full width)",
+              "value": "tablet-2"
+            },
+            {
               "name": "Show more after 3 (product)",
               "value": "more"
             },
