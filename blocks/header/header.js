@@ -2,6 +2,7 @@ import { getMetadata, loadCSS } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import initNav from './nav-behavior.js';
 import initCompass from './compass-behavior.js';
+import initMxHeader from './mx-behavior.js';
 import { compassHeaderHtml, parseCompassNav } from './compass.js';
 
 const icon = (name) => `${window.hlx.codeBasePath}/icons/${name}.svg`;
@@ -345,14 +346,15 @@ async function buildNav(navPath) {
 
 /**
  * Server-rendered header of an AEM Experience Fragment (scotia/components/header): the
- * `.nav-wrapper` (classic) or `.compass` (compass variant) of the XF variation content.
+ * `.nav-wrapper` (classic), `.compass` (compass variant) or `.mx-header` (Scotiabank Mexico) of
+ * the XF variation content.
  */
 async function loadExperienceFragment(path) {
   try {
     const resp = await fetch(`${path.replace(/\.html$/, '')}.content.html?wcmmode=disabled`);
     if (!resp.ok) return null;
     const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
-    const wrapper = doc.querySelector('.nav-wrapper, .compass');
+    const wrapper = doc.querySelector('.nav-wrapper, .compass, .mx-header');
     return wrapper ? document.adoptNode(wrapper) : null;
   } catch {
     return null;
@@ -365,7 +367,7 @@ async function loadExperienceFragment(path) {
  * (template structure) is only bound.
  */
 export default async function decorate(block) {
-  let nav = block.querySelector('nav#nav, .compass');
+  let nav = block.querySelector('nav#nav, .compass, .mx-header');
   if (!nav) {
     const navMeta = getMetadata('nav');
     // Default to a nav fragment in the current content directory so the site works both
@@ -378,9 +380,12 @@ export default async function decorate(block) {
     block.textContent = '';
     if (!navWrapper) return;
     block.append(navWrapper);
-    nav = navWrapper.matches('.compass') ? navWrapper : navWrapper.querySelector('nav#nav');
+    nav = navWrapper.matches('.compass, .mx-header') ? navWrapper : navWrapper.querySelector('nav#nav');
   }
-  if (nav.matches('.compass')) {
+  if (nav.matches('.mx-header')) {
+    await loadCSS(`${window.hlx.codeBasePath}/blocks/header/header-mx.css`);
+    initMxHeader(nav);
+  } else if (nav.matches('.compass')) {
     await loadCSS(`${window.hlx.codeBasePath}/blocks/header/header-compass.css`);
     initCompass(nav);
   } else {

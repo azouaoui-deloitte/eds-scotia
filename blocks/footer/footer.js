@@ -1,6 +1,7 @@
 import { getMetadata, loadCSS } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import initFooter from './footer-behavior.js';
+import initMxFooter from './footer-mx-behavior.js';
 import { compassFooterHtml, parseCompassFooter } from '../header/compass.js';
 
 const el = (tag, cls, ...children) => {
@@ -112,14 +113,15 @@ async function buildFooter(footerPath) {
 
 /**
  * Server-rendered footer of an AEM Experience Fragment (scotia/components/footer): the
- * `.footer-inner` of the XF variation content.
+ * `.footer-inner` (classic), `.cmp-footer` (compass) or `.mx-footer` (Scotiabank Mexico) of the
+ * XF variation content.
  */
 async function loadExperienceFragment(path) {
   try {
     const resp = await fetch(`${path.replace(/\.html$/, '')}.content.html?wcmmode=disabled`);
     if (!resp.ok) return null;
     const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
-    const inner = doc.querySelector('.footer-inner, .cmp-footer');
+    const inner = doc.querySelector('.footer-inner, .cmp-footer, .mx-footer');
     return inner ? document.adoptNode(inner) : null;
   } catch {
     return null;
@@ -132,7 +134,7 @@ async function loadExperienceFragment(path) {
  * block (template structure) is only bound.
  */
 export default async function decorate(block) {
-  let inner = block.querySelector('.footer-inner, .cmp-footer');
+  let inner = block.querySelector('.footer-inner, .cmp-footer, .mx-footer');
   if (!inner) {
     const footerMeta = getMetadata('footer');
     // Default to a footer fragment in the current content directory so the site works both
@@ -145,6 +147,11 @@ export default async function decorate(block) {
     block.textContent = '';
     if (!inner) return;
     block.append(inner);
+  }
+  if (inner.matches('.mx-footer')) {
+    await loadCSS(`${window.hlx.codeBasePath}/blocks/footer/footer-mx.css`);
+    initMxFooter(inner);
+    return;
   }
   if (inner.matches('.cmp-footer')) await loadCSS(`${window.hlx.codeBasePath}/blocks/footer/footer-compass.css`);
   initFooter(inner);
