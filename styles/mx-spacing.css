@@ -19,8 +19,8 @@
 /* ---------- Soluciones integrales: tab panel section -> QR banner ---------- */
 
 /* target: mx.css `.section.mx-tab { padding-bottom }`; prod section.sc-novedades has no bottom
-   padding below 768px and pb-md-5 (48px) from 768px */
-html body.mx main > .section.mx-tab { padding-bottom: 24px; }
+   padding below 768px (the panel's own trailing margins make the gap) and pb-md-5 (48px) from 768px */
+html body.mx main > .section.mx-tab { padding-bottom: 0; }
 
 @media (width >= 768px) {
   html body.mx main > .section.mx-tab { padding-bottom: 48px; }
