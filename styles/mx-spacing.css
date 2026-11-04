@@ -1,0 +1,68 @@
+/* Scotiabank México: spacing between sections / components and the section frames (prod parity).
+   Loaded right after styles/mx.css on MX pages only. Every rule is scoped to body.mx with a leading
+   `html` so it outranks the equivalent mx.css rule whatever the load order; component internals
+   (cards, tab panels, header, footer) stay in mx.css and the block CSS. */
+
+/* page zoom: prod (redesign_desktop.css) renders the whole page at 75% from 600 to 1023px wide
+   when the viewport is at least 400px tall; media queries still see the real viewport width */
+@media (width >= 600px) and (width <= 1023px) and (height >= 400px) {
+  html:has(> body.mx) { zoom: 0.75; }
+}
+
+/* section rows keep prod's 15px column gutters from 900 to 1109px: styles.css
+   `main .section:not(:has(.hero.block)) > div { padding: 0 24px }` (CA) outranks mx.css's generic
+   `body.mx main > .section > div`; the more specific mx.css wrapper rules still apply */
+@media (width >= 900px) and (width < 1110px) {
+  html body.mx main > .section:not(.mx-hero) > div { padding-inline: 15px; }
+}
+
+/* ---------- Soluciones integrales: tab panel section -> QR banner ---------- */
+
+/* target: mx.css `.section.mx-tab { padding-bottom }`; prod section.sc-novedades has no bottom
+   padding below 768px and pb-md-5 (48px) from 768px */
+html body.mx main > .section.mx-tab { padding-bottom: 24px; }
+
+@media (width >= 768px) {
+  html body.mx main > .section.mx-tab { padding-bottom: 48px; }
+}
+
+/* ---------- QR banner frame ---------- */
+
+/* prod div.container.sc-novedades > div: 1280px max-width row centred in the full-bleed band,
+   15px gutters below 720px, none from 720px, 28px from 768 to 1024px; the card is 70% of that row
+   (100% up to 768px). Targets: mx.css `main > .section` container padding and `.columns.mx-qr` width */
+html body.mx main > .section.mx-qr { padding-inline: 0; }
+
+html body.mx main > .section.mx-qr > .columns-wrapper {
+  box-sizing: border-box;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+html body.mx main > .section.mx-qr .columns.mx-qr { width: 70%; }
+
+@media (width >= 720px) {
+  html body.mx main > .section.mx-qr > .columns-wrapper { padding: 0; }
+}
+
+@media (width >= 768px) and (width <= 1024px) {
+  html body.mx main > .section.mx-qr > .columns-wrapper { padding: 0 28px; }
+}
+
+@media (width <= 768px) {
+  html body.mx main > .section.mx-qr .columns.mx-qr { width: 100%; }
+}
+
+/* ---------- Más que un Banco: heading -> boxes -> notice ---------- */
+
+/* prod wraps the boxes and the notice in one `.sc-row.p-xs-24` row: 24px padding on every side
+   below 768px. Local: two cards wrappers (boxes, notice) -> 15px gutter + 24px inline, 24px above
+   the first and below the last. Target: mx.css `main > .section > div` padding */
+@media (width <= 767px) {
+  html body.mx main > .section.mx-normativas > .cards-wrapper { padding-inline: 39px; }
+
+  html body.mx main > .section.mx-normativas > .default-content-wrapper + .cards-wrapper { padding-top: 24px; }
+
+  html body.mx main > .section.mx-normativas > .cards-wrapper:last-child { padding-bottom: 24px; }
+}
