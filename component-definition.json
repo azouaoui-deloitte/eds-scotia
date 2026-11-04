@@ -160,6 +160,21 @@
           }
         },
         {
+          "title": "MX Card",
+          "id": "card-mx",
+          "plugins": {
+            "xwalk": {
+              "page": {
+                "resourceType": "core/franklin/components/block/v1/block/item",
+                "template": {
+                  "name": "MX Card",
+                  "model": "card-mx"
+                }
+              }
+            }
+          }
+        },
+        {
           "title": "Columns",
           "id": "columns",
           "plugins": {

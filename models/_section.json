@@ -121,6 +121,42 @@
             {
               "name": "Quiz column",
               "value": "quiz"
+            },
+            {
+              "name": "MX page (first section)",
+              "value": "mx"
+            },
+            {
+              "name": "MX: hero",
+              "value": "mx-hero"
+            },
+            {
+              "name": "MX: promo band",
+              "value": "mx-promo"
+            },
+            {
+              "name": "MX: text left, block right",
+              "value": "mx-split"
+            },
+            {
+              "name": "MX: soluciones (grey band + tabs)",
+              "value": "mx-novedades"
+            },
+            {
+              "name": "MX: tab panel",
+              "value": "mx-tab"
+            },
+            {
+              "name": "MX: QR banner band",
+              "value": "mx-qr"
+            },
+            {
+              "name": "MX: dark band",
+              "value": "mx-credito"
+            },
+            {
+              "name": "MX: más que un banco",
+              "value": "mx-normativas"
             }
           ]
         }

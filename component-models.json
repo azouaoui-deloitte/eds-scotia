@@ -240,6 +240,42 @@
           {
             "name": "Quiz column",
             "value": "quiz"
+          },
+          {
+            "name": "MX page (first section)",
+            "value": "mx"
+          },
+          {
+            "name": "MX: hero",
+            "value": "mx-hero"
+          },
+          {
+            "name": "MX: promo band",
+            "value": "mx-promo"
+          },
+          {
+            "name": "MX: text left, block right",
+            "value": "mx-split"
+          },
+          {
+            "name": "MX: soluciones (grey band + tabs)",
+            "value": "mx-novedades"
+          },
+          {
+            "name": "MX: tab panel",
+            "value": "mx-tab"
+          },
+          {
+            "name": "MX: QR banner band",
+            "value": "mx-qr"
+          },
+          {
+            "name": "MX: dark band",
+            "value": "mx-credito"
+          },
+          {
+            "name": "MX: más que un banco",
+            "value": "mx-normativas"
           }
         ]
       }
@@ -381,6 +417,54 @@
           {
             "name": "Quiz (Advice+)",
             "value": "quiz"
+          },
+          {
+            "name": "MX: hero rotator (slides)",
+            "value": "mx-hero"
+          },
+          {
+            "name": "MX: image tiles with overlay",
+            "value": "mx-tiles"
+          },
+          {
+            "name": "MX: mosaic grid (Destacado)",
+            "value": "mx-mosaic"
+          },
+          {
+            "name": "MX: wide tile",
+            "value": "mx-wide"
+          },
+          {
+            "name": "MX: slider with dots",
+            "value": "mx-slider"
+          },
+          {
+            "name": "MX: key points (icons)",
+            "value": "mx-keys"
+          },
+          {
+            "name": "MX: key points, 2 columns with divider",
+            "value": "mx-keys-text"
+          },
+          {
+            "name": "MX: colour boxes",
+            "value": "mx-boxes"
+          },
+          {
+            "name": "MX: icon cards",
+            "value": "mx-icons"
+          },
+          {
+            "name": "MX: media cards (photo + title)",
+            "value": "mx-media"
+          },
+          {
+            "name": "MX: feature card",
+            "value": "mx-feature"
+          },
+          {
+            "name": "MX: notice box",
+            "value": "mx-notice"
           }
         ]
       }
@@ -479,6 +563,101 @@
     ]
   },
   {
+    "id": "card-mx",
+    "fields": [
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "image",
+        "label": "Image (background / photo / icon)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "imageAlt",
+        "label": "Alt",
+        "value": ""
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "imageMobile",
+        "label": "Mobile image (768px and below)",
+        "multi": false
+      },
+      {
+        "component": "reference",
+        "valueType": "string",
+        "name": "art",
+        "label": "Art (side image / logo)",
+        "multi": false
+      },
+      {
+        "component": "text",
+        "valueType": "string",
+        "name": "artAlt",
+        "label": "Art alt",
+        "value": ""
+      },
+      {
+        "component": "richtext",
+        "name": "text",
+        "value": "",
+        "label": "Text",
+        "valueType": "string"
+      },
+      {
+        "component": "multiselect",
+        "valueType": "string",
+        "name": "style",
+        "label": "Style",
+        "options": [
+          {
+            "name": "Charcoal",
+            "value": "charcoal"
+          },
+          {
+            "name": "Sky",
+            "value": "sky"
+          },
+          {
+            "name": "Stone",
+            "value": "stone"
+          },
+          {
+            "name": "Grey",
+            "value": "grey"
+          },
+          {
+            "name": "Oxblood",
+            "value": "oxblood"
+          },
+          {
+            "name": "Ocean",
+            "value": "ocean"
+          },
+          {
+            "name": "Light text",
+            "value": "light"
+          },
+          {
+            "name": "Overlay on the right",
+            "value": "right"
+          },
+          {
+            "name": "Wide",
+            "value": "wide"
+          },
+          {
+            "name": "Large logo",
+            "value": "logo-lg"
+          }
+        ]
+      }
+    ]
+  },
+  {
     "id": "columns",
     "fields": [
       {
@@ -532,6 +711,14 @@
           {
             "name": "Swipe carousel below 1200px",
             "value": "scroll"
+          },
+          {
+            "name": "MX: QR banner",
+            "value": "mx-qr"
+          },
+          {
+            "name": "MX: document card + video",
+            "value": "mx-brand"
           }
         ]
       }
@@ -727,6 +914,10 @@
           {
             "name": "Show the active panel copy",
             "value": "panels"
+          },
+          {
+            "name": "MX: panels are the following \"MX tab panel\" sections",
+            "value": "mx"
           }
         ]
       }

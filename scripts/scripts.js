@@ -180,6 +180,13 @@ async function loadEager(doc) {
   }
   if (main) {
     decorateMain(main);
+    // Scotiabank México pages (section style "mx" on the first section): own fonts, type scale
+    // and bands, scoped to body.mx so the CA pages never load or match them
+    if (main.querySelector(':scope > .section.mx')) {
+      document.documentElement.lang = 'es-MX';
+      document.body.classList.add('mx');
+      await loadCSS(`${window.hlx.codeBasePath}/styles/mx.css`);
+    }
     document.body.classList.add('appear');
     const firstSection = main.querySelector('.section');
     if (firstSection) await loadSection(firstSection, waitForFirstImage);
@@ -232,7 +239,8 @@ async function loadLazy(doc) {
   // eslint-disable-next-line import/no-cycle
   if (main.querySelector('a[href*="/modals/"], a[href*="/tooltips/"]')) import('./l1-modal.js').then((m) => m.default(main));
   if (main.querySelector('.section.subnav-select')) import('./l1-subnav.js').then((m) => m.default(main));
-  decorateBackToTop();
+  // MX: the footer Experience Fragment carries its own back-to-top button
+  if (!document.body.classList.contains('mx')) decorateBackToTop();
 
   const { hash } = window.location;
   const element = hash ? doc.getElementById(hash.substring(1)) : false;

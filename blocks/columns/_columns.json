@@ -71,6 +71,14 @@
             {
               "name": "Swipe carousel below 1200px",
               "value": "scroll"
+            },
+            {
+              "name": "MX: QR banner",
+              "value": "mx-qr"
+            },
+            {
+              "name": "MX: document card + video",
+              "value": "mx-brand"
             }
           ]
         }

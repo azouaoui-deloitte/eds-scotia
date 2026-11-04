@@ -49,6 +49,10 @@
             {
               "name": "Show the active panel copy",
               "value": "panels"
+            },
+            {
+              "name": "MX: panels are the following \"MX tab panel\" sections",
+              "value": "mx"
             }
           ]
         }
