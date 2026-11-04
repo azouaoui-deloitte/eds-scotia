@@ -200,6 +200,9 @@ body.mx main p.button-wrapper {
   margin: 0;
 }
 
+/* prod buttons wrap their label in a block span: the line box is just the button's margin box */
+body.mx main p.button-wrapper > a.button { vertical-align: top; }
+
 /* neutralise the base cards grid / tile look (`.cards > ul`, `.cards > ul > li`) */
 .cards > .mx-list { gap: 0; }
 
