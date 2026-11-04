@@ -589,20 +589,20 @@
       {
         "component": "reference",
         "valueType": "string",
-        "name": "art",
-        "label": "Art (side image / logo)",
+        "name": "content_art",
+        "label": "Art / logo (shown before the text)",
         "multi": false
       },
       {
         "component": "text",
         "valueType": "string",
-        "name": "artAlt",
+        "name": "content_artAlt",
         "label": "Art alt",
         "value": ""
       },
       {
         "component": "richtext",
-        "name": "text",
+        "name": "content_text",
         "value": "",
         "label": "Text",
         "valueType": "string"
