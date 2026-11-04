@@ -656,6 +656,10 @@
           {
             "name": "Blank line after the copy",
             "value": "spaced"
+          },
+          {
+            "name": "Icon centred in a half-width box",
+            "value": "icon-half"
           }
         ]
       }
