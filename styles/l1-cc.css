@@ -218,6 +218,31 @@ main:has(> .section.l1) {
     }
   }
 
+  /* newer prod design (credit-cards): filled buttons darken (#be0e15, pressed #900a10), outline
+     buttons turn light grey, focus adds a 5px teal ring inside a 2px white outline */
+  .section.wide a.button.primary:any-link:hover,
+  .section.wide a.button.primary:any-link:focus-visible {
+    border-color: #be0e15;
+    background: #be0e15;
+    color: #fff;
+  }
+
+  .section.wide a.button.primary:any-link:active {
+    border-color: #900a10;
+    background: #900a10;
+  }
+
+  .section.wide a.button.secondary:any-link:hover,
+  .section.wide a.button.secondary:any-link:focus-visible {
+    background: #ebebeb;
+    color: #3d3d3d;
+  }
+
+  .section.wide :is(a.button:any-link, button):focus-visible {
+    outline: 2px solid #fff;
+    box-shadow: 0 0 0 5px #368e99;
+  }
+
   @media (width >= 992px) {
     .section.faq-side.split > div {
       padding: 0;

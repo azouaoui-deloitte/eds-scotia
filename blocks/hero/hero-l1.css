@@ -111,9 +111,21 @@ main .hero.block.split .hero-cta a.button {
 
 main .hero.block.split .hero-cta a.button:hover,
 main .hero.block.split .hero-cta a.button:focus-visible {
-  border-color: #000;
-  background: #000;
-  color: #fff;
+  border-color: #333;
+  background: transparent;
+  color: #333;
+}
+
+main .hero.block.split.gold .hero-cta a.button {
+  border-color: #1f1f1f;
+  background: #1f1f1f;
+}
+
+main .hero.block.split.gold .hero-cta a.button:hover,
+main .hero.block.split.gold .hero-cta a.button:focus-visible {
+  border-color: #1f1f1f;
+  background: transparent;
+  color: #1f1f1f;
 }
 
 main .hero.block.split:is(.maroon, .aura) .hero-cta a.button {
@@ -125,8 +137,8 @@ main .hero.block.split:is(.maroon, .aura) .hero-cta a.button {
 main .hero.block.split:is(.maroon, .aura) .hero-cta a.button:hover,
 main .hero.block.split:is(.maroon, .aura) .hero-cta a.button:focus-visible {
   border-color: #fff;
-  background: #f2f2f2;
-  color: #333;
+  background: transparent;
+  color: #fff;
 }
 
 /* tablet band: the art-directed tablet crop (prod medium rendition) cover-fitted in a 298px band;
@@ -248,7 +260,15 @@ main .hero.block.split .hero-image img {
     height: 100%;
   }
 
+  /* the art fills the hero's height (400 / 407 / 450 / 500px variants) */
+  main .hero.block.split .hero-image > div,
+  main .hero.block.split .hero-image picture {
+    height: 100%;
+  }
+
   main .hero.block.split .hero-image img {
+    height: 100%;
+    object-fit: cover;
     object-position: right center;
   }
 

@@ -112,6 +112,37 @@ main .columns.banner:not(.box, .maroon, .media) h2 {
   line-height: 30px;
 }
 
+/* maroon CTA box (Loans "Choose a borrowing solution") at 768-1199px: the title takes the full
+   width, the buttons follow in a row 20px below (centred from 992px) */
+@media (width >= 768px) and (width < 1200px) {
+  main .columns.banner.maroon > div {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  main .columns.banner.maroon > div > div:first-child {
+    width: 100%;
+    max-width: none;
+  }
+
+  main .columns.banner.maroon > div > div:last-child {
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 24px;
+  }
+
+  main .columns.banner.maroon .button-wrapper + .button-wrapper {
+    margin-top: 0;
+  }
+}
+
+@media (width >= 992px) and (width < 1200px) {
+  main .columns.banner.maroon > div > div:last-child {
+    align-self: center;
+  }
+}
+
 /* plain banner with an h2 (Loans "Take steps today"): prod 32px bold title in a col-md-8 /
    col-lg-9 column, the button filling the remaining column; stacked with a centred button on
    mobile */
@@ -190,6 +221,12 @@ main .columns.maroon a.button:any-link {
   border-color: #fff;
   background: #fff;
   color: #333;
+}
+
+main .columns.maroon a.button:not(.secondary):any-link:hover,
+main .columns.maroon a.button:not(.secondary):any-link:focus-visible {
+  background: transparent;
+  color: #fff;
 }
 
 main .columns.maroon a.button.secondary:any-link {

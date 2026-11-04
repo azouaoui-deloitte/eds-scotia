@@ -31,6 +31,17 @@
   color: #fff;
 }
 
+.tabs.block.pills .tabs-tab[aria-selected="true"]:hover,
+.tabs.block.pills .tabs-tab[aria-selected="true"]:focus-visible {
+  border-color: #525252;
+  background: #525252;
+}
+
+.tabs.block.pills .tabs-tab:focus-visible {
+  outline: 2px solid #fff;
+  box-shadow: 0 0 0 5px #368e99;
+}
+
 .tabs.block.pills .tabs-panel {
   display: none;
 }

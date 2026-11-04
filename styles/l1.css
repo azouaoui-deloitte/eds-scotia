@@ -160,11 +160,12 @@ main:has(> .section.l1) {
     color: #fff;
   }
 
+  /* prod hover / focus on filled buttons: the fill drops out, the label takes the fill colour */
   a.button.primary:hover,
   a.button.primary:focus-visible {
-    border-color: #be061b;
-    background: #be061b;
-    color: #fff;
+    border-color: #ec111a;
+    background: transparent;
+    color: #ec111a;
   }
 
   a.button.secondary {
@@ -187,8 +188,9 @@ main:has(> .section.l1) {
 
   a.button.accent:hover,
   a.button.accent:focus-visible {
-    border-color: #1a1a1a;
-    background: #1a1a1a;
+    border-color: #333;
+    background: transparent;
+    color: #333;
   }
 
   /* carousel pager (mobile / tablet) */
@@ -406,6 +408,11 @@ main:has(> .section.l1) {
     padding-top: 0;
   }
 
+  /* prod card titles (headline-small) are #2b2b2b */
+  .cards:is(.info, .article) .cards-card-body > :is(h2, h3, h4):first-child {
+    color: #2b2b2b;
+  }
+
   /* Loans at 992-1199px: prod shows the swipe lists as grids (2 columns for cols-2, one row
      otherwise) and keeps the hidden pager's slot above them */
   @media (width >= 992px) and (width < 1200px) {
@@ -528,6 +535,12 @@ main:has(> .section.l1) {
     color: #333;
   }
 
+  .section.dark a.button:any-link:hover,
+  .section.dark a.button:any-link:focus-visible {
+    background: transparent;
+    color: #fff;
+  }
+
   .section.light {
     padding: 60px 0 45px;
     background: #f2f2f2;
@@ -599,6 +612,12 @@ main:has(> .section.l1) {
     border-color: #fff;
     background: #fff;
     color: #333;
+  }
+
+  .section.charcoal a.button:any-link:hover,
+  .section.charcoal a.button:any-link:focus-visible {
+    background: transparent;
+    color: #fff;
   }
 
   .section.flush {

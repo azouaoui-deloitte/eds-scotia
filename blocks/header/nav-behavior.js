@@ -14,19 +14,25 @@ const search = (q) => {
   window.location.href = `${SEARCH_URL}${q ? `?q=${encodeURIComponent(q)}` : ''}`;
 };
 
-const lastSegment = (href) => {
-  try { return new URL(href, window.location).pathname.replace(/\/$/, '').split('/').pop().replace(/\.html$/, ''); } catch { return ''; }
+/** site path of a URL: without the AEM site root (/content/<site>), extension and trailing slash */
+const sitePath = (href) => {
+  try {
+    return new URL(href, window.location).pathname
+      .replace(/^\/content\/[^/]+(?=\/)/, '').replace(/\.html$/, '').replace(/\/$/, '');
+  } catch { return ''; }
 };
 
-/** top bar: current segment, language menu */
+/** top bar: current segment (longest segment path containing the page, as prod), language menu */
 function initTopbar(nav) {
-  const current = lastSegment(window.location.pathname);
-  nav.querySelectorAll('.nav-segments a').forEach((a) => {
-    if (lastSegment(a.href) === current) {
-      a.classList.add('active');
-      a.setAttribute('aria-current', 'page');
-    }
-  });
+  const current = sitePath(window.location.href);
+  const active = [...nav.querySelectorAll('.nav-segments a')]
+    .map((a) => ({ a, path: sitePath(a.href) }))
+    .filter(({ path }) => path && (current === path || current.startsWith(`${path}/`)))
+    .sort((x, y) => y.path.length - x.path.length)[0];
+  if (active) {
+    active.a.classList.add('active');
+    active.a.setAttribute('aria-current', 'page');
+  }
 
   const lang = nav.querySelector('.nav-lang');
   const toggle = lang?.querySelector('.nav-lang-toggle');

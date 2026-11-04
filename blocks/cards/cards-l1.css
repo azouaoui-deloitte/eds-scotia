@@ -844,6 +844,23 @@ main .section:has(.tabs.panels) .cards.featured {
   margin-top: 40px;
 }
 
+main .cards.featured.article .cards-card-body h4 {
+  color: #2b2b2b;
+}
+
+/* "Getting started" guides (cards whose copy carries a "You'll learn about" list): 3:2 art, 24px
+   headline titles */
+main .cards.featured.article > ul > li:has(.cards-card-body ul) .cards-card-image img {
+  aspect-ratio: 3 / 2;
+}
+
+main .cards.featured.article > ul > li:has(.cards-card-body ul) .cards-card-body h4 {
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 500;
+}
+
 @media (width < 768px) {
   main .cards.featured.article .cards-card-body {
     padding: 30px;

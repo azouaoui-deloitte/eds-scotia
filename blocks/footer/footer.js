@@ -1,6 +1,7 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { getMetadata, loadCSS } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import initFooter from './footer-behavior.js';
+import { compassFooterHtml, parseCompassFooter } from '../header/compass.js';
 
 const el = (tag, cls, ...children) => {
   const e = document.createElement(tag);
@@ -62,6 +63,12 @@ function buildCards(section) {
 async function buildFooter(footerPath) {
   const fragment = await loadFragment(footerPath);
   if (!fragment) return null;
+  // compass footer document (first section style "compass-footer"): new scotiabank.com design
+  if (fragment.querySelector(':scope > .section.compass-footer')) {
+    const box = el('div');
+    box.innerHTML = compassFooterHtml(parseCompassFooter(fragment));
+    return box.firstElementChild;
+  }
   const [contact, social, bottom] = [...fragment.children];
   const cardsRow = el('div', 'footer-container');
   if (contact) cardsRow.append(...buildCards(contact));
@@ -112,7 +119,7 @@ async function loadExperienceFragment(path) {
     const resp = await fetch(`${path.replace(/\.html$/, '')}.content.html?wcmmode=disabled`);
     if (!resp.ok) return null;
     const doc = new DOMParser().parseFromString(await resp.text(), 'text/html');
-    const inner = doc.querySelector('.footer-inner');
+    const inner = doc.querySelector('.footer-inner, .cmp-footer');
     return inner ? document.adoptNode(inner) : null;
   } catch {
     return null;
@@ -125,7 +132,7 @@ async function loadExperienceFragment(path) {
  * block (template structure) is only bound.
  */
 export default async function decorate(block) {
-  let inner = block.querySelector('.footer-inner');
+  let inner = block.querySelector('.footer-inner, .cmp-footer');
   if (!inner) {
     const footerMeta = getMetadata('footer');
     // Default to a footer fragment in the current content directory so the site works both
@@ -139,5 +146,6 @@ export default async function decorate(block) {
     if (!inner) return;
     block.append(inner);
   }
+  if (inner.matches('.cmp-footer')) await loadCSS(`${window.hlx.codeBasePath}/blocks/footer/footer-compass.css`);
   initFooter(inner);
 }

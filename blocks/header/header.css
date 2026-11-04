@@ -507,12 +507,16 @@ header .nav-signin a.signin-button:any-link {
 header .nav-signin a.signin-button:hover,
 header .nav-signin a.signin-button:focus {
   background-color: #ad0000;
-  border-color: #bb061b;
   color: #fff;
   text-decoration: none;
 }
 
-header .nav-signin a.signin-button:focus {
+/* prod: the border changes on hover only; the focus ring is keyboard-only */
+header .nav-signin a.signin-button:hover {
+  border-color: #bb061b;
+}
+
+header .nav-signin a.signin-button:focus-visible {
   outline: -webkit-focus-ring-color auto 5px;
 }
 
@@ -557,9 +561,10 @@ header .nav-hamburger button {
   margin-right: 16px;
   padding: 12px;
   border: 0;
-  background-color: #fff;
+  background-color: transparent;
   color: #000;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 header .nav-hamburger button:focus {

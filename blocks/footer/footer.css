@@ -119,7 +119,7 @@ footer .footer-card-link a:any-link {
 footer .footer-card-link a:hover,
 footer .footer-card-link a:focus {
   color: #333;
-  border-color: transparent;
+  border-color: #333;
 }
 
 footer .footer-social-list {

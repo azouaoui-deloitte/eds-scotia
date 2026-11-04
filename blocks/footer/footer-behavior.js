@@ -12,7 +12,7 @@ export default function initFooter(footer) {
   if (!footer || footer.dataset.footerInit) return;
   footer.dataset.footerInit = 'true';
   // "Cookie Settings" opens the OneTrust preference centre, as on prod
-  footer.querySelectorAll('.footer-cookie-settings').forEach((button) => {
+  footer.querySelectorAll('.footer-cookie-settings, .cmp-footer .link-button').forEach((button) => {
     button.addEventListener('click', () => window.OneTrust?.ToggleInfoDisplay?.());
   });
 }
