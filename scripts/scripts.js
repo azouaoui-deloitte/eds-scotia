@@ -186,6 +186,7 @@ async function loadEager(doc) {
       document.documentElement.lang = 'es-MX';
       document.body.classList.add('mx');
       await loadCSS(`${window.hlx.codeBasePath}/styles/mx.css`);
+      await loadCSS(`${window.hlx.codeBasePath}/styles/mx-spacing.css`);
     }
     document.body.classList.add('appear');
     const firstSection = main.querySelector('.section');
