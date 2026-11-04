@@ -652,6 +652,10 @@
           {
             "name": "Large logo",
             "value": "logo-lg"
+          },
+          {
+            "name": "Blank line after the copy",
+            "value": "spaced"
           }
         ]
       }

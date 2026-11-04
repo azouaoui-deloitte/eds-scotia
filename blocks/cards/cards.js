@@ -9,7 +9,13 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
  *                     its tone
  * Default: image + body.
  */
-export default function decorate(block) {
+export default async function decorate(block) {
+  // Scotiabank México variants (mx-*): own item model (MX Card) and layouts
+  if ([...block.classList].some((c) => c.startsWith('mx-'))) {
+    const { default: decorateMx } = await import('./cards-mx.js');
+    decorateMx(block);
+    return;
+  }
   const ul = document.createElement('ul');
   [...block.children].forEach((row) => {
     const li = document.createElement('li');

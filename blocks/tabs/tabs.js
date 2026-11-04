@@ -10,7 +10,13 @@ import { moveInstrumentation } from '../../scripts/scripts.js';
  * Options (block classes): `pills` (filter pills), `panels` (show the active panel's copy;
  * dropdown instead of the tab bar below 992px).
  */
-export default function decorate(block) {
+export default async function decorate(block) {
+  // Scotiabank México: each tab shows one of the following "mx-tab" sections
+  if (block.classList.contains('mx')) {
+    const { default: decorateMx } = await import('./tabs-mx.js');
+    decorateMx(block);
+    return;
+  }
   const section = block.closest('.section');
   // sibling card grids, in document (tab) order
   const cardBlocks = section ? [...section.querySelectorAll('.cards.featured, .cards.product')] : [];
