@@ -341,10 +341,7 @@ body.mx main > .section.mx-hero > div {
 @media (width >= 768px) {
   .cards.mx-hero .mx-card-body { padding: 90px 15px; }
 
-  .cards.mx-hero .mx-card-text {
-    padding: 66px 15px;
-    text-align: left;
-  }
+  .cards.mx-hero .mx-card-text { padding: 66px 15px; }
 
   .cards.mx-hero .mx-eyebrow { margin-top: 18px; }
 
@@ -359,7 +356,16 @@ body.mx main > .section.mx-hero > div {
   .cards.mx-hero .mx-card.mx-n3 .mx-card-text { padding-block: 60px; }
 }
 
+/* 768px (prod md, mobile art): the art opens the 66px-padded text column */
+@media (width: 768px) {
+  .cards.mx-hero .mx-has-art .mx-card-art { padding-top: 66px; }
+
+  .cards.mx-hero .mx-has-art .mx-card-text { padding-top: 0; }
+}
+
 @media (width >= 769px) {
+  .cards.mx-hero .mx-card-text { text-align: left; }
+
   .cards.mx-hero .mx-has-art .mx-card-art {
     display: block;
     box-sizing: border-box;
@@ -373,7 +379,6 @@ body.mx main > .section.mx-hero > div {
   .cards.mx-hero .mx-card-body {
     display: flex;
     align-items: center;
-    padding: 120px 15px;
   }
 
   .cards.mx-hero .mx-card-text,
@@ -385,6 +390,8 @@ body.mx main > .section.mx-hero > div {
 }
 
 @media (width >= 1200px) {
+  .cards.mx-hero .mx-card-body { padding: 120px 15px; }
+
   .cards.mx-hero .mx-card-text,
   .cards.mx-hero .mx-card-art {
     flex-basis: 50%;
